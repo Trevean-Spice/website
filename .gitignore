@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Temporary files
+.tmp/
+temporary screenshots/
+
+# Credentials & secrets
+.env
+credentials.json
+token.json
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / editor
+*.code-workspace
+.vscode/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Large media
+*.mp4
+
+# Reference screenshots (local only)
+Screenshot *.png

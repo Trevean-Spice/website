@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story — Trevean Spice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#1A1511',
+            surface: '#241E19',
+            elevated: '#302823',
+            floating: '#3D332C',
+            cream: '#F0E4D4',
+            muted: '#A89888',
+            'silk-road': '#8B2635',
+            'kyoto': '#6B8F71',
+            'persian': '#9B7B6B',
+            'night-market': '#C4973B',
+            'caribbean': '#7B3F5E',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['DM Sans', 'sans-serif'],
+            accent: ['Cormorant Garamond', 'serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { background-color: #1A1511; color: #F0E4D4; font-family: 'DM Sans', sans-serif; }
+    .grain-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; opacity: 0.03; }
+    .wave-divider { width: 100%; height: 48px; position: relative; overflow: hidden; }
+    .wave-divider::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 300%; height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48'%3E%3Cpath d='M0 24 Q150 0 300 24 T600 24 T900 24 T1200 24' fill='none' stroke='%23A89888' stroke-width='1' opacity='0.2'/%3E%3Cpath d='M0 28 Q150 4 300 28 T600 28 T900 28 T1200 28' fill='none' stroke='%23A89888' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E") repeat-x;
+      background-size: 600px 48px; animation: waveScroll 20s linear infinite;
+    }
+    @keyframes waveScroll { 0% { transform: translateX(0); } 100% { transform: translateX(33.33%); } }
+    .accent-line { width: 60px; height: 2px; background: linear-gradient(90deg, #C4973B, #8B2635); display: inline-block; }
+    a:focus-visible, button:focus-visible { outline: 2px solid #C4973B; outline-offset: 4px; border-radius: 2px; }
+    .nav-link {
+      font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 13px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #A89888; text-decoration: none; padding: 8px 0; position: relative; transition: color 0.3s ease;
+    }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: #C4973B; transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+    .nav-link:hover { color: #F0E4D4; }
+    .nav-link:hover::after { width: 100%; }
+    .btn-primary {
+      background: linear-gradient(135deg, #8B2635, #6B1E2A); color: #F0E4D4; padding: 14px 36px;
+      font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.08em;
+      text-transform: uppercase; border: none; cursor: pointer; display: inline-block; text-decoration: none;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,38,53,0.3); }
+    .btn-primary:active { transform: translateY(0); }
+    html { scroll-behavior: smooth; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0; }
+    .delay-1 { animation-delay: 0.15s; } .delay-2 { animation-delay: 0.3s; } .delay-3 { animation-delay: 0.45s; }
+  </style>
+</head>
+<body class="antialiased">
+  <svg class="grain-overlay" width="100%" height="100%">
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#grain)"/>
+  </svg>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(26,21,17,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(168,152,136,0.08);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+      <a href="index.html" class="flex items-center gap-4" aria-label="Trevean Spice Home">
+        <img src="logo-horizontal.png" alt="Trevean Spice" class="h-10 w-auto" style="opacity: 0.92;">
+      </a>
+      <div class="hidden md:flex items-center gap-10">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link" style="color: #F0E4D4;">Our Story</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+      </div>
+      <button class="md:hidden p-2" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <svg width="24" height="24" fill="none" stroke="#F0E4D4" stroke-width="1.5" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 space-y-4">
+      <a href="index.html" class="block nav-link">Home</a>
+      <a href="about.html" class="block nav-link" style="color: #F0E4D4;">Our Story</a>
+      <a href="shop.html" class="block nav-link">Shop</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pt-32 pb-24 lg:pt-40 lg:pb-32 relative overflow-hidden" style="background: radial-gradient(ellipse 80% 60% at 30% 70%, rgba(196,151,59,0.08) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 70% 30%, rgba(139,38,53,0.06) 0%, transparent 50%), #1A1511;">
+    <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
+      <span class="font-body text-xs tracking-[0.2em] uppercase text-muted fade-up">Our Story</span>
+      <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-medium mt-6 leading-[1.05] fade-up delay-1" style="letter-spacing: -0.03em;">
+        Where Ancient Trades<br>Meet <span class="italic" style="color: #C4973B;">Modern Tables</span>
+      </h1>
+      <p class="font-body text-lg text-muted mt-8 max-w-2xl mx-auto leading-relaxed fade-up delay-2" style="line-height: 1.7;">
+        We believe the world's most transformative ingredient is also its most neglected. Trevean Spice exists to change that.
+      </p>
+    </div>
+  </section>
+
+  <div class="wave-divider"></div>
+
+  <!-- ORIGIN STORY -->
+  <section class="py-24 lg:py-32" style="background: #241E19;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <!-- Image -->
+        <div class="aspect-[4/3] rounded-sm overflow-hidden relative" style="background: #302823;">
+          <img src="https://placehold.co/800x600/302823/A89888?text=Spice+Market+Istanbul" alt="Traditional spice market" class="w-full h-full object-cover" style="mix-blend-mode: luminosity; opacity: 0.6;">
+          <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(196,151,59,0.1), transparent 60%);"></div>
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(36,30,25,0.6) 0%, transparent 40%);"></div>
+        </div>
+        <!-- Copy -->
+        <div>
+          <span class="accent-line"></span>
+          <h2 class="font-display text-3xl sm:text-4xl font-medium mt-6 leading-tight" style="letter-spacing: -0.02em;">The Spark</h2>
+          <p class="font-body text-base text-muted mt-6" style="line-height: 1.8;">
+            It started in Istanbul, watching a master spice trader named Amir distinguish this year's saffron harvest from last year's by touch alone. He knew which farm each batch of cardamom came from, when it was picked, how it was dried.
+          </p>
+          <p class="font-body text-base text-muted mt-4" style="line-height: 1.8;">
+            That intimate connection between source and kitchen is what we've lost. Spices once launched expeditions, built empires, and were literally worth more than gold. Today, 73% of home cooks have expired spices in their kitchens — colorful dust where there should be vibrant, transformative flavors.
+          </p>
+          <p class="font-body text-base text-cream mt-4" style="line-height: 1.8; opacity: 0.9;">
+            Trevean Spice was founded to bridge that gap — using technology not to replace tradition, but to revitalize it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="py-24 lg:py-32" style="background: radial-gradient(ellipse 50% 50% at 80% 50%, rgba(107,143,113,0.06) 0%, transparent 50%), #1A1511;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-20">
+        <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">What We Believe</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing: -0.02em;">Our Values</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Value 1 -->
+        <div class="p-8 rounded-sm" style="background: #241E19; border: 1px solid rgba(168,152,136,0.06); box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center mb-5" style="background: rgba(196,151,59,0.1); border: 1px solid rgba(196,151,59,0.15);">
+            <svg width="18" height="18" fill="none" stroke="#C4973B" stroke-width="1.5"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 2"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-medium">Authenticity Through Innovation</h3>
+          <p class="font-body text-sm text-muted mt-3" style="line-height: 1.7;">We honor traditional spice cultivation while embracing technology that enhances rather than replaces human connection to food.</p>
+        </div>
+
+        <!-- Value 2 -->
+        <div class="p-8 rounded-sm" style="background: #241E19; border: 1px solid rgba(168,152,136,0.06); box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center mb-5" style="background: rgba(107,143,113,0.1); border: 1px solid rgba(107,143,113,0.15);">
+            <svg width="18" height="18" fill="none" stroke="#6B8F71" stroke-width="1.5"><path d="M3 14l4-4 3 3 5-6"/><rect x="1" y="1" width="16" height="16" rx="2"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-medium">Transparent Sustainability</h3>
+          <p class="font-body text-sm text-muted mt-3" style="line-height: 1.7;">Every spice tells a complete story — from farmer to kitchen — with traceability that ensures ethical sourcing and fair compensation.</p>
+        </div>
+
+        <!-- Value 3 -->
+        <div class="p-8 rounded-sm" style="background: #241E19; border: 1px solid rgba(168,152,136,0.06); box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center mb-5" style="background: rgba(139,38,53,0.1); border: 1px solid rgba(139,38,53,0.15);">
+            <svg width="18" height="18" fill="none" stroke="#8B2635" stroke-width="1.5"><path d="M9 1l2.5 5 5.5 1-4 3.8 1 5.5L9 13.5 4 16.3l1-5.5-4-3.8 5.5-1z"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-medium">Culinary Empowerment</h3>
+          <p class="font-body text-sm text-muted mt-3" style="line-height: 1.7;">Everyone deserves access to fresh, authentic spices and the knowledge to use them confidently, regardless of cooking experience.</p>
+        </div>
+
+        <!-- Value 4 -->
+        <div class="p-8 rounded-sm" style="background: #241E19; border: 1px solid rgba(168,152,136,0.06); box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center mb-5" style="background: rgba(155,123,107,0.1); border: 1px solid rgba(155,123,107,0.15);">
+            <svg width="18" height="18" fill="none" stroke="#9B7B6B" stroke-width="1.5"><circle cx="9" cy="9" r="7"/><path d="M5 9h8M9 5v8"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-medium">Cultural Respect</h3>
+          <p class="font-body text-sm text-muted mt-3" style="line-height: 1.7;">We preserve and share the heritage behind each spice, ensuring traditional knowledge and farming practices are honored and compensated fairly.</p>
+        </div>
+
+        <!-- Value 5 -->
+        <div class="p-8 rounded-sm" style="background: #241E19; border: 1px solid rgba(168,152,136,0.06); box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center mb-5" style="background: rgba(123,63,94,0.1); border: 1px solid rgba(123,63,94,0.15);">
+            <svg width="18" height="18" fill="none" stroke="#7B3F5E" stroke-width="1.5"><rect x="2" y="4" width="14" height="10" rx="2"/><path d="M6 4V2M12 4V2"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-medium">Intelligent Simplicity</h3>
+          <p class="font-body text-sm text-muted mt-3" style="line-height: 1.7;">Technology should enhance the cooking experience invisibly — providing value without complexity, magic without confusion.</p>
+        </div>
+
+        <!-- Stats card -->
+        <div class="p-8 rounded-sm flex flex-col justify-center" style="background: linear-gradient(135deg, #302823, #241E19); border: 1px solid rgba(196,151,59,0.1);">
+          <div class="space-y-6">
+            <div>
+              <span class="font-display text-3xl font-semibold" style="color: #C4973B;">25+</span>
+              <span class="block font-body text-sm text-muted mt-1">Artisan farming partners worldwide</span>
+            </div>
+            <div style="height: 1px; background: rgba(168,152,136,0.08);"></div>
+            <div>
+              <span class="font-display text-3xl font-semibold" style="color: #C4973B;">92%</span>
+              <span class="block font-body text-sm text-muted mt-1">Beta customer retention rate</span>
+            </div>
+            <div style="height: 1px; background: rgba(168,152,136,0.08);"></div>
+            <div>
+              <span class="font-display text-3xl font-semibold" style="color: #C4973B;">0</span>
+              <span class="block font-body text-sm text-muted mt-1">Compromises on freshness</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE FARMERS -->
+  <section class="py-24 lg:py-32" style="background: #241E19;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-16">
+        <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Direct Trade</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing: -0.02em;">The Farmers Behind the Flavor</h2>
+        <p class="font-body text-base text-muted mt-4 max-w-2xl mx-auto" style="line-height: 1.7;">Every blend begins with a person, a place, and generations of knowledge. Here are some of the artisans who make Trevean Spice possible.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Farmer 1 -->
+        <div class="rounded-sm overflow-hidden" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <div class="aspect-[3/2] relative">
+            <img src="https://placehold.co/600x400/3D332C/8B2635?text=Li+Mei" alt="Li Mei" class="w-full h-full object-cover" style="mix-blend-mode: luminosity; opacity: 0.5;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 10%, transparent 60%);"></div>
+            <div class="absolute inset-0" style="background: rgba(139,38,53,0.1); mix-blend-mode: multiply;"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-lg font-medium">Li Mei</h3>
+            <p class="font-body text-xs tracking-wider uppercase text-muted mt-1">Sichuan, China · The Silk Road</p>
+            <p class="font-body text-sm text-muted mt-3" style="line-height: 1.7;">Ancient trade-route peppercorns from mountain slopes, hand-picked by 5 generations of Li Mei's family.</p>
+          </div>
+        </div>
+
+        <!-- Farmer 2 -->
+        <div class="rounded-sm overflow-hidden" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <div class="aspect-[3/2] relative">
+            <img src="https://placehold.co/600x400/3D332C/6B8F71?text=Hiroshi+Tanaka" alt="Hiroshi Tanaka" class="w-full h-full object-cover" style="mix-blend-mode: luminosity; opacity: 0.5;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 10%, transparent 60%);"></div>
+            <div class="absolute inset-0" style="background: rgba(107,143,113,0.1); mix-blend-mode: multiply;"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-lg font-medium">Hiroshi Tanaka</h3>
+            <p class="font-body text-xs tracking-wider uppercase text-muted mt-1">Kyoto, Japan · Kyoto Garden</p>
+            <p class="font-body text-sm text-muted mt-3" style="line-height: 1.7;">Harvested at dawn in Kyoto's Uji district, where Tanaka-San's family has cultivated green tea for over 600 years.</p>
+          </div>
+        </div>
+
+        <!-- Farmer 3 -->
+        <div class="rounded-sm overflow-hidden" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <div class="aspect-[3/2] relative">
+            <img src="https://placehold.co/600x400/3D332C/C4973B?text=Fatima+Benali" alt="Fatima Benali" class="w-full h-full object-cover" style="mix-blend-mode: luminosity; opacity: 0.5;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 10%, transparent 60%);"></div>
+            <div class="absolute inset-0" style="background: rgba(196,151,59,0.1); mix-blend-mode: multiply;"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-lg font-medium">Fatima Benali</h3>
+            <p class="font-body text-xs tracking-wider uppercase text-muted mt-1">Morocco · North African Night Market</p>
+            <p class="font-body text-sm text-muted mt-3" style="line-height: 1.7;">High Atlas herbs, nurtured by generations of Fatima's spice-crafting family in the mountains of Morocco.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider"></div>
+
+  <!-- CTA -->
+  <section class="py-28 lg:py-36 relative overflow-hidden" style="background: #1A1511;">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(196,151,59,0.05) 0%, transparent 60%);"></div>
+    <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center relative">
+      <img src="fox-icon.png" alt="" class="w-20 h-auto mx-auto mb-8" style="opacity: 0.3;">
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium" style="letter-spacing: -0.02em;">
+        Taste the <span class="italic" style="color: #C4973B;">difference</span>
+      </h2>
+      <p class="font-body text-lg text-muted mt-6 max-w-xl mx-auto" style="line-height: 1.7;">
+        Explore our signature collection and discover what fresh, authentic spices can do for your cooking.
+      </p>
+      <a href="shop.html" class="btn-primary inline-block mt-10">Shop the Collection</a>
+    </div>
+  </section>
+
+  <div class="wave-divider"></div>
+
+  <!-- FOOTER -->
+  <footer class="py-16" style="background: #151210;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-4 gap-12 mb-16">
+        <div class="md:col-span-2">
+          <img src="logo-horizontal.png" alt="Trevean Spice" class="h-8 w-auto mb-4" style="opacity: 0.7;">
+          <p class="font-body text-sm text-muted max-w-sm" style="line-height: 1.7;">Ancient spice wisdom meets modern technology. Curated, ethical, and always fresh.</p>
+        </div>
+        <div>
+          <h4 class="font-body text-xs tracking-[0.15em] uppercase text-muted mb-5">Explore</h4>
+          <ul class="space-y-3">
+            <li><a href="shop.html" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Shop Blends</a></li>
+            <li><a href="about.html" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Our Story</a></li>
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Subscriptions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-body text-xs tracking-[0.15em] uppercase text-muted mb-5">Connect</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Instagram</a></li>
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">TikTok</a></li>
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8" style="border-top: 1px solid rgba(168,152,136,0.08);">
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p class="font-body text-xs text-muted">&copy; 2026 Trevean Spice. All rights reserved.</p>
+          <p class="font-body text-xs text-muted">Austin, TX 78738 · <a href="https://treveanspice.com" class="hover:text-cream transition-colors duration-300">treveanspice.com</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

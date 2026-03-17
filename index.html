@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trevean Spice — Ancient Wisdom, Modern Kitchens</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#1A1511',
+            surface: '#241E19',
+            elevated: '#302823',
+            floating: '#3D332C',
+            cream: '#F0E4D4',
+            muted: '#A89888',
+            'silk-road': '#8B2635',
+            'kyoto': '#6B8F71',
+            'persian': '#9B7B6B',
+            'night-market': '#C4973B',
+            'caribbean': '#7B3F5E',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['DM Sans', 'sans-serif'],
+            accent: ['Cormorant Garamond', 'serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { background-color: #1A1511; color: #F0E4D4; font-family: 'DM Sans', sans-serif; }
+
+    /* SVG noise texture overlay */
+    .grain-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+    }
+
+    /* Wavy motif inspired by label design */
+    .wave-divider {
+      width: 100%;
+      height: 48px;
+      background: repeating-linear-gradient(
+        to right,
+        transparent 0px,
+        transparent 2px,
+        rgba(168,152,136,0.08) 2px,
+        rgba(168,152,136,0.08) 4px
+      );
+      position: relative;
+      overflow: hidden;
+    }
+    .wave-divider::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 300%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48'%3E%3Cpath d='M0 24 Q150 0 300 24 T600 24 T900 24 T1200 24' fill='none' stroke='%23A89888' stroke-width='1' opacity='0.2'/%3E%3Cpath d='M0 28 Q150 4 300 28 T600 28 T900 28 T1200 28' fill='none' stroke='%23A89888' stroke-width='0.5' opacity='0.15'/%3E%3Cpath d='M0 20 Q150 -4 300 20 T600 20 T900 20 T1200 20' fill='none' stroke='%23A89888' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E") repeat-x;
+      background-size: 600px 48px;
+      animation: waveScroll 20s linear infinite;
+    }
+    @keyframes waveScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(33.33%); }
+    }
+
+    /* Animated accent line */
+    .accent-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, #C4973B, #8B2635);
+      display: inline-block;
+    }
+
+    /* Blend card hover */
+    .blend-card {
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .blend-card:hover {
+      transform: translateY(-6px) scale(1.01);
+    }
+    .blend-card:active {
+      transform: translateY(-2px) scale(0.995);
+    }
+
+    /* Focus visible for accessibility */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #C4973B;
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    /* Button styles */
+    .btn-primary {
+      background: linear-gradient(135deg, #8B2635, #6B1E2A);
+      color: #F0E4D4;
+      padding: 14px 36px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(139,38,53,0.3), 0 2px 8px rgba(139,38,53,0.2);
+    }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-outline {
+      background: transparent;
+      color: #F0E4D4;
+      padding: 14px 36px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(240,228,212,0.25);
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, background 0.3s ease;
+    }
+    .btn-outline:hover {
+      border-color: #C4973B;
+      background: rgba(196,151,59,0.06);
+      transform: translateY(-2px);
+    }
+    .btn-outline:active { transform: translateY(0); }
+
+    /* Nav link styles */
+    .nav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #A89888;
+      text-decoration: none;
+      padding: 8px 0;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #C4973B;
+      transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-link:hover { color: #F0E4D4; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
+    /* Fade in animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      opacity: 0;
+    }
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+    .delay-4 { animation-delay: 0.6s; }
+
+    /* Radial gradient backgrounds */
+    .hero-gradient {
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(139,38,53,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(196,151,59,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 70% 70% at 50% 50%, rgba(107,143,113,0.05) 0%, transparent 60%),
+        #1A1511;
+    }
+
+    .section-gradient-1 {
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(155,123,107,0.08) 0%, transparent 50%),
+        #1A1511;
+    }
+
+    .section-gradient-2 {
+      background:
+        radial-gradient(ellipse 50% 50% at 20% 50%, rgba(123,63,94,0.08) 0%, transparent 50%),
+        #241E19;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <!-- Grain texture overlay -->
+  <svg class="grain-overlay" width="100%" height="100%">
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain)"/>
+  </svg>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(26,21,17,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(168,152,136,0.08);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+      <a href="index.html" class="flex items-center gap-4" aria-label="Trevean Spice Home">
+        <img src="logo-horizontal.png" alt="Trevean Spice" class="h-10 w-auto" style="opacity: 0.92;">
+      </a>
+      <div class="hidden md:flex items-center gap-10">
+        <a href="index.html" class="nav-link" style="color: #F0E4D4;">Home</a>
+        <a href="about.html" class="nav-link">Our Story</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+      </div>
+      <!-- Mobile menu button -->
+      <button class="md:hidden p-2" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <svg width="24" height="24" fill="none" stroke="#F0E4D4" stroke-width="1.5" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 space-y-4">
+      <a href="index.html" class="block nav-link" style="color: #F0E4D4;">Home</a>
+      <a href="about.html" class="block nav-link">Our Story</a>
+      <a href="shop.html" class="block nav-link">Shop</a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-20">
+    <!-- Subtle decorative circles -->
+    <div class="absolute top-1/4 right-0 w-96 h-96 rounded-full opacity-[0.03]" style="background: radial-gradient(circle, #C4973B, transparent 70%);"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full opacity-[0.04]" style="background: radial-gradient(circle, #8B2635, transparent 70%);"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full py-24 lg:py-0">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <!-- Left: Copy -->
+        <div>
+          <div class="fade-up">
+            <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Curated Spice Collections</span>
+          </div>
+          <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-medium leading-[1.05] mt-6 fade-up delay-1" style="letter-spacing: -0.03em;">
+            Ancient Wisdom,<br>
+            <span class="italic" style="color: #C4973B;">Modern</span> Kitchens
+          </h1>
+          <p class="font-body text-lg text-muted mt-8 max-w-lg leading-relaxed fade-up delay-2" style="line-height: 1.7;">
+            Premium, ethically-sourced spice blends delivered fresh from artisan farmers around the world. Each jar carries centuries of tradition, tracked by technology you can trust.
+          </p>
+          <div class="flex flex-wrap gap-4 mt-10 fade-up delay-3">
+            <a href="shop.html" class="btn-primary inline-block">Explore Blends</a>
+            <a href="about.html" class="btn-outline inline-block">Our Story</a>
+          </div>
+          <!-- Trust badges -->
+          <div class="flex items-center gap-8 mt-14 fade-up delay-4">
+            <div class="text-center">
+              <span class="font-display text-2xl font-semibold" style="color: #C4973B;">25+</span>
+              <span class="block font-body text-xs text-muted mt-1 tracking-wide uppercase">Artisan Farmers</span>
+            </div>
+            <div style="width:1px; height:32px; background: rgba(168,152,136,0.15);"></div>
+            <div class="text-center">
+              <span class="font-display text-2xl font-semibold" style="color: #C4973B;">5</span>
+              <span class="block font-body text-xs text-muted mt-1 tracking-wide uppercase">Global Regions</span>
+            </div>
+            <div style="width:1px; height:32px; background: rgba(168,152,136,0.15);"></div>
+            <div class="text-center">
+              <span class="font-display text-2xl font-semibold" style="color: #C4973B;">92%</span>
+              <span class="block font-body text-xs text-muted mt-1 tracking-wide uppercase">Retention Rate</span>
+            </div>
+          </div>
+        </div>
+        <!-- Right: Hero image placeholder -->
+        <div class="relative">
+          <div class="aspect-[4/5] rounded-sm overflow-hidden relative" style="background: #241E19;">
+            <img src="pomelli-image%20(3).png" alt="Trevean Spice collection — person opening a spice jar" class="w-full h-full object-cover" style="opacity: 0.85;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(26,21,17,0.8) 0%, transparent 50%, rgba(26,21,17,0.3) 100%);"></div>
+            <div class="absolute bottom-8 left-8 right-8">
+              <img src="fox-icon.png" alt="" class="w-16 h-auto mb-4" style="opacity: 0.6;">
+              <p class="font-accent text-xl italic text-cream" style="opacity: 0.8;">Where every jar tells a story</p>
+            </div>
+          </div>
+          <!-- Floating accent card -->
+          <div class="absolute -bottom-6 -left-6 p-5 rounded-sm" style="background: #302823; border: 1px solid rgba(168,152,136,0.1); box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.2);">
+            <span class="font-body text-xs tracking-[0.15em] uppercase text-muted block">NFC-Enabled Freshness</span>
+            <span class="font-display text-sm mt-1 block">Smart Packaging Technology</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider"></div>
+
+  <!-- ==================== BRAND PROMISE ==================== -->
+  <section class="py-28 lg:py-36 section-gradient-1">
+    <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
+      <span class="accent-line"></span>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mt-8 leading-tight" style="letter-spacing: -0.02em;">
+        Spices once launched empires.<br>We're bringing that spirit <span class="italic" style="color: #6B8F71;">home</span>.
+      </h2>
+      <p class="font-body text-lg text-muted mt-8 max-w-2xl mx-auto" style="line-height: 1.7;">
+        73% of home cooks have expired spices in their kitchens. We're changing that with guaranteed-fresh, ethically-sourced blends paired with the cultural knowledge to use them right.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURED BLENDS ==================== -->
+  <section class="py-28 lg:py-36" style="background: #241E19;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <!-- Section header -->
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-16">
+        <div>
+          <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">The Collection</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing: -0.02em;">Signature Blends</h2>
+        </div>
+        <a href="shop.html" class="nav-link mt-4 sm:mt-0">View All →</a>
+      </div>
+
+      <!-- Blend cards grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+        <!-- The Silk Road -->
+        <a href="shop.html" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
+          <div class="aspect-[4/3] relative overflow-hidden">
+            <img src="Along_the_Golden_Route_version_2.png" alt="The Silk Road blend — desert caravan along the golden route" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%); mix-blend-mode: normal;"></div>
+            <div class="absolute inset-0" style="background: rgba(139,38,53,0.15); mix-blend-mode: multiply;"></div>
+            <div class="absolute top-4 left-4">
+              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(139,38,53,0.8); color: #F0E4D4;">Signature</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-medium">The Silk Road</h3>
+            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Peppercorn · Cardamom · Galangal · Star Anise</p>
+            <div class="flex items-center justify-between mt-5">
+              <span class="font-body text-xs tracking-wider uppercase text-muted">Numbing · Warm · Complex</span>
+              <span class="font-display text-lg" style="color: #8B2635;">$18</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Kyoto Garden -->
+        <a href="shop.html" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
+          <div class="aspect-[4/3] relative overflow-hidden">
+            <img src="Screenshot%202026-03-06%20061050.png" alt="Kyoto Garden spice blend jar" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
+            <div class="absolute inset-0" style="background: rgba(107,143,113,0.15); mix-blend-mode: multiply;"></div>
+            <div class="absolute top-4 left-4">
+              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(107,143,113,0.8); color: #F0E4D4;">Signature</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-medium">Kyoto Garden</h3>
+            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Sesame · Nori · Yuzu · Green Tea · Mushroom</p>
+            <div class="flex items-center justify-between mt-5">
+              <span class="font-body text-xs tracking-wider uppercase text-muted">Bright · Subtle · Umami</span>
+              <span class="font-display text-lg" style="color: #6B8F71;">$18</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Persian Sunrise -->
+        <a href="shop.html" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
+          <div class="aspect-[4/3] relative overflow-hidden">
+            <img src="Saffron_and_Damask_Rose_version_1.png" alt="Persian Sunrise blend — saffron and damask rose" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
+            <div class="absolute inset-0" style="background: rgba(155,123,107,0.15); mix-blend-mode: multiply;"></div>
+            <div class="absolute top-4 left-4">
+              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(155,123,107,0.8); color: #F0E4D4;">Signature</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-medium">Persian Sunrise</h3>
+            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Cinnamon · Cardamom · Lime · Rose Petals · Saffron</p>
+            <div class="flex items-center justify-between mt-5">
+              <span class="font-body text-xs tracking-wider uppercase text-muted">Floral · Citrus · Warm</span>
+              <span class="font-display text-lg" style="color: #9B7B6B;">$18</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- North African Night Market -->
+        <a href="shop.html" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
+          <div class="aspect-[4/3] relative overflow-hidden">
+            <img src="Screenshot%202026-03-06%20061030.png" alt="North African Night Market spice blend jar" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
+            <div class="absolute inset-0" style="background: rgba(196,151,59,0.15); mix-blend-mode: multiply;"></div>
+            <div class="absolute top-4 left-4">
+              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(196,151,59,0.8); color: #1A1511;">Signature</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-medium">North African Night Market</h3>
+            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Pepper · Cumin · Lemon · Thyme · Sumac</p>
+            <div class="flex items-center justify-between mt-5">
+              <span class="font-body text-xs tracking-wider uppercase text-muted">Smoky · Tangy · Bright</span>
+              <span class="font-display text-lg" style="color: #C4973B;">$18</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Caribbean Sunset -->
+        <a href="shop.html" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
+          <div class="aspect-[4/3] relative overflow-hidden">
+            <img src="pomelli_image%20(3).png" alt="Caribbean Sunset blend — spice jar with food and spices" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
+            <div class="absolute inset-0" style="background: rgba(123,63,94,0.15); mix-blend-mode: multiply;"></div>
+            <div class="absolute top-4 left-4">
+              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(123,63,94,0.8); color: #F0E4D4;">Signature</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-medium">Caribbean Sunset</h3>
+            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Allspice · Nutmeg · Thyme · Orange Peel · Scotch Bonnet</p>
+            <div class="flex items-center justify-between mt-5">
+              <span class="font-body text-xs tracking-wider uppercase text-muted">Warm · Tropical · Island Heat</span>
+              <span class="font-display text-lg" style="color: #7B3F5E;">$18</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Subscription CTA card -->
+        <div class="blend-card rounded-sm overflow-hidden flex flex-col" style="background: linear-gradient(135deg, #302823 0%, #241E19 100%); border: 1px solid rgba(196,151,59,0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <div class="aspect-[4/3] relative overflow-hidden">
+            <img src="Screenshot%202026-03-06%20061157.png" alt="Trevean Spice subscription box with jars and recipe cards" class="w-full h-full object-cover" style="opacity: 0.8;">
+            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 10%, transparent 70%);"></div>
+            <div class="absolute inset-0" style="background: rgba(196,151,59,0.08); mix-blend-mode: multiply;"></div>
+          </div>
+          <div class="flex flex-col justify-center items-center text-center p-8 flex-1">
+            <h3 class="font-display text-2xl font-medium">The Full Journey</h3>
+            <p class="font-body text-sm text-muted mt-3 leading-relaxed">Subscribe and receive 3–9 curated blends every month. Fresh. Authentic. Delivered.</p>
+            <span class="block font-display text-3xl mt-5" style="color: #C4973B;">$45<span class="text-base text-muted">/mo</span></span>
+            <a href="shop.html" class="btn-primary mt-5 inline-block">Subscribe Now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider"></div>
+
+  <!-- ==================== HOW IT WORKS ==================== -->
+  <section class="py-28 lg:py-36 section-gradient-1">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-20">
+        <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">The Experience</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing: -0.02em;">From Farm to Your Kitchen</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-12 lg:gap-16">
+        <!-- Step 1 -->
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center" style="background: rgba(196,151,59,0.1); border: 1px solid rgba(196,151,59,0.2);">
+            <span class="font-display text-2xl" style="color: #C4973B;">01</span>
+          </div>
+          <h3 class="font-display text-xl font-medium mt-6">Sourced with Intention</h3>
+          <p class="font-body text-sm text-muted mt-3 max-w-xs mx-auto" style="line-height: 1.7;">Direct relationships with 25+ artisan farmers across five continents. Every spice is hand-selected at peak freshness.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center" style="background: rgba(139,38,53,0.1); border: 1px solid rgba(139,38,53,0.2);">
+            <span class="font-display text-2xl" style="color: #8B2635;">02</span>
+          </div>
+          <h3 class="font-display text-xl font-medium mt-6">Blended with Knowledge</h3>
+          <p class="font-body text-sm text-muted mt-3 max-w-xs mx-auto" style="line-height: 1.7;">Verified by cultural experts and traditional practitioners. Each blend honors centuries of culinary heritage.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center" style="background: rgba(107,143,113,0.1); border: 1px solid rgba(107,143,113,0.2);">
+            <span class="font-display text-2xl" style="color: #6B8F71;">03</span>
+          </div>
+          <h3 class="font-display text-xl font-medium mt-6">Tracked with Technology</h3>
+          <p class="font-body text-sm text-muted mt-3 max-w-xs mx-auto" style="line-height: 1.7;">NFC-enabled packaging tracks freshness in real time. Tap your phone, unlock recipes, stories, and origin maps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIAL / QUOTE ==================== -->
+  <section class="py-24 section-gradient-2">
+    <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+      <svg width="40" height="32" viewBox="0 0 40 32" fill="none" class="mx-auto mb-8" style="opacity: 0.3;">
+        <path d="M0 32V19.2C0 8.53 6.4 1.6 16 0l2.4 4.8C11.2 6.93 8.53 11.2 8 16h8v16H0zm24 0V19.2C24 8.53 30.4 1.6 40 0l-2.4 4.8C35.2 6.93 32.53 11.2 32 16h8v16H24z" fill="#C4973B"/>
+      </svg>
+      <blockquote class="font-accent text-2xl sm:text-3xl italic leading-relaxed" style="color: #F0E4D4;">
+        The moment I opened the Silk Road blend, I understood what fresh spices were supposed to smell like. Everything in my cabinet suddenly seemed like dust.
+      </blockquote>
+      <cite class="font-body text-sm text-muted not-italic mt-6 block tracking-wide uppercase">— Beta Subscriber, Austin TX</cite>
+    </div>
+  </section>
+
+  <!-- ==================== CTA SECTION ==================== -->
+  <section class="py-28 lg:py-36 relative overflow-hidden" style="background: #1A1511;">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(196,151,59,0.05) 0%, transparent 60%);"></div>
+    <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center relative">
+      <img src="fox-icon.png" alt="" class="w-20 h-auto mx-auto mb-8" style="opacity: 0.3;">
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium" style="letter-spacing: -0.02em;">
+        Ready to transform<br>your spice cabinet?
+      </h2>
+      <p class="font-body text-lg text-muted mt-6 max-w-xl mx-auto" style="line-height: 1.7;">
+        Join a growing community of curious cooks discovering authentic global flavors, one blend at a time.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 mt-10">
+        <a href="shop.html" class="btn-primary inline-block">Start Your Journey</a>
+        <a href="about.html" class="btn-outline inline-block">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider"></div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="py-16" style="background: #151210;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-4 gap-12 mb-16">
+        <!-- Brand -->
+        <div class="md:col-span-2">
+          <img src="logo-horizontal.png" alt="Trevean Spice" class="h-8 w-auto mb-4" style="opacity: 0.7;">
+          <p class="font-body text-sm text-muted max-w-sm" style="line-height: 1.7;">Ancient spice wisdom meets modern technology. Curated, ethical, and always fresh.</p>
+        </div>
+        <!-- Explore -->
+        <div>
+          <h4 class="font-body text-xs tracking-[0.15em] uppercase text-muted mb-5">Explore</h4>
+          <ul class="space-y-3">
+            <li><a href="shop.html" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Shop Blends</a></li>
+            <li><a href="about.html" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Our Story</a></li>
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Subscriptions</a></li>
+          </ul>
+        </div>
+        <!-- Connect -->
+        <div>
+          <h4 class="font-body text-xs tracking-[0.15em] uppercase text-muted mb-5">Connect</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Instagram</a></li>
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">TikTok</a></li>
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Bottom bar -->
+      <div class="pt-8" style="border-top: 1px solid rgba(168,152,136,0.08);">
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p class="font-body text-xs text-muted">&copy; 2026 Trevean Spice. All rights reserved.</p>
+          <p class="font-body text-xs text-muted">Austin, TX 78738 · <a href="https://treveanspice.com" class="hover:text-cream transition-colors duration-300">treveanspice.com</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
