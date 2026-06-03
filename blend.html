@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Trevean Spice — Trace Your Flavor</title>
+  <meta name="description" content="Tap the jar. Trace the origin. Every Trevean Spice blend connects your kitchen to the farmer, the place, and the harvest behind it.">
+  <meta name="theme-color" content="#1A1511">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#1A1511', surface: '#241E19', elevated: '#302823', floating: '#3D332C',
+            cream: '#F0E4D4', muted: '#A89888',
+            'silk-road': '#8B2635', 'kyoto': '#6B8F71', 'persian': '#9B7B6B',
+            'night-market': '#C4973B', 'caribbean': '#7B3F5E',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['DM Sans', 'sans-serif'],
+            accent: ['Cormorant Garamond', 'serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    :root { --accent: #C4973B; --accent-rgb: 196,151,59; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html { overflow-x: clip; }
+    body { background-color: #1A1511; color: #F0E4D4; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+
+    /* ---------- Grain texture ---------- */
+    .grain-overlay { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; opacity: 0.03; }
+
+    /* ---------- Wave divider ---------- */
+    .wave-divider { width: 100%; height: 48px; position: relative; overflow: hidden; }
+    .wave-divider::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 300%; height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48'%3E%3Cpath d='M0 24 Q150 0 300 24 T600 24 T900 24 T1200 24' fill='none' stroke='%23A89888' stroke-width='1' opacity='0.2'/%3E%3Cpath d='M0 28 Q150 4 300 28 T600 28 T900 28 T1200 28' fill='none' stroke='%23A89888' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E") repeat-x;
+      background-size: 600px 48px; animation: waveScroll 20s linear infinite;
+    }
+    @keyframes waveScroll { 0% { transform: translateX(0); } 100% { transform: translateX(33.33%); } }
+
+    .accent-line { width: 60px; height: 2px; background: linear-gradient(90deg, var(--accent), #8B2635); display: inline-block; }
+
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+
+    /* ---------- Nav ---------- */
+    .nav-link { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #A89888; text-decoration: none; padding: 8px 0; position: relative; transition: color 0.3s ease; }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s cubic-bezier(0.22,1,0.36,1); }
+    .nav-link:hover { color: #F0E4D4; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ---------- Buttons ---------- */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #1A1511)); color: #F7EFE2; padding: 14px 34px;
+      font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; cursor: pointer; display: inline-block; text-decoration: none; position: relative; overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.14), transparent); opacity: 0; transition: opacity 0.3s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(var(--accent-rgb),0.30), 0 3px 10px rgba(0,0,0,0.3); }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-outline {
+      background: transparent; color: #F0E4D4; padding: 14px 34px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 14px;
+      letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(240,228,212,0.22); cursor: pointer; display: inline-block; text-decoration: none;
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), border-color 0.3s ease, background 0.3s ease;
+    }
+    .btn-outline:hover { border-color: var(--accent); background: rgba(var(--accent-rgb),0.06); transform: translateY(-2px); }
+    .btn-outline:active { transform: translateY(0); }
+
+    /* ---------- Reveal on scroll ---------- */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: 0.1s; } .reveal.d2 { transition-delay: 0.2s; } .reveal.d3 { transition-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .wave-divider::before { animation: none; } }
+
+    /* ---------- NFC entry banner ---------- */
+    .entry-banner { background: linear-gradient(90deg, rgba(var(--accent-rgb),0.16), rgba(var(--accent-rgb),0.04)); border-bottom: 1px solid rgba(var(--accent-rgb),0.18); }
+    .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); position: relative; }
+    .pulse-dot::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--accent); animation: ping 2s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes ping { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(2.4); opacity: 0; } }
+
+    /* ---------- Hero ---------- */
+    .blend-hero {
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 110%, rgba(var(--accent-rgb),0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 50% at 85% 10%, rgba(var(--accent-rgb),0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 10% 30%, rgba(139,38,53,0.08) 0%, transparent 55%),
+        #161210;
+    }
+    .descriptor-pill { display: inline-block; padding: 6px 16px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(var(--accent-rgb),0.3); border-radius: 100px; background: rgba(var(--accent-rgb),0.05); }
+    .spec-chip { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #A89888; }
+    .spec-chip svg { color: var(--accent); flex: none; }
+
+    /* ---------- CSS jar / label motif (matches physical product) ---------- */
+    .jar { position: relative; width: 100%; max-width: 300px; margin: 0 auto; }
+    .jar-lid { height: 42px; margin: 0 6%; border-radius: 12px 12px 6px 6px; background: linear-gradient(180deg, #C9A876 0%, #A47E50 55%, #8A6840 100%); box-shadow: inset 0 2px 0 rgba(255,255,255,0.25), 0 6px 18px rgba(0,0,0,0.4); position: relative; z-index: 2; }
+    .jar-lid::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 8px; background: linear-gradient(180deg, #6E5436, #4f3c27); border-radius: 3px; }
+    .jar-body {
+      margin-top: -2px; border-radius: 8px 8px 16px 16px; padding: 30px 22px 26px; position: relative; overflow: hidden;
+      background: linear-gradient(180deg, #211C18 0%, #18130F 100%);
+      border: 1px solid rgba(168,152,136,0.12);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04), inset -22px 0 40px rgba(0,0,0,0.5), inset 22px 0 40px rgba(0,0,0,0.35);
+    }
+    .jar-waves { position: absolute; left: 0; right: 0; top: 18px; height: 70px; opacity: 0.5; color: var(--accent); }
+    .jar-name { font-family: 'Playfair Display', serif; font-size: 26px; line-height: 1.05; letter-spacing: -0.01em; position: relative; z-index: 1; }
+    .jar-sub { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #A89888; margin-top: 4px; }
+    .jar-ings { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #C9BBAA; line-height: 1.9; margin-top: 14px; }
+    .jar-fox { width: 26px; height: auto; opacity: 0.85; }
+    .jar-accent-bar { height: 3px; width: 54px; background: var(--accent); margin-top: 16px; border-radius: 2px; }
+    .jar-glow { position: absolute; inset: -40% -10% auto; height: 80%; background: radial-gradient(ellipse at 50% 0, rgba(var(--accent-rgb),0.18), transparent 70%); filter: blur(10px); }
+
+    /* ---------- Section sub-nav ---------- */
+    .subnav { background: rgba(22,18,16,0.82); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(168,152,136,0.08); }
+    .subnav a { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #A89888; white-space: nowrap; padding: 6px 2px; transition: color 0.25s ease; }
+    .subnav a:hover, .subnav a.active { color: var(--accent); }
+
+    /* ---------- Origin story ---------- */
+    .prose p { font-family: 'DM Sans', sans-serif; font-size: 1.0625rem; line-height: 1.9; color: #C7B8A7; margin-top: 1.35rem; }
+    .prose p:first-child { margin-top: 0; }
+    .dropcap::first-letter { font-family: 'Playfair Display', serif; font-size: 3.6rem; line-height: 0.8; float: left; padding: 6px 12px 0 0; color: var(--accent); font-weight: 600; }
+    .pullquote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.7rem; line-height: 1.5; color: #F0E4D4; border-left: 2px solid var(--accent); padding-left: 1.5rem; }
+
+    /* ---------- Certifications ---------- */
+    .cert-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 100px; border: 1px solid rgba(168,152,136,0.18); background: rgba(168,152,136,0.05); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #C7B8A7; }
+    .cert-badge svg { color: var(--accent); flex: none; }
+
+    /* ---------- Location / map callout ---------- */
+    .map-card { position: relative; overflow: hidden; border-radius: 4px; background:
+        radial-gradient(circle at 50% 50%, rgba(var(--accent-rgb),0.10), transparent 60%), #1B1612;
+      border: 1px solid rgba(168,152,136,0.12); }
+    .map-grid { position: absolute; inset: 0; background-image:
+        radial-gradient(circle, rgba(168,152,136,0.12) 1px, transparent 1.4px);
+      background-size: 26px 26px; opacity: 0.5; }
+    .map-meridians { position: absolute; inset: 0; opacity: 0.35; color: var(--accent); }
+    .map-pin { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 18px rgba(var(--accent-rgb),0.9); transform: translate(-50%,-50%); }
+    .map-pin::after { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 1.5px solid var(--accent); animation: ping 2.4s cubic-bezier(0,0,0.2,1) infinite; }
+
+    /* ---------- Freshness ---------- */
+    .fresh-track { height: 6px; border-radius: 100px; background: rgba(168,152,136,0.14); position: relative; overflow: hidden; }
+    .fresh-fill { position: absolute; inset: 0 auto 0 0; border-radius: 100px; background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #6B8F71)); }
+    .fresh-marker { position: absolute; top: 50%; width: 2px; height: 22px; background: #F0E4D4; transform: translate(-50%,-50%); box-shadow: 0 0 8px rgba(240,228,212,0.6); }
+    .ring-wrap { position: relative; width: 132px; height: 132px; }
+    .ring-num { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+    /* ---------- Recipe carousel ---------- */
+    .recipe-scroller { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 14px; scrollbar-width: thin; }
+    .recipe-scroller::-webkit-scrollbar { height: 6px; }
+    .recipe-scroller::-webkit-scrollbar-thumb { background: rgba(168,152,136,0.25); border-radius: 100px; }
+    .recipe-card { scroll-snap-align: start; flex: 0 0 78%; max-width: 320px; border-radius: 4px; overflow: hidden; background: #302823; box-shadow: 0 6px 22px rgba(0,0,0,0.28); cursor: pointer; text-align: left; border: none; color: inherit; padding: 0; transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
+    .recipe-card:hover { transform: translateY(-4px); }
+    @media (min-width: 640px) { .recipe-card { flex-basis: 42%; } }
+    @media (min-width: 1024px) { .recipe-card { flex-basis: 30%; } }
+
+    /* ---------- Media gallery ---------- */
+    .media-img { filter: saturate(0.92); transition: transform 0.6s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease; }
+    .media-tile:hover .media-img { transform: scale(1.05); filter: saturate(1.05); }
+
+    /* ---------- Modal ---------- */
+    .modal { position: fixed; inset: 0; z-index: 10000; display: none; align-items: flex-end; justify-content: center; }
+    .modal.open { display: flex; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(10,8,6,0.7); backdrop-filter: blur(6px); animation: fadeIn 0.3s ease; }
+    .modal-panel { position: relative; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; background: #211C18; border: 1px solid rgba(168,152,136,0.14); border-radius: 14px 14px 0 0; box-shadow: 0 -20px 60px rgba(0,0,0,0.5); animation: slideUp 0.4s cubic-bezier(0.22,1,0.36,1); }
+    @media (min-width: 640px) { .modal { align-items: center; } .modal-panel { border-radius: 14px; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .related-card { transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
+    .related-card:hover { transform: translateY(-5px); }
+  </style>
+</head>
+<body>
+  <!-- Grain -->
+  <svg class="grain-overlay" width="100%" height="100%">
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#grain)"/>
+  </svg>
+
+  <!-- NFC / QR entry banner -->
+  <div id="entry-banner" class="entry-banner sticky top-0 z-[60]">
+    <div class="max-w-5xl mx-auto px-5 h-11 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span class="pulse-dot"></span>
+        <span class="font-body text-[11px] sm:text-xs tracking-[0.12em] uppercase truncate" style="color:#E4D5C2;">Jar traced · <span id="banner-fresh">verifying freshness…</span></span>
+      </div>
+      <button id="banner-close" class="font-body text-[11px] tracking-[0.1em] uppercase text-muted hover:text-cream transition-colors" aria-label="Dismiss">Dismiss</button>
+    </div>
+  </div>
+
+  <!-- Top nav -->
+  <nav class="sticky top-11 z-50" style="background: rgba(22,18,16,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(168,152,136,0.08);">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12 flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3" aria-label="Trevean Spice Home">
+        <img src="logo-horizontal.png" alt="Trevean Spice" class="h-8 w-auto" style="opacity:0.92;">
+      </a>
+      <div class="hidden md:flex items-center gap-9">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">Our Story</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+      </div>
+      <a href="shop.html" class="md:hidden font-body text-[11px] tracking-[0.12em] uppercase text-muted hover:text-cream transition-colors">Shop</a>
+    </div>
+  </nav>
+
+  <main id="blend-root" aria-live="polite"></main>
+
+  <!-- Recipe modal -->
+  <div id="recipe-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <div id="modal-body" class="p-7 sm:p-9"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="wave-divider"></div>
+  <footer class="py-14" style="background:#151210;">
+    <div class="max-w-7xl mx-auto px-5 lg:px-12">
+      <div class="grid md:grid-cols-4 gap-10 mb-12">
+        <div class="md:col-span-2">
+          <img src="logo-horizontal.png" alt="Trevean Spice" class="h-7 w-auto mb-4" style="opacity:0.7;">
+          <p class="font-body text-sm text-muted max-w-sm" style="line-height:1.7;">Ancient spice wisdom meets modern technology. Tap the jar, trace the origin, taste the difference.</p>
+        </div>
+        <div>
+          <h4 class="font-body text-xs tracking-[0.15em] uppercase text-muted mb-4">Explore</h4>
+          <ul class="space-y-3">
+            <li><a href="shop.html" class="font-body text-sm text-cream hover:text-white transition-colors" style="opacity:0.7;">Shop Blends</a></li>
+            <li><a href="about.html" class="font-body text-sm text-cream hover:text-white transition-colors" style="opacity:0.7;">Our Story</a></li>
+            <li><a href="index.html" class="font-body text-sm text-cream hover:text-white transition-colors" style="opacity:0.7;">Home</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-body text-xs tracking-[0.15em] uppercase text-muted mb-4">Connect</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors" style="opacity:0.7;">Instagram</a></li>
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors" style="opacity:0.7;">TikTok</a></li>
+            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors" style="opacity:0.7;">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-7" style="border-top:1px solid rgba(168,152,136,0.08);">
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+          <p class="font-body text-xs text-muted">&copy; 2026 Trevean Spice. All rights reserved.</p>
+          <p class="font-body text-xs text-muted">Austin, TX 78738 · <a href="https://treveanspice.com" class="hover:text-cream transition-colors">treveanspice.com</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  /* ============================================================
+     TREVEAN SPICE — Per-Blend Landing Engine
+     Single template, data-driven. Reachable via NFC / QR as
+     blend.html?blend=<slug>. CMS-ready: replace BLENDS with a fetch.
+     ============================================================ */
+
+  const HQ = { lat: 30.2672, lng: -97.7431, label: 'our Austin atelier' };
+
+  const BLENDS = {
+    'silk-road': {
+      name: 'The Silk Road', accent: '#8B2635', accentRgb: '139,38,53',
+      region: 'Sichuan Highlands', country: 'China',
+      coords: { lat: 30.05, lng: 103.0, latLabel: '30.05° N', lngLabel: '103.00° E' },
+      descriptors: ['Numbing', 'Warm', 'Complex'],
+      ingredients: ['Sichuan Peppercorn', 'Black Cardamom', 'Galangal', 'Star Anise', 'Long Pepper'],
+      netWeight: '1.27 oz (36g)', price: '$18', harvest: '2025-09-15',
+      heroLede: 'A bold, warming blend that echoes centuries of caravans threading the mountain passes between East and West.',
+      grower: {
+        name: 'Li Mei', title: 'Fifth-generation peppercorn grower',
+        region: 'Mount Emei foothills, Sichuan',
+        photo: 'https://placehold.co/640x800/3D332C/8B2635?text=Li+Mei',
+        certs: ['Direct Trade', 'Single Origin', 'Hand-Harvested'],
+        bio: [
+          'Li Mei tends terraced groves of red Sichuan peppercorn on the misted lower slopes of Mount Emei, where her family has harvested the same trees for five generations. She can tell a ripe husk from an unripe one in the half-second it takes to roll it between her fingers.',
+          'Every autumn she and a small crew pick by hand at first light, before the heat draws the volatile oils out of the husk. The peppercorns are sun-dried on bamboo racks and winnowed of their bitter black seeds — the slow, deliberate steps that give this blend its clean, electric tingle.'
+        ]
+      },
+      story: [
+        'For two thousand years the Silk Road was less a road than a rumor — a braid of routes carrying jade, silk, and above all spice across the spine of Asia. Caravans measured wealth in cardamom and pepper, and the flavors that travelled those passes reshaped the cooking of every empire they touched. This blend is our love letter to that journey.',
+        'At its heart is red Sichuan peppercorn, harvested by Li Mei on the foothills of Mount Emei. It is not heat in the way a chili is hot; it is a bright, buzzing tingle — the Chinese call it málà — that wakes the whole palate and makes everything after it taste louder. We pair it with smoky black cardamom dried over open flame, woody galangal, the cool liquorice of star anise, and long pepper, the ancient peppercorn that ruled Roman kitchens before black pepper ever did.',
+        'Together they read like a map of the trade routes themselves: the resinous high notes of the Himalayan foothills, the camphor-cool of the river valleys, the slow warmth of the lowland markets. It is a blend built for braises and broths, for charring over fire, for the kind of cooking that fills a house with the smell of somewhere far away.',
+        'We source every component through direct relationships with the growers who tend them, paying above market and naming them on the jar. When you tap the lid, you are not reading marketing — you are meeting Li Mei, standing in her grove, at the exact coordinates where this harvest began.'
+      ],
+      pullQuote: 'Not heat — a bright, buzzing tingle that makes everything after it taste louder.',
+      jarWaveColor: '#8B2635',
+      media: [
+        { src: 'Along_the_Golden_Route_version_2.png', caption: 'The golden route — caravans at dusk' },
+        { src: 'Taste_3%2C000_Years_of_History_version_1.png', caption: 'Three thousand years of trade' },
+        { src: 'pomelli_image.png', caption: 'From the jar to your table' }
+      ],
+      recipes: [
+        { name: 'Málà Dry-Fried Green Beans', time: '20 min', level: 'Easy', blurb: 'Blistered beans tossed in a numbing, garlicky Sichuan glaze.',
+          ings: ['400g green beans', '2 tsp The Silk Road blend', '3 cloves garlic, minced', '1 tbsp soy sauce', '1 tsp sugar', 'Neutral oil'],
+          steps: ['Dry-fry beans in a hot wok with a little oil until blistered and wrinkled, 6–8 min.', 'Push aside; add garlic and 1.5 tsp of the blend, stir 30 sec until fragrant.', 'Add soy and sugar, toss to coat. Finish with the remaining blend over the top.'] },
+        { name: 'Silk Road Short Rib Braise', time: '3 hr', level: 'Project', blurb: 'Fall-apart beef in a star-anise and cardamom broth.',
+          ings: ['1.5 kg beef short rib', '1 tbsp The Silk Road blend', '4 slices ginger', '3 tbsp soy', '2 tbsp rice wine', '1 onion'],
+          steps: ['Sear ribs on all sides; remove.', 'Soften onion and ginger, add the blend and toast 1 min.', 'Return ribs with soy, wine, and water to cover. Braise low 2.5–3 hr until tender.'] },
+        { name: 'Numbing Peppercorn Oil', time: '15 min', level: 'Easy', blurb: 'A pourable finishing oil for noodles, dumplings, and eggs.',
+          ings: ['120 ml neutral oil', '2 tbsp The Silk Road blend', '1 tbsp chili flakes', '1 star anise', 'Pinch of salt'],
+          steps: ['Warm oil to 160°C / 320°F.', 'Place blend, chili, and salt in a heatproof bowl; pour hot oil over and let crackle.', 'Cool, then store. Spoon over anything that needs waking up.'] },
+        { name: 'Caravan Roast Carrots', time: '35 min', level: 'Easy', blurb: 'Honey-roasted carrots with a warm, resinous crust.',
+          ings: ['600g carrots', '2 tsp The Silk Road blend', '1 tbsp honey', '2 tbsp olive oil', 'Yogurt to serve'],
+          steps: ['Toss carrots with oil, honey, and the blend.', 'Roast at 220°C / 430°F for 25–30 min, turning once.', 'Serve over seasoned yogurt with the pan juices.'] },
+        { name: 'Five-Empire Fried Rice', time: '15 min', level: 'Easy', blurb: 'Day-old rice charred wok-hot with egg and scallion.',
+          ings: ['3 cups cooked rice', '2 eggs', '1.5 tsp The Silk Road blend', '3 scallions', '1 tbsp soy', 'Oil'],
+          steps: ['Scramble eggs in hot oil; remove.', 'Fry rice hard until it crackles, add the blend and soy.', 'Fold eggs and scallions back through and serve immediately.'] }
+      ]
+    },
+
+    'kyoto-garden': {
+      name: 'Kyoto Garden', accent: '#6B8F71', accentRgb: '107,143,113',
+      region: "Uji District, Kyoto", country: 'Japan',
+      coords: { lat: 34.8889, lng: 135.8050, latLabel: '34.8889° N', lngLabel: '135.8050° E' },
+      descriptors: ['Bright', 'Subtle', 'Umami'],
+      ingredients: ['White Sesame', 'Nori Flakes', 'Dried Yuzu Peel', 'Green Tea Powder', 'Dried Mushroom'],
+      netWeight: '1.48 oz (42g)', price: '$18', harvest: '2026-05-10',
+      heroLede: 'A delicate, umami-rich blend that brings the precision of a Kyoto tea garden to everyday cooking.',
+      grower: {
+        name: 'Hiroshi Tanaka', title: 'Eighth-generation tea cultivator',
+        region: 'Uji, Kyoto Prefecture',
+        photo: 'https://placehold.co/640x800/3D332C/6B8F71?text=Hiroshi+Tanaka',
+        certs: ['Organic (JAS)', 'Direct Trade', 'Shade-Grown'],
+        bio: [
+          "Tanaka-san's family has grown tea in Uji — the birthplace of Japanese matcha — for more than 600 years. He shades his finest rows with reed screens for three weeks before harvest, coaxing out the deep, savory sweetness that defines great Kyoto tea.",
+          'For our blend he stone-grinds a portion of that tea into a fine powder and pairs it with sesame toasted in his own kitchen. He insists on harvesting at dawn, when the leaves are cool and the aromatics are at their peak — a discipline that shapes everything we make with him.'
+        ]
+      },
+      story: [
+        'There is a particular quiet to a Kyoto garden at dawn — moss still wet, the air green and cool, a single rake-line through the gravel. We built this blend to taste like that moment.',
+        'Its backbone is gyokuro-grade green tea from Tanaka-san in Uji, shade-grown to concentrate its umami and stone-ground into a powder so fine it dissolves on the tongue. Around it we layer nutty toasted white sesame, a whisper of ocean from hand-torn nori, the high citrus lift of dried yuzu peel, and the deep, savory hum of dried shiitake.',
+        'This is seasoning as restraint. It does not shout; it sharpens. A pinch over steamed rice, grilled fish, soft eggs, or roasted vegetables draws out a savoriness that was already there but hiding — the Japanese idea that the cook’s job is to reveal an ingredient rather than disguise it.',
+        'Every component is single-origin and traceable to the person who grew it. Tap the lid and you arrive in Uji at first light, at the exact coordinates of Tanaka-san’s shaded rows, the morning this tea was picked.'
+      ],
+      pullQuote: 'This is seasoning as restraint. It does not shout; it sharpens.',
+      jarWaveColor: '#6B8F71',
+      media: [
+        { src: 'Screenshot%202026-03-06%20061050.png', caption: 'Kyoto Garden — signature jar' },
+        { src: 'Screenshot%202026-03-06%20060949.png', caption: 'The collection, shelved' },
+        { src: 'pomelli-image%20(1).png', caption: 'A pinch transforms the everyday' }
+      ],
+      recipes: [
+        { name: 'Kyoto Garden Tamago', time: '10 min', level: 'Easy', blurb: 'Silky folded omelette dusted with green-tea umami.',
+          ings: ['3 eggs', '1 tsp Kyoto Garden blend', '1 tsp soy', '1 tsp mirin', 'Oil'],
+          steps: ['Beat eggs with soy, mirin, and half the blend.', 'Cook in thin layers in an oiled pan, rolling each as it sets.', 'Slice and finish with the remaining blend.'] },
+        { name: 'Umami Steamed Rice', time: '5 min', level: 'Easy', blurb: 'The simplest, most addictive bowl of rice you will make.',
+          ings: ['2 cups hot steamed rice', '2 tsp Kyoto Garden blend', 'Drizzle of sesame oil'],
+          steps: ['Mound hot rice into bowls.', 'Drizzle with sesame oil.', 'Shower generously with the blend and eat immediately.'] },
+        { name: 'Dawn-Harvest Grilled Salmon', time: '20 min', level: 'Easy', blurb: 'Crisp-skinned salmon with a yuzu-sesame crust.',
+          ings: ['2 salmon fillets', '2 tsp Kyoto Garden blend', '1 tsp oil', 'Lemon'],
+          steps: ['Pat salmon dry; rub with oil and 1.5 tsp blend.', 'Sear skin-side down until crisp, flip and finish.', 'Squeeze lemon over and dust with remaining blend.'] },
+        { name: 'Garden Vegetable Donburi', time: '25 min', level: 'Easy', blurb: 'Roasted vegetables over rice with a savory-green finish.',
+          ings: ['Mixed seasonal vegetables', '2 cups rice', '1 tbsp Kyoto Garden blend', 'Soy', 'Sesame oil'],
+          steps: ['Roast vegetables tossed with oil and 2 tsp blend.', 'Bowl over hot rice, splash with soy.', 'Finish with the remaining blend and serve.'] },
+        { name: 'Umami Butter', time: '5 min', level: 'Easy', blurb: 'A compound butter for corn, popcorn, and grilled bread.',
+          ings: ['100g soft butter', '1 tbsp Kyoto Garden blend', 'Pinch of salt'],
+          steps: ['Mash blend and salt into soft butter.', 'Roll in paper and chill.', 'Slice onto anything hot.'] }
+      ]
+    },
+
+    'persian-sunrise': {
+      name: 'Persian Sunrise', accent: '#9B7B6B', accentRgb: '155,123,107',
+      region: 'Kashan, Isfahan Province', country: 'Iran',
+      coords: { lat: 33.9850, lng: 51.4100, latLabel: '33.985° N', lngLabel: '51.410° E' },
+      descriptors: ['Warm', 'Floral', 'Bright'],
+      ingredients: ['Iranian Cinnamon', 'Green Cardamom', 'Persian Lime', 'Dried Rose Petals', 'Saffron Threads'],
+      netWeight: '1.62 oz (46g)', price: '$18', harvest: '2026-04-20',
+      heroLede: 'An aromatic blend that captures the warmth of a Persian sunrise — saffron, rose, and citrus over slow spice.',
+      grower: {
+        name: 'Reza Ahmadi', title: 'Saffron & rose grower',
+        region: "Kashan rose valleys, Iran",
+        photo: 'https://placehold.co/640x800/3D332C/9B7B6B?text=Reza+Ahmadi',
+        certs: ['Direct Trade', 'Hand-Harvested', 'Heirloom Variety'],
+        bio: [
+          "Reza farms saffron and Damask rose on land his family has worked for centuries near Kashan, the heart of Iran’s rose harvest. Saffron is the most labor-intensive spice on earth — each crimson thread is the stigma of a crocus, pulled by hand the morning the flower opens.",
+          'His roses are picked before sunrise in May, when their oils are richest, and dried in shade to hold their color. The care is almost devotional, and it is exactly why this blend tastes the way it does: floral without being soapy, warm without being heavy.'
+        ]
+      },
+      story: [
+        'In Persian cooking, spice is not an accent — it is hospitality made edible. A guest is welcomed with saffron rice, rosewater sweets, and the slow perfume of cardamom and cinnamon. This blend bottles that welcome.',
+        'We build it around saffron and Damask rose from Reza Ahmadi’s gardens near Kashan, the most storied rose valley on earth. Saffron brings its honeyed, hay-like warmth and a sunrise color to match the name; rose petals lend a high, floral lift. Underneath, Iranian cinnamon and green cardamom give a rounded sweetness, while dried Persian lime — limu omani — cuts through with a sour, almost smoky brightness that is the secret signature of the region’s cooking.',
+        'It is a blend that flatters both sweet and savory: stirred into rice and slow-braised lamb, but equally at home in poached fruit, rice pudding, or a pot of strong tea. A little goes a long way — saffron is measured in threads, not spoons.',
+        'Each ingredient is traceable to its grower and harvest. Tap the lid and the morning opens in Kashan, at the coordinates where Reza’s crocuses bloomed and his roses were picked before the sun.'
+      ],
+      pullQuote: 'In Persian cooking, spice is not an accent — it is hospitality made edible.',
+      jarWaveColor: '#9B7B6B',
+      media: [
+        { src: 'Saffron_and_Damask_Rose_version_1.png', caption: 'Saffron & Damask rose, hand-picked' },
+        { src: 'Trace_the_Origin_of_Taste_version_1.png', caption: 'Trace the origin of taste' },
+        { src: 'Persian%20Sunrise.png', caption: 'Persian Sunrise' }
+      ],
+      recipes: [
+        { name: 'Saffron Rose Rice (Polow)', time: '40 min', level: 'Medium', blurb: 'Fluffy basmati with a saffron crust and rose perfume.',
+          ings: ['2 cups basmati', '1 tsp Persian Sunrise blend', '2 tbsp butter', 'Salt', 'Bloomed saffron water'],
+          steps: ['Parboil soaked, salted rice 6 min; drain.', 'Layer back into the pot with butter and the blend; wrap the lid.', 'Steam low 25 min for a golden tahdig crust.'] },
+        { name: 'Sunrise Braised Lamb', time: '2.5 hr', level: 'Project', blurb: 'Lamb shoulder slow-cooked with lime, cinnamon, and rose.',
+          ings: ['1.2 kg lamb shoulder', '1 tbsp Persian Sunrise blend', '1 onion', '2 dried limes', 'Stock'],
+          steps: ['Brown lamb; soften onion.', 'Add the blend and pierced dried limes, toast 1 min.', 'Add stock to cover and braise 2 hr until spoon-tender.'] },
+        { name: 'Rosewater Saffron Pudding', time: '30 min', level: 'Easy', blurb: 'A silky, fragrant rice pudding for the table.',
+          ings: ['100g rice', '700 ml milk', '3 tbsp sugar', '1 tsp Persian Sunrise blend', 'Pistachios'],
+          steps: ['Simmer rice in milk until soft and creamy.', 'Stir in sugar and the blend.', 'Chill and top with crushed pistachios.'] },
+        { name: 'Persian Spiced Tea', time: '8 min', level: 'Easy', blurb: 'Black tea bloomed with cardamom, rose, and cinnamon.',
+          ings: ['2 tsp black tea', '1/2 tsp Persian Sunrise blend', 'Hot water', 'Honey'],
+          steps: ['Add tea and the blend to a pot.', 'Steep 4–5 min off the boil.', 'Strain and sweeten with honey.'] },
+        { name: 'Sunrise Roast Carrots & Yogurt', time: '35 min', level: 'Easy', blurb: 'Sweet roasted carrots over rose-flecked yogurt.',
+          ings: ['600g carrots', '2 tsp Persian Sunrise blend', 'Olive oil', 'Yogurt', 'Honey'],
+          steps: ['Roast carrots with oil and 1.5 tsp blend at 220°C.', 'Spread yogurt swirled with honey.', 'Pile carrots over and finish with remaining blend.'] }
+      ]
+    },
+
+    'north-african-night-market': {
+      name: 'North African Night Market', accent: '#C4973B', accentRgb: '196,151,59',
+      region: 'High Atlas Mountains', country: 'Morocco',
+      coords: { lat: 31.0589, lng: -7.9162, latLabel: '31.0589° N', lngLabel: '7.9162° W' },
+      descriptors: ['Smoky', 'Tangy', 'Bright'],
+      ingredients: ['Aleppo Pepper', 'Toasted Cumin', 'Preserved Lemon', 'Wild Thyme', 'Sumac'],
+      netWeight: '1.62 oz (46g)', price: '$18', harvest: '2025-10-05',
+      heroLede: 'A vibrant, aromatic blend that drops you into the bustling souks of Morocco at twilight.',
+      grower: {
+        name: 'Fatima Benali', title: 'Cooperative spice crafter',
+        region: 'High Atlas, Morocco',
+        photo: 'https://placehold.co/640x800/3D332C/C4973B?text=Fatima+Benali',
+        certs: ['Fair Trade', 'Women-Led Co-op', 'Wild-Harvested'],
+        bio: [
+          "Fatima leads a women’s cooperative that gathers wild thyme and za’atar from the High Atlas and sun-dries chilies and lemons on the rooftops of her village. The co-op pays its members directly and reinvests in the mountain community’s school.",
+          'Her hands know each herb by smell alone. She toasts the cumin in small batches over wood heat — the step that gives this blend its deep, smoky base — and balances every batch by taste before it is ever weighed.'
+        ]
+      },
+      story: [
+        'After dark, a Moroccan night market is all smoke and lamplight: braziers of grilling meat, pyramids of spice glowing under bare bulbs, the sour-bright snap of preserved lemon cutting through it all. This blend is that scene in a jar.',
+        'Toasted cumin gives it a smoky, earthen base; Aleppo pepper layers a fruity, gentle heat that builds rather than burns. Over the top, sumac and preserved lemon bring a tart, almost electric brightness, while wild High Atlas thyme — gathered by Fatima Benali’s cooperative — ties it to the mountains it came from.',
+        'It is the kind of seasoning that makes simple food taste considered. Rubbed onto chicken or lamb before the grill, stirred into chickpeas, whisked into a dressing, or scattered over roasted vegetables and labneh, it delivers the souk’s complexity with none of the work.',
+        'Every component is traceable to the women who harvested and blended it, paid fairly through a direct relationship. Tap the lid and you stand in the High Atlas, at the coordinates where this thyme was wild-gathered at the end of the dry season.'
+      ],
+      pullQuote: 'All smoke and lamplight, the sour-bright snap of preserved lemon cutting through it all.',
+      jarWaveColor: '#C4973B',
+      media: [
+        { src: 'Screenshot%202026-03-06%20061030.png', caption: 'Night Market — signature jar' },
+        { src: 'Screenshot%202026-03-06%20061109.png', caption: 'Souk-bright on the shelf' },
+        { src: 'pomelli_image%20(2).png', caption: 'Twilight flavor, any night' }
+      ],
+      recipes: [
+        { name: 'Night Market Grilled Chicken', time: '40 min', level: 'Easy', blurb: 'Smoky, citrus-bright chicken straight off the souk grill.',
+          ings: ['1 kg chicken thighs', '1 tbsp Night Market blend', '2 tbsp olive oil', '1 lemon', 'Yogurt'],
+          steps: ['Rub chicken with oil and the blend; rest 20 min.', 'Grill or roast hot until charred and cooked through.', 'Squeeze lemon over and serve with yogurt.'] },
+        { name: 'Charred Chickpeas', time: '20 min', level: 'Easy', blurb: 'Crispy pan-charred chickpeas with sumac and thyme.',
+          ings: ['1 tin chickpeas, dried', '2 tsp Night Market blend', '2 tbsp oil', 'Salt'],
+          steps: ['Fry chickpeas in hot oil until crisp.', 'Add the blend and toss 1 min off heat.', 'Salt and eat hot as a snack or over salad.'] },
+        { name: 'Souk Carrot Salad', time: '15 min', level: 'Easy', blurb: 'Bright shaved carrot with lemon and a smoky dressing.',
+          ings: ['4 carrots, shaved', '1.5 tsp Night Market blend', '2 tbsp olive oil', '1 tbsp lemon juice', 'Herbs'],
+          steps: ['Whisk oil, lemon, and the blend.', 'Toss with shaved carrots.', 'Top with fresh herbs and rest 10 min.'] },
+        { name: 'Atlas Lamb Kefta', time: '30 min', level: 'Medium', blurb: 'Spiced lamb skewers with a herby, tangy crust.',
+          ings: ['500g ground lamb', '1 tbsp Night Market blend', '1 grated onion', 'Parsley', 'Salt'],
+          steps: ['Mix lamb with the blend, onion, and herbs.', 'Form around skewers.', 'Grill hot 3–4 min per side.'] },
+        { name: 'Smoky Roasted Vegetables & Labneh', time: '35 min', level: 'Easy', blurb: 'Caramelized vegetables over cool, tangy labneh.',
+          ings: ['Mixed vegetables', '1 tbsp Night Market blend', 'Olive oil', 'Labneh', 'Mint'],
+          steps: ['Roast vegetables with oil and 2 tsp blend.', 'Spread labneh on a platter.', 'Pile vegetables over, finish with mint and remaining blend.'] }
+      ]
+    },
+
+    'caribbean-sunset': {
+      name: 'Caribbean Sunset', accent: '#7B3F5E', accentRgb: '123,63,94',
+      region: "Saint Ann Parish", country: 'Jamaica',
+      coords: { lat: 18.2208, lng: -77.5000, latLabel: '18.2208° N', lngLabel: '77.500° W' },
+      descriptors: ['Warm', 'Tropical', 'Island Heat'],
+      ingredients: ['Allspice (Pimento)', 'Ground Nutmeg', 'Dried Thyme', 'Bitter Orange Peel', 'Scotch Bonnet'],
+      netWeight: '1.62 oz (46g)', price: '$18', harvest: '2025-08-25',
+      heroLede: 'A bold, tropical blend that brings island warmth and the spirit of Caribbean cooking to every dish.',
+      grower: {
+        name: 'Winston Campbell', title: 'Pimento grove keeper',
+        region: "Saint Ann, Jamaica",
+        photo: 'https://placehold.co/640x800/3D332C/7B3F5E?text=Winston+Campbell',
+        certs: ['Direct Trade', 'Single Origin', 'Sun-Dried'],
+        bio: [
+          "Winston tends century-old pimento (allspice) groves in the hills of Saint Ann, the parish that gave the world jerk cooking. Allspice is Jamaica’s great gift to the spice cabinet — a single berry that tastes of clove, cinnamon, nutmeg, and pepper at once.",
+          'He hand-picks the berries green and sun-dries them on tarps until they rattle, the traditional way that preserves their oils. The thyme and Scotch bonnet come from neighbors’ plots, keeping the whole blend rooted in a few square miles of hillside.'
+        ]
+      },
+      story: [
+        'Jamaican cooking runs on contrast: scorching Scotch bonnet against cooling thyme, sweet allspice against sour citrus, fire against the breeze coming off the water at sunset. This blend chases that balance.',
+        'Its soul is allspice — pimento — from Winston Campbell’s century-old groves in Saint Ann. One berry carries clove, cinnamon, nutmeg, and pepper all at once, which is why it anchors jerk and so much of the island’s table. We round it with fresh-ground nutmeg, earthy dried thyme, the perfume of bitter orange peel, and just enough dried Scotch bonnet to bring the heat that makes a Caribbean dish sing.',
+        'Rub it hard into chicken or pork and let it sit overnight for proper jerk; stir it into rice and peas, bean stews, or a pot of pumpkin soup; even a pinch in a rum cocktail or a tray of roast sweet potato will carry the islands to your kitchen.',
+        'Each ingredient is single-origin and traceable to the grower. Tap the lid and you arrive in the hills of Saint Ann, at the coordinates where Winston’s pimento berries dried in the late-summer sun.'
+      ],
+      pullQuote: 'Fire against the breeze coming off the water at sunset — that is the balance.',
+      jarWaveColor: '#7B3F5E',
+      media: [
+        { src: 'pomelli_image%20(3).png', caption: 'Island heat, plated' },
+        { src: 'pomelli-image%20(3).png', caption: 'Sunset on the table' },
+        { src: 'Screenshot%202026-03-06%20061006.png', caption: 'Wear the brand — Trevean apron' }
+      ],
+      recipes: [
+        { name: 'Overnight Jerk Chicken', time: '24 hr', level: 'Medium', blurb: 'Deeply spiced, smoky-sweet jerk with real island heat.',
+          ings: ['1 kg chicken', '1.5 tbsp Caribbean Sunset blend', '2 tbsp soy', '1 tbsp oil', 'Lime', 'Garlic'],
+          steps: ['Blend seasonings into a paste; coat chicken.', 'Marinate overnight.', 'Grill or roast hot until charred and cooked through; squeeze lime over.'] },
+        { name: 'Rice and Peas', time: '45 min', level: 'Easy', blurb: 'Coconut rice with kidney beans and warm allspice.',
+          ings: ['2 cups rice', '1 tin kidney beans', '1 tin coconut milk', '2 tsp Caribbean Sunset blend', 'Thyme', 'Scallion'],
+          steps: ['Simmer beans, coconut milk, the blend, thyme, and scallion.', 'Add rinsed rice and water to cover.', 'Cook covered low until rice is fluffy.'] },
+        { name: 'Sunset Pumpkin Soup', time: '40 min', level: 'Easy', blurb: 'Silky pumpkin soup with a tropical, peppery lift.',
+          ings: ['800g pumpkin', '1 onion', '2 tsp Caribbean Sunset blend', 'Stock', 'Coconut milk'],
+          steps: ['Soften onion, add the blend and pumpkin.', 'Cover with stock and simmer until soft.', 'Blend with a splash of coconut milk.'] },
+        { name: 'Island Roast Sweet Potato', time: '35 min', level: 'Easy', blurb: 'Caramelized wedges with allspice and orange.',
+          ings: ['700g sweet potato', '2 tsp Caribbean Sunset blend', '2 tbsp oil', 'Orange zest'],
+          steps: ['Toss wedges with oil and the blend.', 'Roast at 220°C until caramelized, 25–30 min.', 'Finish with fresh orange zest.'] },
+        { name: 'Spiced Rum Sour', time: '5 min', level: 'Easy', blurb: 'A warming cocktail with a whisper of Scotch bonnet.',
+          ings: ['60 ml dark rum', '25 ml lime juice', '15 ml syrup', 'Tiny pinch Caribbean Sunset blend'],
+          steps: ['Shake all with ice.', 'Strain over fresh ice.', 'Dust the top with the blend.'] }
+      ]
+    }
+  };
+
+  const ORDER = ['silk-road','kyoto-garden','persian-sunrise','north-african-night-market','caribbean-sunset'];
+
+  /* ---------- helpers ---------- */
+  const $ = (s, r=document) => r.querySelector(s);
+  const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const monthYear = (iso) => new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  function haversineMiles(a, b) {
+    const R = 3958.8, toRad = d => d * Math.PI / 180;
+    const dLat = toRad(b.lat - a.lat), dLng = toRad(b.lng - a.lng);
+    const x = Math.sin(dLat/2)**2 + Math.cos(toRad(a.lat))*Math.cos(toRad(b.lat))*Math.sin(dLng/2)**2;
+    return Math.round(2 * R * Math.asin(Math.sqrt(x)));
+  }
+
+  // map lat/lng to a 0..100 position inside the stylized map card
+  function projectPin(c) {
+    const x = (c.lng + 180) / 360 * 100;
+    const y = (90 - c.lat) / 180 * 100;
+    return { x: Math.max(6, Math.min(94, x)), y: Math.max(12, Math.min(80, y)) };
+  }
+
+  function freshness(harvestISO) {
+    const harvest = new Date(harvestISO + 'T00:00:00');
+    const packed = new Date(harvest); packed.setDate(packed.getDate() + 21);
+    const peakEnd = new Date(harvest); peakEnd.setMonth(peakEnd.getMonth() + 18);
+    const now = new Date();
+    const total = peakEnd - harvest;
+    const elapsed = Math.min(Math.max(now - harvest, 0), total);
+    const pct = Math.round(elapsed / total * 100);
+    const remainingPct = Math.max(0, 100 - pct);
+    const daysSince = Math.max(0, Math.round((now - harvest) / 86400000));
+    const daysLeft = Math.max(0, Math.round((peakEnd - now) / 86400000));
+    return { harvest, packed, peakEnd, pct, remainingPct, daysSince, daysLeft };
+  }
+
+  /* ---------- analytics stub (scan / device / engagement) ---------- */
+  function track(event, data) {
+    window.dataLayer = window.dataLayer || [];
+    const payload = Object.assign({ event, ts: new Date().toISOString() }, data || {});
+    window.dataLayer.push(payload);
+    console.log('[trevean-analytics]', payload);
+  }
+
+  /* ---------- icons ---------- */
+  const I = {
+    leaf: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M11 3C6 3 3 7 3 12c0 4 2 7 2 7s4-1 7-4 5-7 5-12c-2 0-4 0-6 0z"/><path d="M5 19C9 14 13 10 17 8"/></svg>',
+    pin: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>',
+    calendar: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>',
+    scale: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M7 21h10M6 7h12M6 7l-3 6a3 3 0 0 0 6 0zM18 7l3 6a3 3 0 0 1-6 0z"/></svg>',
+    nfc: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9a14 14 0 0 1 16 0M7 12a9 9 0 0 1 10 0M10 15a4 4 0 0 1 4 0"/></svg>',
+    check: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>',
+    clock: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    chef: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 13v6h12v-6M6 13a4 4 0 1 1 1-7 4 4 0 0 1 10 0 4 4 0 1 1 1 7z"/></svg>',
+    play: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
+  };
+
+  function jarSVGWaves() {
+    return '<svg class="jar-waves" viewBox="0 0 300 70" preserveAspectRatio="none" fill="none">'
+      + '<path d="M0 20 Q50 4 100 20 T200 20 T300 20" stroke="currentColor" stroke-width="1.4" opacity="0.7"/>'
+      + '<path d="M0 34 Q50 18 100 34 T200 34 T300 34" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>'
+      + '<path d="M0 48 Q50 32 100 48 T200 48 T300 48" stroke="currentColor" stroke-width="0.9" opacity="0.35"/>'
+      + '</svg>';
+  }
+
+  /* ---------- render ---------- */
+  function render(slug) {
+    const b = BLENDS[slug];
+    const root = $('#blend-root');
+    document.documentElement.style.setProperty('--accent', b.accent);
+    document.documentElement.style.setProperty('--accent-rgb', b.accentRgb);
+    document.title = `${b.name} — Trevean Spice`;
+
+    const f = freshness(b.harvest);
+    const pin = projectPin(b.coords);
+    const miles = haversineMiles(b.coords, HQ);
+    $('#banner-fresh').textContent = f.daysLeft > 0 ? `fresh · ${f.remainingPct}% peak window left` : 'past peak window';
+
+    const descPills = b.descriptors.map(d => `<span class="descriptor-pill">${esc(d)}</span>`).join('');
+    const ingChips = b.ingredients.map(x => `<span class="font-body text-xs tracking-wide" style="color:#C7B8A7;">${esc(x)}</span>`)
+      .join('<span style="color:var(--accent);opacity:.6;"> · </span>');
+    const jarIngs = b.ingredients.map(esc).join(' &middot; ');
+    const certs = b.grower.certs.map(c => `<span class="cert-badge">${I.check}${esc(c)}</span>`).join('');
+    const growerBio = b.grower.bio.map(p => `<p class="font-body text-[15px] mt-4" style="line-height:1.85;color:#C7B8A7;">${esc(p)}</p>`).join('');
+    const storyParas = b.story.map((p,i) => `<p class="${i===0?'dropcap':''}">${esc(p)}</p>`).join('');
+
+    const recipeCards = b.recipes.map((r,i) => `
+      <button class="recipe-card group" data-recipe="${i}" aria-label="View recipe: ${esc(r.name)}">
+        <div class="aspect-[4/3] relative overflow-hidden" style="background:#241E19;">
+          <img src="https://placehold.co/480x360/241E19/${b.accent.slice(1)}?text=${encodeURIComponent(r.name)}" alt="" class="media-img w-full h-full object-cover" style="opacity:.7;" loading="lazy">
+          <div class="absolute inset-0" style="background:linear-gradient(to top,#302823 6%,transparent 70%);"></div>
+          <div class="absolute inset-0" style="background:rgba(${b.accentRgb},0.14);mix-blend-mode:multiply;"></div>
+          <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] tracking-wider uppercase" style="background:rgba(22,18,16,0.7);color:var(--accent);">${I.clock}${esc(r.time)}</span>
+        </div>
+        <div class="p-5">
+          <h4 class="font-display text-lg font-medium leading-snug">${esc(r.name)}</h4>
+          <p class="font-body text-sm text-muted mt-2" style="line-height:1.6;">${esc(r.blurb)}</p>
+          <span class="inline-flex items-center gap-1.5 mt-4 font-body text-[11px] tracking-[0.12em] uppercase" style="color:var(--accent);">${I.chef}${esc(r.level)} · View recipe →</span>
+        </div>
+      </button>`).join('');
+
+    const mediaTiles = b.media.map((m,i) => `
+      <figure class="media-tile relative overflow-hidden rounded-sm ${i===0?'sm:col-span-2 sm:row-span-2':''}" style="background:#241E19;">
+        <div class="${i===0?'aspect-[4/3] sm:aspect-auto sm:h-full':'aspect-[4/3]'} relative">
+          <img src="${m.src}" alt="${esc(m.caption)}" class="media-img w-full h-full object-cover" loading="lazy">
+          <div class="absolute inset-0" style="background:rgba(${b.accentRgb},0.10);mix-blend-mode:multiply;"></div>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(22,18,16,0.85) 0%,transparent 55%);"></div>
+        </div>
+        <figcaption class="absolute bottom-4 left-4 right-4 font-body text-xs tracking-wide" style="color:#E4D5C2;">${esc(m.caption)}</figcaption>
+      </figure>`).join('');
+
+    const related = ORDER.filter(s => s !== slug).map(s => {
+      const o = BLENDS[s];
+      return `<a href="blend.html?blend=${s}" class="related-card block rounded-sm overflow-hidden group" style="background:#302823;box-shadow:0 4px 16px rgba(0,0,0,0.2);">
+        <div class="h-24 relative overflow-hidden" style="background:linear-gradient(135deg, rgba(${o.accentRgb},0.5), #241E19);">
+          <div class="absolute inset-0" style="background:radial-gradient(ellipse at 30% 120%, rgba(${o.accentRgb},0.6), transparent 60%);"></div>
+        </div>
+        <div class="p-4">
+          <h4 class="font-display text-base font-medium leading-tight">${esc(o.name)}</h4>
+          <p class="font-body text-[11px] tracking-wider uppercase text-muted mt-1">${esc(o.region)}, ${esc(o.country)}</p>
+        </div>
+      </a>`;
+    }).join('');
+
+    root.innerHTML = `
+    <!-- ===== HERO ===== -->
+    <header class="blend-hero pt-12 pb-16 sm:pt-16 sm:pb-20">
+      <div class="absolute top-0 right-0 w-[520px] h-[520px] rounded-full opacity-[0.05]" style="background:radial-gradient(circle,var(--accent),transparent 70%);"></div>
+      <div class="max-w-6xl mx-auto px-5 lg:px-12 relative">
+        <a href="shop.html" class="inline-flex items-center gap-2 font-body text-[11px] tracking-[0.14em] uppercase text-muted hover:text-cream transition-colors mb-8 reveal in">← All blends</a>
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div>
+            <div class="reveal in flex items-center gap-2.5 mb-5">
+              <span class="spec-chip">${I.pin}<span style="color:var(--accent);letter-spacing:0.14em;">${esc(b.region)}, ${esc(b.country)}</span></span>
+            </div>
+            <h1 class="reveal in d1 font-display text-5xl sm:text-6xl lg:text-7xl font-medium leading-[1.02]" style="letter-spacing:-0.03em;">${esc(b.name)}</h1>
+            <div class="reveal in d1 flex flex-wrap gap-2 mt-6">${descPills}</div>
+            <p class="reveal in d2 font-body text-lg text-muted mt-6 max-w-md" style="line-height:1.7;">${esc(b.heroLede)}</p>
+            <div class="reveal in d2 flex flex-wrap items-center gap-x-6 gap-y-3 mt-7">
+              <span class="spec-chip">${I.calendar}Harvested ${esc(monthYear(b.harvest))}</span>
+              <span class="spec-chip">${I.scale}${esc(b.netWeight)}</span>
+              <span class="spec-chip">${I.nfc}NFC-traceable</span>
+            </div>
+            <div class="reveal in d3 flex flex-wrap gap-3 mt-9">
+              <a href="shop.html" class="btn-primary">Add to Cart · ${esc(b.price)}</a>
+              <a href="#story" class="btn-outline">Trace the Origin</a>
+            </div>
+          </div>
+          <!-- CSS jar -->
+          <div class="reveal in d2 relative">
+            <div class="jar-glow"></div>
+            <div class="jar">
+              <div class="jar-lid"></div>
+              <div class="jar-body">
+                ${jarSVGWaves()}
+                <div class="flex items-start justify-between gap-3 relative">
+                  <div>
+                    <div class="jar-name">${esc(b.name)}</div>
+                    <div class="jar-sub">${esc(b.descriptors.join(' · '))}</div>
+                  </div>
+                </div>
+                <div class="jar-ings relative">${jarIngs}</div>
+                <div class="jar-accent-bar"></div>
+                <div class="flex items-center justify-between mt-5 relative">
+                  <img src="fox-icon.png" alt="" class="jar-fox">
+                  <span class="font-body text-[9px] tracking-[0.2em] uppercase" style="color:#A89888;">Signature Blend · ${esc(b.netWeight)}</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 mx-auto w-max max-w-full px-5 py-3 rounded-sm flex items-center gap-3" style="background:#302823;border:1px solid rgba(${b.accentRgb},0.2);box-shadow:0 16px 40px rgba(0,0,0,0.35);">
+              <span class="pulse-dot" style="flex:none;"></span>
+              <span>
+                <span class="block font-body text-[10px] tracking-[0.16em] uppercase text-muted">Tap the lid · trace your flavor</span>
+                <span class="block font-display text-sm mt-0.5" style="color:var(--accent);">${esc(b.coords.latLabel)}, ${esc(b.coords.lngLabel)}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== SECTION SUB-NAV ===== -->
+    <div class="subnav sticky top-[6.75rem] z-40 hidden sm:block">
+      <div class="max-w-6xl mx-auto px-5 lg:px-12 flex items-center gap-7 h-12 overflow-x-auto">
+        <a href="#story" data-spy="story">Origin Story</a>
+        <a href="#grower" data-spy="grower">The Grower</a>
+        <a href="#origin" data-spy="origin">Where It Grows</a>
+        <a href="#freshness" data-spy="freshness">Freshness</a>
+        <a href="#recipes" data-spy="recipes">Recipes</a>
+        <a href="#media" data-spy="media">From the Field</a>
+      </div>
+    </div>
+
+    <div class="wave-divider"></div>
+
+    <!-- ===== ORIGIN STORY ===== -->
+    <section id="story" class="py-20 lg:py-28" style="background:#241E19;scroll-margin-top:8rem;">
+      <div class="max-w-3xl mx-auto px-5 lg:px-12">
+        <div class="reveal text-center mb-10">
+          <span class="accent-line"></span>
+          <p class="font-body text-xs tracking-[0.2em] uppercase text-muted mt-5">The Origin Story</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing:-0.02em;">Where ${esc(b.name)} Begins</h2>
+        </div>
+        <div class="reveal prose">${storyParas}</div>
+        <figure class="reveal mt-12">
+          <blockquote class="pullquote">${esc(b.pullQuote)}</blockquote>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== GROWER PROFILE ===== -->
+    <section id="grower" class="py-20 lg:py-28" style="background:radial-gradient(ellipse 60% 50% at 15% 30%, rgba(${b.accentRgb},0.07) 0%, transparent 55%), #1A1511; scroll-margin-top:8rem;">
+      <div class="max-w-6xl mx-auto px-5 lg:px-12">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div class="reveal order-1 lg:order-none">
+            <div class="rounded-sm overflow-hidden relative" style="box-shadow:0 20px 50px rgba(0,0,0,0.4);">
+              <div class="aspect-[4/5] relative" style="background:#302823;">
+                <img src="${b.grower.photo}" alt="${esc(b.grower.name)}" class="w-full h-full object-cover" style="mix-blend-mode:luminosity;opacity:0.75;" loading="lazy">
+                <div class="absolute inset-0" style="background:rgba(${b.accentRgb},0.16);mix-blend-mode:multiply;"></div>
+                <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(26,21,17,0.85) 0%,transparent 55%);"></div>
+                <div class="absolute bottom-5 left-5 right-5">
+                  <p class="font-display text-2xl font-medium">${esc(b.grower.name)}</p>
+                  <p class="font-body text-xs tracking-[0.14em] uppercase text-muted mt-1">${esc(b.grower.region)}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal d1">
+            <span class="accent-line"></span>
+            <p class="font-body text-xs tracking-[0.2em] uppercase text-muted mt-5">The Grower</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing:-0.02em;">${esc(b.grower.name)}</h2>
+            <p class="font-body text-sm tracking-[0.06em] uppercase mt-2" style="color:var(--accent);">${esc(b.grower.title)}</p>
+            ${growerBio}
+            <div class="flex flex-wrap gap-2.5 mt-7">${certs}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOCATION CONTEXT ===== -->
+    <section id="origin" class="py-20 lg:py-28" style="background:#241E19; scroll-margin-top:8rem;">
+      <div class="max-w-6xl mx-auto px-5 lg:px-12">
+        <div class="reveal text-center mb-12">
+          <span class="accent-line"></span>
+          <p class="font-body text-xs tracking-[0.2em] uppercase text-muted mt-5">Grower Location</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing:-0.02em;">Where It Grows</h2>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-8 items-stretch">
+          <div class="reveal lg:col-span-3 map-card min-h-[300px] sm:min-h-[360px]">
+            <div class="map-grid"></div>
+            <svg class="map-meridians" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="0.3">
+              <path d="M0 50 Q50 38 100 50" opacity="0.5"/><path d="M0 30 Q50 20 100 30" opacity="0.3"/><path d="M0 70 Q50 60 100 70" opacity="0.3"/>
+              <path d="M30 0 Q40 50 30 100" opacity="0.25"/><path d="M60 0 Q70 50 60 100" opacity="0.25"/>
+            </svg>
+            <div class="map-pin" style="left:${pin.x}%;top:${pin.y}%;"></div>
+            <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
+              <div>
+                <p class="font-display text-xl font-medium">${esc(b.region)}</p>
+                <p class="font-body text-xs tracking-[0.14em] uppercase text-muted mt-1">${esc(b.country)}</p>
+              </div>
+              <div class="text-right">
+                <p class="font-display text-base" style="color:var(--accent);">${esc(b.coords.latLabel)}</p>
+                <p class="font-display text-base" style="color:var(--accent);">${esc(b.coords.lngLabel)}</p>
+              </div>
+            </div>
+          </div>
+          <div class="reveal d1 lg:col-span-2 flex flex-col gap-4 justify-center">
+            <div class="p-6 rounded-sm" style="background:#302823;border:1px solid rgba(168,152,136,0.08);">
+              <p class="font-display text-4xl font-semibold" style="color:var(--accent);">${miles.toLocaleString()}<span class="font-body text-base text-muted"> mi</span></p>
+              <p class="font-body text-sm text-muted mt-1">travelled from origin to ${esc(HQ.label)}</p>
+            </div>
+            <div class="p-6 rounded-sm" style="background:#302823;border:1px solid rgba(168,152,136,0.08);">
+              <p class="font-body text-sm" style="line-height:1.8;color:#C7B8A7;">This is a real place tended by a real person. Every Trevean jar names its grower and its coordinates — no anonymous supply chain, no guesswork.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-divider"></div>
+
+    <!-- ===== FRESHNESS ===== -->
+    <section id="freshness" class="py-20 lg:py-28" style="background:radial-gradient(ellipse 50% 50% at 80% 40%, rgba(${b.accentRgb},0.07) 0%, transparent 55%), #1A1511; scroll-margin-top:8rem;">
+      <div class="max-w-5xl mx-auto px-5 lg:px-12">
+        <div class="reveal text-center mb-12">
+          <span class="accent-line"></span>
+          <p class="font-body text-xs tracking-[0.2em] uppercase text-muted mt-5">Freshness Window</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing:-0.02em;">Caught at Its Peak</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 items-center">
+          <div class="reveal flex justify-center">
+            <div class="ring-wrap">
+              <svg width="132" height="132" viewBox="0 0 132 132">
+                <circle cx="66" cy="66" r="58" fill="none" stroke="rgba(168,152,136,0.14)" stroke-width="8"/>
+                <circle id="fresh-ring" cx="66" cy="66" r="58" fill="none" stroke="var(--accent)" stroke-width="8" stroke-linecap="round" transform="rotate(-90 66 66)" stroke-dasharray="${(2*Math.PI*58).toFixed(1)}" stroke-dashoffset="${(2*Math.PI*58).toFixed(1)}"/>
+              </svg>
+              <div class="ring-num">
+                <span class="font-display text-3xl font-semibold" style="color:var(--accent);">${f.remainingPct}%</span>
+                <span class="font-body text-[10px] tracking-[0.14em] uppercase text-muted mt-0.5">peak left</span>
+              </div>
+            </div>
+          </div>
+          <div class="reveal d1 md:col-span-2">
+            <p class="font-body text-base" style="line-height:1.8;color:#C7B8A7;">Ground spices fade fast. This jar was sealed within three weeks of harvest and is tracked from that day — so you always know exactly how much life is left in it.</p>
+            <div class="mt-8">
+              <div class="fresh-track">
+                <div id="fresh-fill" class="fresh-fill" style="right:100%;"></div>
+                <div id="fresh-marker" class="fresh-marker" style="left:0%;"></div>
+              </div>
+              <div class="flex justify-between mt-3 font-body text-[11px] tracking-wide uppercase text-muted">
+                <span>${esc(monthYear(b.harvest))}<br><span style="opacity:.7;">Harvested</span></span>
+                <span class="text-center" style="color:var(--accent);">Today<br><span class="text-muted" style="opacity:.7;">${f.daysSince} days in</span></span>
+                <span class="text-right">${esc(f.peakEnd.toLocaleDateString('en-US',{month:'long',year:'numeric'}))}<br><span style="opacity:.7;">Best by</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-divider"></div>
+
+    <!-- ===== RECIPES ===== -->
+    <section id="recipes" class="py-20 lg:py-28" style="background:#241E19; scroll-margin-top:8rem;">
+      <div class="max-w-6xl mx-auto px-5 lg:px-12">
+        <div class="reveal flex items-end justify-between mb-9 gap-4">
+          <div>
+            <span class="accent-line"></span>
+            <p class="font-body text-xs tracking-[0.2em] uppercase text-muted mt-5">Cook With It</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing:-0.02em;">${b.recipes.length} Ways to Use ${esc(b.name)}</h2>
+          </div>
+          <span class="hidden sm:block font-body text-[11px] tracking-[0.12em] uppercase text-muted">Swipe →</span>
+        </div>
+        <div class="reveal recipe-scroller" id="recipe-scroller">${recipeCards}</div>
+      </div>
+    </section>
+
+    <!-- ===== SUPPORTING MEDIA ===== -->
+    <section id="media" class="py-20 lg:py-28" style="background:#1A1511; scroll-margin-top:8rem;">
+      <div class="max-w-6xl mx-auto px-5 lg:px-12">
+        <div class="reveal text-center mb-12">
+          <span class="accent-line"></span>
+          <p class="font-body text-xs tracking-[0.2em] uppercase text-muted mt-5">From the Field</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing:-0.02em;">See the Journey</h2>
+        </div>
+        <div class="reveal grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 auto-rows-fr">
+          ${mediaTiles}
+          <button id="video-card" class="media-tile relative overflow-hidden rounded-sm group" style="background:linear-gradient(135deg, rgba(${b.accentRgb},0.35), #241E19);" aria-label="Play origin film">
+            <div class="aspect-[4/3] flex flex-col items-center justify-center">
+              <span class="w-14 h-14 rounded-full flex items-center justify-center mb-3 transition-transform group-hover:scale-110" style="background:rgba(${b.accentRgb},0.85);color:#161210;">${I.play}</span>
+              <span class="font-body text-[11px] tracking-[0.16em] uppercase" style="color:#E4D5C2;">Watch the origin film</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-divider"></div>
+
+    <!-- ===== CTA ===== -->
+    <section class="py-20 lg:py-28 relative overflow-hidden" style="background:#1A1511;">
+      <div class="absolute inset-0" style="background:radial-gradient(ellipse 60% 50% at 50% 50%, rgba(${b.accentRgb},0.08) 0%, transparent 60%);"></div>
+      <div class="max-w-3xl mx-auto px-5 lg:px-12 text-center relative">
+        <img src="fox-icon.png" alt="" class="w-16 h-auto mx-auto mb-7" style="opacity:0.3;">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium" style="letter-spacing:-0.02em;">Bring ${esc(b.name)}<br>into your kitchen</h2>
+        <p class="font-body text-lg text-muted mt-6 max-w-xl mx-auto" style="line-height:1.7;">Guaranteed-fresh, ethically sourced, and traceable to the exact grove it grew in.</p>
+        <div class="flex flex-wrap justify-center gap-3 mt-9">
+          <a href="shop.html" class="btn-primary">Add to Cart · ${esc(b.price)}</a>
+          <a href="shop.html" class="btn-outline">Subscribe &amp; Save</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RELATED ===== -->
+    <section class="py-16 lg:py-20" style="background:#241E19;">
+      <div class="max-w-6xl mx-auto px-5 lg:px-12">
+        <p class="font-body text-xs tracking-[0.2em] uppercase text-muted mb-7">Continue the Journey</p>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">${related}</div>
+      </div>
+    </section>
+    `;
+
+    bindInteractions(b, f);
+    track('blend_view', { blend: slug, freshnessRemaining: f.remainingPct, viewport: window.innerWidth + 'x' + window.innerHeight });
+  }
+
+  /* ---------- interactions ---------- */
+  function bindInteractions(b, f) {
+    // reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+
+    // animate freshness once visible
+    const freshSection = document.getElementById('freshness');
+    const circ = 2 * Math.PI * 58;
+    const fo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const ring = document.getElementById('fresh-ring');
+          if (ring) ring.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1)';
+          requestAnimationFrame(() => { if (ring) ring.style.strokeDashoffset = (circ * (1 - f.remainingPct/100)).toFixed(1); });
+          const fill = document.getElementById('fresh-fill'); const marker = document.getElementById('fresh-marker');
+          if (fill) { fill.style.transition = 'right 1.4s cubic-bezier(0.22,1,0.36,1)'; requestAnimationFrame(() => fill.style.right = (100 - f.pct) + '%'); }
+          if (marker) { marker.style.transition = 'left 1.4s cubic-bezier(0.22,1,0.36,1)'; requestAnimationFrame(() => marker.style.left = f.pct + '%'); }
+          fo.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    if (freshSection) fo.observe(freshSection);
+
+    // scrollspy
+    const spy = [...document.querySelectorAll('.subnav a[data-spy]')];
+    const sections = spy.map(a => document.getElementById(a.dataset.spy)).filter(Boolean);
+    const so = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { spy.forEach(a => a.classList.toggle('active', a.dataset.spy === e.target.id)); }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(s => so.observe(s));
+
+    // recipe modal
+    document.querySelectorAll('.recipe-card').forEach(card => {
+      card.addEventListener('click', () => openRecipe(b, parseInt(card.dataset.recipe, 10)));
+    });
+    document.getElementById('recipe-scroller')?.addEventListener('scroll', () => track('recipe_scroll', { blend: b.name }), { once: true });
+
+    // video placeholder
+    document.getElementById('video-card')?.addEventListener('click', () => {
+      track('video_play_intent', { blend: b.name });
+      alert('Origin film coming soon — this is where the farm-to-jar video will play.');
+    });
+
+    // engagement depth
+    let maxDepth = 0;
+    const onScroll = () => {
+      const d = Math.round((window.scrollY + window.innerHeight) / document.body.scrollHeight * 100);
+      if (d > maxDepth + 24) { maxDepth = d; track('scroll_depth', { blend: b.name, depth: Math.min(100, d) }); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  function openRecipe(b, i) {
+    const r = b.recipes[i];
+    const ings = r.ings.map(x => `<li class="flex items-start gap-2.5 font-body text-sm" style="color:#C7B8A7;"><span style="color:var(--accent);margin-top:2px;">${I.check}</span>${esc(x)}</li>`).join('');
+    const steps = r.steps.map((s,n) => `<li class="flex gap-3.5"><span class="font-display text-lg flex-none" style="color:var(--accent);width:1.4em;">${n+1}</span><span class="font-body text-sm" style="line-height:1.7;color:#C7B8A7;">${esc(s)}</span></li>`).join('');
+    $('#modal-body').innerHTML = `
+      <button data-close class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center text-muted hover:text-cream" style="background:rgba(168,152,136,0.08);" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <p class="font-body text-[11px] tracking-[0.2em] uppercase" style="color:var(--accent);">${esc(b.name)} Recipe</p>
+      <h3 id="modal-title" class="font-display text-2xl sm:text-3xl font-medium mt-2 leading-tight">${esc(r.name)}</h3>
+      <div class="flex items-center gap-5 mt-3">
+        <span class="spec-chip">${I.clock}${esc(r.time)}</span>
+        <span class="spec-chip">${I.chef}${esc(r.level)}</span>
+      </div>
+      <p class="font-body text-sm text-muted mt-4" style="line-height:1.7;">${esc(r.blurb)}</p>
+      <div class="grid sm:grid-cols-2 gap-7 mt-7">
+        <div>
+          <h4 class="font-body text-xs tracking-[0.16em] uppercase text-muted mb-4">Ingredients</h4>
+          <ul class="space-y-2.5">${ings}</ul>
+        </div>
+        <div>
+          <h4 class="font-body text-xs tracking-[0.16em] uppercase text-muted mb-4">Method</h4>
+          <ol class="space-y-3.5">${steps}</ol>
+        </div>
+      </div>
+      <a href="shop.html" class="btn-primary w-full text-center mt-8">Get ${esc(b.name)} · ${esc(b.price)}</a>`;
+    const modal = $('#recipe-modal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    track('recipe_open', { blend: b.name, recipe: r.name });
+  }
+
+  function closeModal() { $('#recipe-modal').classList.remove('open'); document.body.style.overflow = ''; }
+
+  /* ---------- boot ---------- */
+  document.addEventListener('click', (e) => { if (e.target.closest('[data-close]')) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  document.getElementById('banner-close').addEventListener('click', () => {
+    document.getElementById('entry-banner').style.display = 'none'; track('banner_dismiss', {});
+  });
+
+  (function init() {
+    const params = new URLSearchParams(location.search);
+    let slug = (params.get('blend') || '').toLowerCase().trim();
+    // tolerant aliases for NFC/QR short links
+    const alias = { 'silk':'silk-road','thesilkroad':'silk-road','kyoto':'kyoto-garden','persian':'persian-sunrise',
+      'north-african':'north-african-night-market','nightmarket':'north-african-night-market','night-market':'north-african-night-market',
+      'caribbean':'caribbean-sunset' };
+    if (alias[slug]) slug = alias[slug];
+    if (!BLENDS[slug]) slug = 'silk-road';
+    render(slug);
+    // analytics: scan + device context
+    track('scan_entry', { blend: slug, ref: document.referrer || 'direct', ua: navigator.userAgent.slice(0,80), source: params.get('via') || 'web' });
+  })();
+  </script>
+</body>
+</html>
