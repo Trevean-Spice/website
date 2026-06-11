@@ -3,27 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trevean Spice — Ancient Wisdom, Modern Kitchens</title>
+  <title>Trevean Spice — Know Your Spice | Traceable, Fresh, Premium Spice Blends</title>
+  <meta name="description" content="Premium spice blends with NFC-powered traceability. Tap the jar to meet the farmer, see the harvest date, and verify freshness. Five signature blends, delivered fresh.">
+  <link rel="canonical" href="https://treveanspice.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trevean Spice">
+  <meta property="og:title" content="Trevean Spice — Know Your Spice">
+  <meta property="og:description" content="Freshness, transparency, and provenance in every jar. NFC-powered traceability from farm to kitchen.">
+  <meta property="og:url" content="https://treveanspice.com/">
+  <meta property="og:image" content="https://treveanspice.com/Persian%20Sunrise.png">
+  <meta name="twitter:card" content="summary_large_image">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://treveanspice.com/#org",
+        "name": "Trevean Spice",
+        "url": "https://treveanspice.com/",
+        "logo": "https://treveanspice.com/logo-horizontal.png",
+        "description": "Premium spice-tech company. Five signature blends with NFC smart packaging, direct-trade sourcing, and cultural education.",
+        "address": { "@type": "PostalAddress", "addressLocality": "Austin", "addressRegion": "TX", "postalCode": "78738", "addressCountry": "US" }
+      },
+      {
+        "@type": "ItemList",
+        "name": "Trevean Signature Blends",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "url": "https://treveanspice.com/blend.html?blend=silk-road", "name": "The Silk Road" },
+          { "@type": "ListItem", "position": 2, "url": "https://treveanspice.com/blend.html?blend=kyoto-garden", "name": "Kyoto Garden" },
+          { "@type": "ListItem", "position": 3, "url": "https://treveanspice.com/blend.html?blend=persian-sunrise", "name": "Persian Sunrise" },
+          { "@type": "ListItem", "position": 4, "url": "https://treveanspice.com/blend.html?blend=north-african-night-market", "name": "North African Night Market" },
+          { "@type": "ListItem", "position": 5, "url": "https://treveanspice.com/blend.html?blend=caribbean-sunset", "name": "Caribbean Sunset" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does Trevean's NFC traceability work?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Every Trevean jar carries an NFC tag in the lid. Tap it with your phone — no app required — and the jar opens its own page: the farm it came from, the person who grew it, the harvest date, and live freshness data for that exact batch." }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does spice freshness matter?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ground spices lose volatile aromatic oils from the day they are processed. Most grocery-store spices sit in supply chains for one to three years before purchase. Trevean jars are batch-dated, sealed within weeks of harvest, and tracked so you always know where your jar is in its freshness window." }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does the Spice Sage subscription cost?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The Spice Sage subscription is $39 per month or $99 per quarter. Subscribers receive curated signature blends with NFC-enabled packaging, rotating limited releases, and recipe pairings unlocked by tapping the jar." }
+          },
+          {
+            "@type": "Question",
+            "name": "Where do Trevean spices come from?",
+            "acceptedAnswer": { "@type": "Answer", "text": "We source through direct relationships with more than 25 artisan growers across five global regions — from Sichuan peppercorn groves to Kashan saffron fields — paying above market and naming the grower on every jar." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            base: '#1A1511',
-            surface: '#241E19',
-            elevated: '#302823',
-            floating: '#3D332C',
-            cream: '#F0E4D4',
-            muted: '#A89888',
-            'silk-road': '#8B2635',
-            'kyoto': '#6B8F71',
-            'persian': '#9B7B6B',
-            'night-market': '#C4973B',
-            'caribbean': '#7B3F5E',
+            base: '#1A1511', surface: '#241E19', elevated: '#302823', floating: '#3D332C',
+            cream: '#F0E4D4', muted: '#A89888',
+            'silk-road': '#8B2635', 'kyoto': '#6B8F71', 'persian': '#9B7B6B',
+            'night-market': '#C4973B', 'caribbean': '#7B3F5E',
           },
           fontFamily: {
             display: ['Playfair Display', 'serif'],
@@ -37,194 +97,155 @@
   <style>
     * { box-sizing: border-box; }
     body { background-color: #1A1511; color: #F0E4D4; font-family: 'DM Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
 
-    /* SVG noise texture overlay */
-    .grain-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.03;
-    }
+    .grain-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 80; opacity: 0.03; }
 
-    /* Wavy motif inspired by label design */
-    .wave-divider {
-      width: 100%;
-      height: 48px;
-      background: repeating-linear-gradient(
-        to right,
-        transparent 0px,
-        transparent 2px,
-        rgba(168,152,136,0.08) 2px,
-        rgba(168,152,136,0.08) 4px
-      );
-      position: relative;
-      overflow: hidden;
-    }
-    .wave-divider::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 300%;
-      height: 100%;
+    .wave-divider { width: 100%; height: 48px; position: relative; overflow: hidden;
+      background: repeating-linear-gradient(to right, transparent 0 2px, rgba(168,152,136,0.08) 2px 4px); }
+    .wave-divider::before { content: ''; position: absolute; top: 0; left: -100%; width: 300%; height: 100%;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48'%3E%3Cpath d='M0 24 Q150 0 300 24 T600 24 T900 24 T1200 24' fill='none' stroke='%23A89888' stroke-width='1' opacity='0.2'/%3E%3Cpath d='M0 28 Q150 4 300 28 T600 28 T900 28 T1200 28' fill='none' stroke='%23A89888' stroke-width='0.5' opacity='0.15'/%3E%3Cpath d='M0 20 Q150 -4 300 20 T600 20 T900 20 T1200 20' fill='none' stroke='%23A89888' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E") repeat-x;
-      background-size: 600px 48px;
-      animation: waveScroll 20s linear infinite;
-    }
-    @keyframes waveScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(33.33%); }
-    }
+      background-size: 600px 48px; animation: waveScroll 20s linear infinite; }
+    @keyframes waveScroll { to { transform: translateX(33.33%); } }
 
-    /* Animated accent line */
-    .accent-line {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, #C4973B, #8B2635);
-      display: inline-block;
-    }
+    .accent-line { width: 60px; height: 2px; background: linear-gradient(90deg, #C4973B, #8B2635); display: inline-block; }
 
-    /* Blend card hover */
-    .blend-card {
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .blend-card:hover {
-      transform: translateY(-6px) scale(1.01);
-    }
-    .blend-card:active {
-      transform: translateY(-2px) scale(0.995);
-    }
+    a:focus-visible, button:focus-visible { outline: 2px solid #C4973B; outline-offset: 4px; border-radius: 2px; }
 
-    /* Focus visible for accessibility */
-    a:focus-visible, button:focus-visible {
-      outline: 2px solid #C4973B;
-      outline-offset: 4px;
-      border-radius: 2px;
-    }
-
-    /* Button styles */
-    .btn-primary {
-      background: linear-gradient(135deg, #8B2635, #6B1E2A);
-      color: #F0E4D4;
-      padding: 14px 36px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(139,38,53,0.3), 0 2px 8px rgba(139,38,53,0.2);
-    }
+    .btn-primary { background: linear-gradient(135deg, #8B2635, #6B1E2A); color: #F0E4D4; padding: 14px 36px;
+      font: 500 14px 'DM Sans', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; border: none; cursor: pointer;
+      transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s cubic-bezier(.22,1,.36,1); position: relative; overflow: hidden; }
+    .btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.1), transparent);
+      opacity: 0; transition: opacity .3s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,38,53,.3), 0 2px 8px rgba(139,38,53,.2); }
     .btn-primary:hover::after { opacity: 1; }
     .btn-primary:active { transform: translateY(0); }
 
-    .btn-outline {
-      background: transparent;
-      color: #F0E4D4;
-      padding: 14px 36px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid rgba(240,228,212,0.25);
-      cursor: pointer;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, background 0.3s ease;
-    }
-    .btn-outline:hover {
-      border-color: #C4973B;
-      background: rgba(196,151,59,0.06);
-      transform: translateY(-2px);
-    }
+    .btn-outline { background: transparent; color: #F0E4D4; padding: 14px 36px; font: 500 14px 'DM Sans', sans-serif;
+      letter-spacing: .08em; text-transform: uppercase; border: 1px solid rgba(240,228,212,.25); cursor: pointer;
+      transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, background .3s ease; }
+    .btn-outline:hover { border-color: #C4973B; background: rgba(196,151,59,.06); transform: translateY(-2px); }
     .btn-outline:active { transform: translateY(0); }
 
-    /* Nav link styles */
-    .nav-link {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #A89888;
-      text-decoration: none;
-      padding: 8px 0;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: #C4973B;
-      transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+    .nav-link { font: 400 13px 'DM Sans', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #A89888;
+      text-decoration: none; padding: 8px 0; position: relative; transition: color .3s ease; }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: #C4973B;
+      transition: width .3s cubic-bezier(.22,1,.36,1); }
     .nav-link:hover { color: #F0E4D4; }
     .nav-link:hover::after { width: 100%; }
 
-    /* Smooth scroll */
-    html { scroll-behavior: smooth; }
+    /* scroll reveals */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: .12s; } .reveal-d2 { transition-delay: .24s; } .reveal-d3 { transition-delay: .36s; }
 
-    /* Fade in animation */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up {
-      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      opacity: 0;
-    }
-    .delay-1 { animation-delay: 0.15s; }
-    .delay-2 { animation-delay: 0.3s; }
-    .delay-3 { animation-delay: 0.45s; }
-    .delay-4 { animation-delay: 0.6s; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp .8s cubic-bezier(.22,1,.36,1) forwards; opacity: 0; }
+    .delay-1 { animation-delay: .15s; } .delay-2 { animation-delay: .3s; } .delay-3 { animation-delay: .45s; } .delay-4 { animation-delay: .6s; }
 
-    /* Radial gradient backgrounds */
-    .hero-gradient {
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(139,38,53,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(196,151,59,0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 70% 70% at 50% 50%, rgba(107,143,113,0.05) 0%, transparent 60%),
-        #1A1511;
-    }
+    .hero-gradient { background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(139,38,53,.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(196,151,59,.08) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 70% at 50% 50%, rgba(107,143,113,.05) 0%, transparent 60%), #1A1511; }
+    .section-gradient-1 { background: radial-gradient(ellipse 60% 40% at 80% 80%, rgba(155,123,107,.08) 0%, transparent 50%), #1A1511; }
+    .section-gradient-2 { background: radial-gradient(ellipse 50% 50% at 20% 50%, rgba(123,63,94,.08) 0%, transparent 50%), #241E19; }
 
-    .section-gradient-1 {
-      background:
-        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(155,123,107,0.08) 0%, transparent 50%),
-        #1A1511;
-    }
+    /* hero jar */
+    .hero-jar-stage { position: relative; }
+    .hero-jar-glow { position: absolute; inset: -10%; border-radius: 50%;
+      background: radial-gradient(circle at 50% 55%, rgba(196,151,59,.22), rgba(139,38,53,.10) 45%, transparent 70%); }
+    .hero-jar { position: relative; filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));
+      animation: jarFloat 7s ease-in-out infinite; will-change: transform; }
+    @keyframes jarFloat { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-12px) rotate(1deg); } }
+    .nfc-pulse { position: absolute; border: 1px solid rgba(196,151,59,.5); border-radius: 9999px;
+      animation: nfcPulse 2.6s cubic-bezier(.22,1,.36,1) infinite; }
+    @keyframes nfcPulse { 0% { transform: scale(.55); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } }
 
-    .section-gradient-2 {
-      background:
-        radial-gradient(ellipse 50% 50% at 20% 50%, rgba(123,63,94,0.08) 0%, transparent 50%),
-        #241E19;
+    /* freshness decay chart */
+    .decay-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
+    .decay-section.in .decay-path { animation: drawPath 2.2s cubic-bezier(.22,1,.36,1) forwards; }
+    .decay-section.in .decay-path.trevean-path { animation-delay: .5s; }
+    @keyframes drawPath { to { stroke-dashoffset: 0; } }
+
+    /* journey */
+    .journey-line { position: absolute; left: 27px; top: 0; bottom: 0; width: 2px; background: rgba(168,152,136,.12); }
+    .journey-progress { position: absolute; left: 27px; top: 0; width: 2px; background: linear-gradient(to bottom, #C4973B, #8B2635);
+      height: 0; transition: height .2s linear; }
+    .journey-step { position: relative; padding-left: 76px; }
+    .journey-dot { position: absolute; left: 12px; top: 4px; width: 32px; height: 32px; border-radius: 50%;
+      background: #241E19; border: 1px solid rgba(168,152,136,.25); display: flex; align-items: center; justify-content: center;
+      transition: border-color .4s ease, background .4s ease, box-shadow .4s ease; }
+    .journey-step.active .journey-dot { border-color: #C4973B; background: #302823; box-shadow: 0 0 0 6px rgba(196,151,59,.08); }
+    .journey-step .journey-label { transition: color .4s ease; color: #A89888; }
+    .journey-step.active .journey-label { color: #F0E4D4; }
+
+    /* tap-to-reveal jar */
+    .tap-jar { cursor: pointer; transition: transform .4s cubic-bezier(.22,1,.36,1); }
+    .tap-jar:hover { transform: translateY(-4px); }
+    .tap-reveal { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .7s cubic-bezier(.22,1,.36,1), opacity .5s ease .1s; }
+    .tap-reveal.open { max-height: 420px; opacity: 1; }
+
+    /* phone demo */
+    .phone { width: 270px; height: 552px; border-radius: 40px; background: #0E0B09; border: 1px solid rgba(168,152,136,.25);
+      box-shadow: 0 24px 80px rgba(0,0,0,.55), 0 4px 16px rgba(0,0,0,.3), inset 0 0 0 6px #050403; position: relative; overflow: hidden; }
+    .phone-notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 86px; height: 22px;
+      border-radius: 12px; background: #050403; z-index: 5; }
+    .phone-screen { position: absolute; inset: 6px; border-radius: 34px; overflow: hidden; background: #1A1511; }
+    .phone-stage > div { position: absolute; inset: 0; opacity: 0; }
+    .phone-tap-ring { position: absolute; top: 24%; left: 50%; width: 64px; height: 64px; margin-left: -32px;
+      border: 2px solid #C4973B; border-radius: 50%; opacity: 0; }
+    /* 9s looped sequence: tap → profile → journey */
+    .phone-stage .ph-1 { animation: ph1 9s infinite; }
+    .phone-stage .ph-2 { animation: ph2 9s infinite; }
+    .phone-stage .ph-3 { animation: ph3 9s infinite; }
+    .phone-tap-ring { animation: phRing 9s infinite; }
+    @keyframes ph1 { 0%,26% { opacity: 1; } 32%,100% { opacity: 0; } }
+    @keyframes ph2 { 0%,30% { opacity: 0; transform: translateY(16px); } 36%,60% { opacity: 1; transform: translateY(0); } 66%,100% { opacity: 0; } }
+    @keyframes ph3 { 0%,62% { opacity: 0; transform: translateY(16px); } 68%,94% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; } }
+    @keyframes phRing { 8% { opacity: 0; transform: scale(.6); } 14% { opacity: 1; } 24% { opacity: 0; transform: scale(1.5); } 25%,100% { opacity: 0; } }
+
+    /* product cards with pointer lighting */
+    .blend-card { position: relative; transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1); }
+    .blend-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 24px 56px rgba(0,0,0,.45), 0 4px 16px rgba(0,0,0,.25); }
+    .blend-card:active { transform: translateY(-2px) scale(.995); }
+    .card-light { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s ease; z-index: 2;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(240,228,212,.08), transparent 45%); }
+    .blend-card:hover .card-light { opacity: 1; }
+
+    /* parallax sustainability band */
+    .parallax-band { background-attachment: fixed; background-size: cover; background-position: center; }
+    @supports (-webkit-touch-callout: none) { .parallax-band { background-attachment: scroll; } }
+
+    /* email capture */
+    .ledger-input { background: rgba(240,228,212,.06); border: 1px solid rgba(168,152,136,.25); color: #F0E4D4;
+      padding: 15px 18px; font: 400 14px 'DM Sans', sans-serif; width: 100%; border-radius: 2px;
+      transition: border-color .3s ease, background .3s ease; }
+    .ledger-input::placeholder { color: #A89888; }
+    .ledger-input:focus { outline: none; border-color: #C4973B; background: rgba(240,228,212,.09); }
+
+    /* FAQ */
+    details.faq { border-bottom: 1px solid rgba(168,152,136,.12); }
+    details.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 0; font: 500 16px 'DM Sans', sans-serif; color: #F0E4D4; }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary::after { content: '+'; font-family: 'Playfair Display', serif; font-size: 22px; color: #C4973B;
+      transition: transform .3s cubic-bezier(.22,1,.36,1); }
+    details.faq[open] summary::after { transform: rotate(45deg); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-jar, .nfc-pulse, .wave-divider::before, .phone-stage .ph-1, .phone-stage .ph-2, .phone-stage .ph-3, .phone-tap-ring { animation: none !important; }
+      .phone-stage .ph-2, .phone-stage .ph-3 { opacity: 0 !important; }
+      .phone-stage .ph-1 { opacity: 1 !important; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .fade-up { animation: none; opacity: 1; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body class="antialiased">
   <!-- Grain texture overlay -->
-  <svg class="grain-overlay" width="100%" height="100%">
-    <filter id="grain">
-      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
-      <feColorMatrix type="saturate" values="0"/>
-    </filter>
+  <svg class="grain-overlay" width="100%" height="100%" aria-hidden="true">
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
     <rect width="100%" height="100%" filter="url(#grain)"/>
   </svg>
 
@@ -237,48 +258,50 @@
       <div class="hidden md:flex items-center gap-10">
         <a href="index.html" class="nav-link" style="color: #F0E4D4;">Home</a>
         <a href="about.html" class="nav-link">Our Story</a>
+        <a href="#traceability" class="nav-link">Traceability</a>
         <a href="shop.html" class="nav-link">Shop</a>
+        <span data-tv-cart-button></span>
       </div>
-      <!-- Mobile menu button -->
-      <button class="md:hidden p-2" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-        <svg width="24" height="24" fill="none" stroke="#F0E4D4" stroke-width="1.5" stroke-linecap="round">
-          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
-        </svg>
-      </button>
+      <div class="flex md:hidden items-center gap-1">
+        <span data-tv-cart-button></span>
+        <button class="p-2" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <svg width="24" height="24" fill="none" stroke="#F0E4D4" stroke-width="1.5" stroke-linecap="round">
+            <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+          </svg>
+        </button>
+      </div>
     </div>
-    <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 space-y-4">
       <a href="index.html" class="block nav-link" style="color: #F0E4D4;">Home</a>
       <a href="about.html" class="block nav-link">Our Story</a>
+      <a href="#traceability" class="block nav-link">Traceability</a>
       <a href="shop.html" class="block nav-link">Shop</a>
     </div>
   </nav>
 
-  <!-- ==================== HERO SECTION ==================== -->
+  <!-- ==================== HERO ==================== -->
   <section class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-20">
-    <!-- Subtle decorative circles -->
+    <canvas id="spice-particles" class="absolute inset-0 w-full h-full" aria-hidden="true" style="opacity:.55;"></canvas>
     <div class="absolute top-1/4 right-0 w-96 h-96 rounded-full opacity-[0.03]" style="background: radial-gradient(circle, #C4973B, transparent 70%);"></div>
     <div class="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full opacity-[0.04]" style="background: radial-gradient(circle, #8B2635, transparent 70%);"></div>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full py-24 lg:py-0">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full py-24 lg:py-0 relative">
       <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-        <!-- Left: Copy -->
+        <!-- Left: copy -->
         <div>
           <div class="fade-up">
-            <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Curated Spice Collections</span>
+            <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Ancient Wisdom · Modern Kitchens</span>
           </div>
-          <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-medium leading-[1.05] mt-6 fade-up delay-1" style="letter-spacing: -0.03em;">
-            Ancient Wisdom,<br>
-            <span class="italic" style="color: #C4973B;">Modern</span> Kitchens
+          <h1 class="font-display text-6xl sm:text-7xl lg:text-8xl font-medium leading-[1.02] mt-6 fade-up delay-1" style="letter-spacing: -0.03em;">
+            Know your<br><span class="italic" style="color: #C4973B;">spice</span>.
           </h1>
-          <p class="font-body text-lg text-muted mt-8 max-w-lg leading-relaxed fade-up delay-2" style="line-height: 1.7;">
-            Premium, ethically-sourced spice blends delivered fresh from artisan farmers around the world. Each jar carries centuries of tradition, tracked by technology you can trust.
+          <p class="font-body text-lg text-muted mt-8 max-w-lg fade-up delay-2" style="line-height: 1.7;">
+            Freshness, transparency, and provenance in every jar. Tap the lid and meet the farmer who grew it — harvest date, origin, and freshness, verified by the jar itself.
           </p>
           <div class="flex flex-wrap gap-4 mt-10 fade-up delay-3">
-            <a href="shop.html" class="btn-primary inline-block">Explore Blends</a>
-            <a href="about.html" class="btn-outline inline-block">Our Story</a>
+            <a href="shop.html" class="btn-primary inline-block">Shop the Collection</a>
+            <a href="#traceability" class="btn-outline inline-block">How Traceability Works</a>
           </div>
-          <!-- Trust badges -->
           <div class="flex items-center gap-8 mt-14 fade-up delay-4">
             <div class="text-center">
               <span class="font-display text-2xl font-semibold" style="color: #C4973B;">25+</span>
@@ -286,291 +309,539 @@
             </div>
             <div style="width:1px; height:32px; background: rgba(168,152,136,0.15);"></div>
             <div class="text-center">
-              <span class="font-display text-2xl font-semibold" style="color: #C4973B;">5</span>
-              <span class="block font-body text-xs text-muted mt-1 tracking-wide uppercase">Global Regions</span>
+              <span class="font-display text-2xl font-semibold" style="color: #C4973B;">92%</span>
+              <span class="block font-body text-xs text-muted mt-1 tracking-wide uppercase">Member Retention</span>
             </div>
             <div style="width:1px; height:32px; background: rgba(168,152,136,0.15);"></div>
             <div class="text-center">
-              <span class="font-display text-2xl font-semibold" style="color: #C4973B;">92%</span>
-              <span class="block font-body text-xs text-muted mt-1 tracking-wide uppercase">Retention Rate</span>
+              <span class="font-display text-2xl font-semibold" style="color: #C4973B;">82</span>
+              <span class="block font-body text-xs text-muted mt-1 tracking-wide uppercase">NPS Score</span>
             </div>
           </div>
         </div>
-        <!-- Right: Hero image placeholder -->
-        <div class="relative">
-          <div class="aspect-[4/5] rounded-sm overflow-hidden relative" style="background: #241E19;">
-            <img src="pomelli-image%20(3).png" alt="Trevean Spice collection — person opening a spice jar" class="w-full h-full object-cover" style="opacity: 0.85;">
-            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(26,21,17,0.8) 0%, transparent 50%, rgba(26,21,17,0.3) 100%);"></div>
-            <div class="absolute bottom-8 left-8 right-8">
-              <img src="fox-icon.png" alt="" class="w-16 h-auto mb-4" style="opacity: 0.6;">
-              <p class="font-accent text-xl italic text-cream" style="opacity: 0.8;">Where every jar tells a story</p>
-            </div>
-          </div>
-          <!-- Floating accent card -->
-          <div class="absolute -bottom-6 -left-6 p-5 rounded-sm" style="background: #302823; border: 1px solid rgba(168,152,136,0.1); box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.2);">
-            <span class="font-body text-xs tracking-[0.15em] uppercase text-muted block">NFC-Enabled Freshness</span>
-            <span class="font-display text-sm mt-1 block">Smart Packaging Technology</span>
+
+        <!-- Right: jar stage -->
+        <div class="hero-jar-stage flex items-center justify-center fade-up delay-2">
+          <div class="hero-jar-glow" aria-hidden="true"></div>
+          <span class="nfc-pulse" style="width: 360px; height: 360px;" aria-hidden="true"></span>
+          <span class="nfc-pulse" style="width: 360px; height: 360px; animation-delay: 1.3s;" aria-hidden="true"></span>
+          <img src="data:image/webp;base64,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" alt="Persian Sunrise — Trevean signature blend jar with NFC-enabled lid"
+               class="hero-jar w-72 sm:w-80 lg:w-96 h-auto" fetchpriority="high">
+          <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto lg:-right-2 p-5 rounded-sm" style="background: #302823; border: 1px solid rgba(168,152,136,0.1); box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.2);">
+            <span class="font-body text-xs tracking-[0.15em] uppercase text-muted block">Tap the lid</span>
+            <span class="font-display text-sm mt-1 block">Every jar tells you where it's been</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Wave divider -->
-  <div class="wave-divider"></div>
+  <div class="wave-divider" aria-hidden="true"></div>
 
-  <!-- ==================== BRAND PROMISE ==================== -->
-  <section class="py-28 lg:py-36 section-gradient-1">
-    <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
-      <span class="accent-line"></span>
-      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mt-8 leading-tight" style="letter-spacing: -0.02em;">
-        Spices once launched empires.<br>We're bringing that spirit <span class="italic" style="color: #6B8F71;">home</span>.
-      </h2>
-      <p class="font-body text-lg text-muted mt-8 max-w-2xl mx-auto" style="line-height: 1.7;">
-        73% of home cooks have expired spices in their kitchens. We're changing that with guaranteed-fresh, ethically-sourced blends paired with the cultural knowledge to use them right.
-      </p>
+  <!-- ==================== FRESHNESS PROBLEM ==================== -->
+  <section class="py-28 lg:py-36 section-gradient-1 decay-section reveal" id="freshness">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12">
+      <div class="text-center">
+        <span class="accent-line"></span>
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mt-8 leading-tight" style="letter-spacing: -0.02em;">
+          Most spices are <span class="italic" style="color: #8B2635;">dead</span> on arrival.
+        </h2>
+        <p class="font-body text-lg text-muted mt-8 max-w-2xl mx-auto" style="line-height: 1.7;">
+          Ground spices begin losing their volatile oils the day they're processed — and the average grocery-store jar
+          spends one to three years in a supply chain before you ever open it. 73% of home cooks are seasoning with dust.
+        </p>
+      </div>
+
+      <!-- animated potency decay chart -->
+      <figure class="mt-16 rounded-sm p-6 sm:p-10" style="background: #241E19; border: 1px solid rgba(168,152,136,.1);">
+        <svg viewBox="0 0 720 320" class="w-full h-auto" role="img" aria-label="Chart comparing flavor potency over time: typical store-bought spices fall below 30% potency before purchase, while Trevean jars arrive within weeks of harvest at over 90% potency.">
+          <!-- grid -->
+          <g stroke="rgba(168,152,136,.12)" stroke-width="1">
+            <line x1="70" y1="40" x2="70" y2="260"/><line x1="70" y1="260" x2="680" y2="260"/>
+            <line x1="70" y1="113" x2="680" y2="113" stroke-dasharray="3 5"/>
+            <line x1="70" y1="187" x2="680" y2="187" stroke-dasharray="3 5"/>
+          </g>
+          <g font-family="DM Sans, sans-serif" font-size="11" fill="#A89888">
+            <text x="58" y="44" text-anchor="end">100%</text>
+            <text x="58" y="117" text-anchor="end">66%</text>
+            <text x="58" y="191" text-anchor="end">33%</text>
+            <text x="58" y="264" text-anchor="end">0%</text>
+            <text x="70" y="284">Harvest</text>
+            <text x="265" y="284">6 months</text>
+            <text x="455" y="284">18 months</text>
+            <text x="630" y="284">3 years</text>
+            <text x="20" y="160" transform="rotate(-90 20 160)" text-anchor="middle" letter-spacing="2">FLAVOR POTENCY</text>
+          </g>
+          <!-- typical supply chain -->
+          <path class="decay-path" d="M70 48 C 180 60, 260 140, 360 195 S 580 248, 680 252" fill="none" stroke="#A89888" stroke-width="2.5" opacity=".7"/>
+          <!-- Trevean -->
+          <path class="decay-path trevean-path" d="M70 48 C 150 50, 220 56, 320 70 S 560 108, 680 128" fill="none" stroke="#C4973B" stroke-width="3"/>
+          <!-- purchase marker on typical line -->
+          <circle cx="455" cy="225" r="5" fill="#8B2635"/>
+          <g font-family="DM Sans, sans-serif" font-size="11.5">
+            <text x="455" y="212" fill="#8B2635" text-anchor="middle">average jar at purchase</text>
+            <text x="640" y="115" fill="#C4973B" text-anchor="end">Trevean — sealed weeks after harvest</text>
+            <text x="640" y="245" fill="#A89888" text-anchor="end">typical supply chain</text>
+          </g>
+        </svg>
+        <figcaption class="font-body text-xs text-muted mt-4 text-center tracking-wide">
+          Volatile aromatic compounds degrade with time, heat, and light. Freshness isn't a luxury — it's the whole product.
+        </figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- ==================== FEATURED BLENDS ==================== -->
+  <!-- ==================== NFC TRACEABILITY ==================== -->
+  <section class="py-28 lg:py-36" id="traceability" style="background: #241E19;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-20 reveal">
+        <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">NFC-Powered Traceability</span>
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mt-3" style="letter-spacing: -0.02em;">
+          The jar that <span class="italic" style="color: #C4973B;">proves</span> itself
+        </h2>
+        <p class="font-body text-lg text-muted mt-6 max-w-2xl mx-auto" style="line-height: 1.7;">
+          Every lid carries an NFC tag. No app, no account — tap it with your phone and the jar opens its own record.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <!-- Journey -->
+        <div class="relative self-start" id="journey">
+          <div class="journey-line" aria-hidden="true"></div>
+          <div class="journey-progress" id="journey-progress" aria-hidden="true"></div>
+          <div class="space-y-14">
+            <div class="journey-step" data-step>
+              <div class="journey-dot"><span class="font-display text-sm" style="color:#C4973B;">01</span></div>
+              <h3 class="journey-label font-display text-xl font-medium">The Farm</h3>
+              <p class="font-body text-sm text-muted mt-2 max-w-md" style="line-height:1.7;">Hand-harvested by named growers — Li Mei's peppercorn terraces, Reza's saffron fields, Winston's pimento groves. Harvest date logged at the source.</p>
+            </div>
+            <div class="journey-step" data-step>
+              <div class="journey-dot"><span class="font-display text-sm" style="color:#C4973B;">02</span></div>
+              <h3 class="journey-label font-display text-xl font-medium">Processing</h3>
+              <p class="font-body text-sm text-muted mt-2 max-w-md" style="line-height:1.7;">Sun-dried, stone-ground, small-batch blended. Each batch is tested in-house and assigned its own traceable record.</p>
+            </div>
+            <div class="journey-step" data-step>
+              <div class="journey-dot"><span class="font-display text-sm" style="color:#C4973B;">03</span></div>
+              <h3 class="journey-label font-display text-xl font-medium">Packaging</h3>
+              <p class="font-body text-sm text-muted mt-2 max-w-md" style="line-height:1.7;">Sealed within weeks of harvest in UV-protective jars. The NFC tag in the lid is written with this batch's story — not a generic brand page.</p>
+            </div>
+            <div class="journey-step" data-step>
+              <div class="journey-dot"><span class="font-display text-sm" style="color:#C4973B;">04</span></div>
+              <h3 class="journey-label font-display text-xl font-medium">Delivery</h3>
+              <p class="font-body text-sm text-muted mt-2 max-w-md" style="line-height:1.7;">Shipped direct — no warehouse years, no distributor shelves. The freshness clock barely starts before it reaches your kitchen.</p>
+            </div>
+            <div class="journey-step" data-step>
+              <div class="journey-dot"><span class="font-display text-sm" style="color:#C4973B;">05</span></div>
+              <h3 class="journey-label font-display text-xl font-medium">Your Kitchen</h3>
+              <p class="font-body text-sm text-muted mt-2 max-w-md" style="line-height:1.7;">Tap the lid: origin, grower, harvest date, freshness window, and recipes matched to this exact blend. The story ends at your table.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tap-to-reveal jar -->
+        <div><div class="lg:sticky lg:top-32 reveal">
+          <button class="tap-jar w-full text-left rounded-sm overflow-hidden" style="background:#302823; border:1px solid rgba(168,152,136,.12); box-shadow: 0 12px 40px rgba(0,0,0,.35);" onclick="toggleTapReveal(this)" aria-expanded="false" aria-controls="tap-data">
+            <div class="relative">
+              <img src="pomelli_image.png" alt="Trevean jar beside a phone — tap to trace" class="w-full aspect-[4/3] object-cover" style="opacity:.85;" loading="lazy">
+              <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 5%, transparent 60%);"></div>
+              <div class="absolute bottom-5 left-6 right-6 flex items-end justify-between flex-wrap gap-3">
+                <span class="font-display text-lg" style="max-width: 60%;">Persian Sunrise · Batch PS-26-041</span>
+                <span class="font-body text-xs tracking-[0.15em] uppercase px-3 py-2 rounded-sm" style="background: rgba(196,151,59,.85); color:#1A1511;">Tap to trace</span>
+              </div>
+            </div>
+          </button>
+          <div class="tap-reveal" id="tap-data">
+            <div class="p-6 sm:p-8 rounded-b-sm" style="background:#2A231D; border:1px solid rgba(168,152,136,.12); border-top:none;">
+              <div class="grid grid-cols-2 gap-6">
+                <div>
+                  <span class="font-body text-xs tracking-[0.15em] uppercase text-muted block">Farm origin</span>
+                  <span class="font-display text-base mt-1 block">Kashan, Isfahan Province</span>
+                  <span class="font-body text-xs text-muted">33.985° N · 51.410° E</span>
+                </div>
+                <div>
+                  <span class="font-body text-xs tracking-[0.15em] uppercase text-muted block">Grower</span>
+                  <span class="font-display text-base mt-1 block">Reza Ahmadi</span>
+                  <span class="font-body text-xs text-muted">Saffron & Damask rose</span>
+                </div>
+                <div>
+                  <span class="font-body text-xs tracking-[0.15em] uppercase text-muted block">Harvested</span>
+                  <span class="font-display text-base mt-1 block">April 20, 2026</span>
+                  <span class="font-body text-xs text-muted">Packed May 11, 2026</span>
+                </div>
+                <div>
+                  <span class="font-body text-xs tracking-[0.15em] uppercase text-muted block">Freshness</span>
+                  <span class="font-display text-base mt-1 block" style="color:#6B8F71;">Peak window</span>
+                  <span class="font-body text-xs text-muted">96% potency remaining</span>
+                </div>
+              </div>
+              <a href="blend.html?blend=persian-sunrise" class="btn-outline inline-block mt-7" style="padding: 11px 26px; font-size: 12px;">See the full origin page</a>
+            </div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" aria-hidden="true"></div>
+
+  <!-- ==================== PHONE TAP DEMO ==================== -->
+  <section class="py-28 lg:py-36 section-gradient-2">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">The Experience</span>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mt-3 leading-tight" style="letter-spacing:-0.02em;">
+            Tap. Trace. <span class="italic" style="color:#C4973B;">Taste.</span>
+          </h2>
+          <p class="font-body text-lg text-muted mt-6 max-w-lg" style="line-height:1.7;">
+            No app to download. No QR code to squint at. Hold your phone to the lid and the jar introduces itself —
+            who grew it, when it was harvested, how fresh it is right now, and what to cook with it tonight.
+          </p>
+          <ul class="mt-8 space-y-4">
+            <li class="flex gap-4 items-start">
+              <span class="font-display text-lg" style="color:#C4973B;">→</span>
+              <span class="font-body text-sm text-muted" style="line-height:1.7;"><strong class="text-cream font-medium">Works with any modern phone.</strong> iPhone and Android read NFC natively — one tap, the page opens.</span>
+            </li>
+            <li class="flex gap-4 items-start">
+              <span class="font-display text-lg" style="color:#C4973B;">→</span>
+              <span class="font-body text-sm text-muted" style="line-height:1.7;"><strong class="text-cream font-medium">Batch-level truth.</strong> Each tag is written per batch — your jar's data, not a marketing page.</span>
+            </li>
+            <li class="flex gap-4 items-start">
+              <span class="font-display text-lg" style="color:#C4973B;">→</span>
+              <span class="font-body text-sm text-muted" style="line-height:1.7;"><strong class="text-cream font-medium">Recipes that match the jar.</strong> Five chef-written recipes per blend, unlocked at the tap.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Animated phone mockup -->
+        <div class="flex justify-center reveal reveal-d1">
+          <div class="phone" role="img" aria-label="Animated demonstration: tapping a Trevean jar opens its product profile and sourcing journey on a phone.">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <div class="phone-screen">
+              <div class="phone-stage" style="position:absolute; inset:0;">
+                <!-- frame 1: tap the jar -->
+                <div class="ph-1 flex flex-col items-center justify-center text-center p-8" style="background: radial-gradient(ellipse 80% 50% at 50% 30%, rgba(196,151,59,.12), transparent), #1A1511;">
+                  <img src="fox-icon.png" alt="" class="w-12 h-auto mb-6" style="opacity:.5;">
+                  <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#C4973B" stroke-width="1.2" aria-hidden="true">
+                    <path d="M6 8.5a7 7 0 0 1 0 7M3.5 6a10.5 10.5 0 0 1 0 12M8.5 11a3.5 3.5 0 0 1 0 2"/>
+                    <rect x="13" y="7" width="8" height="12" rx="1.4"/>
+                  </svg>
+                  <p class="font-display text-xl mt-6" style="color:#F0E4D4;">Hold near lid</p>
+                  <p class="font-body text-xs text-muted mt-2 tracking-wide uppercase">NFC detected…</p>
+                </div>
+                <!-- frame 2: product profile -->
+                <div class="ph-2 p-6" style="background:#1A1511;">
+                  <div class="h-1 w-10 rounded-full mx-auto mb-5" style="background:rgba(168,152,136,.3);"></div>
+                  <span class="font-body text-[10px] tracking-[0.2em] uppercase" style="color:#C4973B;">Verified · Batch PS-26-041</span>
+                  <h3 class="font-display text-2xl mt-2" style="color:#F0E4D4;">Persian Sunrise</h3>
+                  <p class="font-body text-xs text-muted mt-1">Saffron · Rose · Cardamom · Lime</p>
+                  <div class="mt-5 rounded-sm p-4" style="background:#241E19; border:1px solid rgba(168,152,136,.12);">
+                    <div class="flex justify-between font-body text-xs"><span class="text-muted">Harvested</span><span style="color:#F0E4D4;">Apr 20, 2026</span></div>
+                    <div class="flex justify-between font-body text-xs mt-2"><span class="text-muted">Origin</span><span style="color:#F0E4D4;">Kashan, Iran</span></div>
+                    <div class="flex justify-between font-body text-xs mt-2"><span class="text-muted">Grower</span><span style="color:#F0E4D4;">Reza Ahmadi</span></div>
+                  </div>
+                  <div class="mt-4">
+                    <div class="flex justify-between font-body text-[10px] uppercase tracking-wider text-muted"><span>Freshness</span><span style="color:#6B8F71;">96%</span></div>
+                    <div class="h-1.5 mt-2 rounded-full" style="background:rgba(168,152,136,.15);"><div class="h-full rounded-full" style="width:96%; background:linear-gradient(90deg,#6B8F71,#C4973B);"></div></div>
+                  </div>
+                </div>
+                <!-- frame 3: journey map -->
+                <div class="ph-3 p-6" style="background:#1A1511;">
+                  <span class="font-body text-[10px] tracking-[0.2em] uppercase" style="color:#C4973B;">Sourcing journey</span>
+                  <h3 class="font-display text-xl mt-2" style="color:#F0E4D4;">Kashan → Austin</h3>
+                  <svg viewBox="0 0 220 130" class="w-full mt-4" aria-hidden="true">
+                    <rect width="220" height="130" rx="4" fill="#241E19"/>
+                    <path d="M30 95 Q 80 20 190 40" fill="none" stroke="#C4973B" stroke-width="1.5" stroke-dasharray="4 4"/>
+                    <circle cx="190" cy="40" r="5" fill="#8B2635"/><circle cx="30" cy="95" r="5" fill="#C4973B"/>
+                    <text x="158" y="28" font-family="DM Sans" font-size="9" fill="#A89888">Kashan</text>
+                    <text x="22" y="112" font-family="DM Sans" font-size="9" fill="#A89888">Austin</text>
+                  </svg>
+                  <div class="mt-4 space-y-2.5">
+                    <div class="flex justify-between font-body text-xs"><span class="text-muted">Harvest → packed</span><span style="color:#F0E4D4;">21 days</span></div>
+                    <div class="flex justify-between font-body text-xs"><span class="text-muted">Packed → shipped</span><span style="color:#F0E4D4;">9 days</span></div>
+                    <div class="flex justify-between font-body text-xs"><span class="text-muted">Total farm → kitchen</span><span style="color:#6B8F71;">five weeks</span></div>
+                  </div>
+                  <div class="mt-5 py-3 text-center rounded-sm font-body text-xs tracking-wider uppercase" style="background:linear-gradient(135deg,#8B2635,#6B1E2A); color:#F0E4D4;">View recipes</div>
+                </div>
+              </div>
+              <span class="phone-tap-ring" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PRODUCT SHOWCASE ==================== -->
   <section class="py-28 lg:py-36" style="background: #241E19;">
     <div class="max-w-7xl mx-auto px-6 lg:px-12">
-      <!-- Section header -->
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-16">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-16 reveal">
         <div>
           <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">The Collection</span>
-          <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing: -0.02em;">Signature Blends</h2>
+          <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing: -0.02em;">Five Signature Blends</h2>
         </div>
         <a href="shop.html" class="nav-link mt-4 sm:mt-0">View All →</a>
       </div>
 
-      <!-- Blend cards grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-
         <!-- The Silk Road -->
-        <a href="blend.html?blend=silk-road" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
-          <div class="aspect-[4/3] relative overflow-hidden">
-            <img src="Along_the_Golden_Route_version_2.png" alt="The Silk Road blend — desert caravan along the golden route" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
-            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%); mix-blend-mode: normal;"></div>
-            <div class="absolute inset-0" style="background: rgba(139,38,53,0.15); mix-blend-mode: multiply;"></div>
-            <div class="absolute top-4 left-4">
-              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(139,38,53,0.8); color: #F0E4D4;">Signature</span>
+        <div class="blend-card rounded-sm overflow-hidden group reveal" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <span class="card-light" aria-hidden="true"></span>
+          <a href="blend.html?blend=silk-road" class="block">
+            <div class="aspect-[4/3] relative overflow-hidden">
+              <img src="data:image/webp;base64,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" alt="The Silk Road blend — jar against an ancient trade map" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;" loading="lazy">
+              <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
+              <div class="absolute inset-0" style="background: rgba(139,38,53,0.15); mix-blend-mode: multiply;"></div>
+              <div class="absolute top-4 left-4"><span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(139,38,53,0.8); color: #F0E4D4;">Signature</span></div>
             </div>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-medium">The Silk Road</h3>
-            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Peppercorn · Cardamom · Galangal · Star Anise</p>
-            <div class="flex items-center justify-between mt-5">
-              <span class="font-body text-xs tracking-wider uppercase text-muted">Numbing · Warm · Complex</span>
-              <span class="font-display text-lg" style="color: #8B2635;">$18</span>
+            <div class="p-6 pb-4">
+              <h3 class="font-display text-xl font-medium">The Silk Road</h3>
+              <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Peppercorn · Cardamom · Galangal · Star Anise</p>
+              <div class="flex items-center justify-between mt-5">
+                <span class="font-body text-xs tracking-wider uppercase text-muted">Numbing · Warm · Complex</span>
+                <span class="font-display text-lg" style="color: #8B2635;">$18</span>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+          <div class="px-6 pb-6"><button class="btn-outline w-full" style="padding: 11px 0; font-size: 12px;" data-tv-add="silk-road">Add to Cart</button></div>
+        </div>
 
         <!-- Kyoto Garden -->
-        <a href="blend.html?blend=kyoto-garden" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
-          <div class="aspect-[4/3] relative overflow-hidden">
-            <img src="Screenshot%202026-03-06%20061050.png" alt="Kyoto Garden spice blend jar" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
-            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
-            <div class="absolute inset-0" style="background: rgba(107,143,113,0.15); mix-blend-mode: multiply;"></div>
-            <div class="absolute top-4 left-4">
-              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(107,143,113,0.8); color: #F0E4D4;">Signature</span>
+        <div class="blend-card rounded-sm overflow-hidden group reveal reveal-d1" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <span class="card-light" aria-hidden="true"></span>
+          <a href="blend.html?blend=kyoto-garden" class="block">
+            <div class="aspect-[4/3] relative overflow-hidden">
+              <img src="pomelli-image%20(2).png" alt="Kyoto Garden — Trevean jars with fresh botanicals" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;" loading="lazy">
+              <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
+              <div class="absolute inset-0" style="background: rgba(107,143,113,0.15); mix-blend-mode: multiply;"></div>
+              <div class="absolute top-4 left-4"><span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(107,143,113,0.8); color: #F0E4D4;">Signature</span></div>
             </div>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-medium">Kyoto Garden</h3>
-            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Sesame · Nori · Yuzu · Green Tea · Mushroom</p>
-            <div class="flex items-center justify-between mt-5">
-              <span class="font-body text-xs tracking-wider uppercase text-muted">Bright · Subtle · Umami</span>
-              <span class="font-display text-lg" style="color: #6B8F71;">$18</span>
+            <div class="p-6 pb-4">
+              <h3 class="font-display text-xl font-medium">Kyoto Garden</h3>
+              <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Sesame · Nori · Yuzu · Green Tea · Mushroom</p>
+              <div class="flex items-center justify-between mt-5">
+                <span class="font-body text-xs tracking-wider uppercase text-muted">Bright · Subtle · Umami</span>
+                <span class="font-display text-lg" style="color: #6B8F71;">$18</span>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+          <div class="px-6 pb-6"><button class="btn-outline w-full" style="padding: 11px 0; font-size: 12px;" data-tv-add="kyoto-garden">Add to Cart</button></div>
+        </div>
 
         <!-- Persian Sunrise -->
-        <a href="blend.html?blend=persian-sunrise" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
-          <div class="aspect-[4/3] relative overflow-hidden">
-            <img src="Saffron_and_Damask_Rose_version_1.png" alt="Persian Sunrise blend — saffron and damask rose" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
-            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
-            <div class="absolute inset-0" style="background: rgba(155,123,107,0.15); mix-blend-mode: multiply;"></div>
-            <div class="absolute top-4 left-4">
-              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(155,123,107,0.8); color: #F0E4D4;">Signature</span>
+        <div class="blend-card rounded-sm overflow-hidden group reveal reveal-d2" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <span class="card-light" aria-hidden="true"></span>
+          <a href="blend.html?blend=persian-sunrise" class="block">
+            <div class="aspect-[4/3] relative overflow-hidden">
+              <img src="Saffron_and_Damask_Rose_version_1.png" alt="Persian Sunrise blend — saffron and damask rose" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;" loading="lazy">
+              <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
+              <div class="absolute inset-0" style="background: rgba(155,123,107,0.15); mix-blend-mode: multiply;"></div>
+              <div class="absolute top-4 left-4"><span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(155,123,107,0.8); color: #F0E4D4;">Signature</span></div>
             </div>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-medium">Persian Sunrise</h3>
-            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Cinnamon · Cardamom · Lime · Rose Petals · Saffron</p>
-            <div class="flex items-center justify-between mt-5">
-              <span class="font-body text-xs tracking-wider uppercase text-muted">Floral · Citrus · Warm</span>
-              <span class="font-display text-lg" style="color: #9B7B6B;">$18</span>
+            <div class="p-6 pb-4">
+              <h3 class="font-display text-xl font-medium">Persian Sunrise</h3>
+              <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Cinnamon · Cardamom · Lime · Rose Petals · Saffron</p>
+              <div class="flex items-center justify-between mt-5">
+                <span class="font-body text-xs tracking-wider uppercase text-muted">Floral · Citrus · Warm</span>
+                <span class="font-display text-lg" style="color: #9B7B6B;">$18</span>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+          <div class="px-6 pb-6"><button class="btn-outline w-full" style="padding: 11px 0; font-size: 12px;" data-tv-add="persian-sunrise">Add to Cart</button></div>
+        </div>
 
         <!-- North African Night Market -->
-        <a href="blend.html?blend=north-african-night-market" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
-          <div class="aspect-[4/3] relative overflow-hidden">
-            <img src="Screenshot%202026-03-06%20061030.png" alt="North African Night Market spice blend jar" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
-            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
-            <div class="absolute inset-0" style="background: rgba(196,151,59,0.15); mix-blend-mode: multiply;"></div>
-            <div class="absolute top-4 left-4">
-              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(196,151,59,0.8); color: #1A1511;">Signature</span>
+        <div class="blend-card rounded-sm overflow-hidden group reveal" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <span class="card-light" aria-hidden="true"></span>
+          <a href="blend.html?blend=north-african-night-market" class="block">
+            <div class="aspect-[4/3] relative overflow-hidden">
+              <img src="pomelli-image.png" alt="North African Night Market — spices ground by hand" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75; object-position: center 72%;" loading="lazy">
+              <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
+              <div class="absolute inset-0" style="background: rgba(196,151,59,0.15); mix-blend-mode: multiply;"></div>
+              <div class="absolute top-4 left-4"><span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(196,151,59,0.8); color: #1A1511;">Signature</span></div>
             </div>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-medium">North African Night Market</h3>
-            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Pepper · Cumin · Lemon · Thyme · Sumac</p>
-            <div class="flex items-center justify-between mt-5">
-              <span class="font-body text-xs tracking-wider uppercase text-muted">Smoky · Tangy · Bright</span>
-              <span class="font-display text-lg" style="color: #C4973B;">$18</span>
+            <div class="p-6 pb-4">
+              <h3 class="font-display text-xl font-medium">North African Night Market</h3>
+              <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Pepper · Cumin · Lemon · Thyme · Sumac</p>
+              <div class="flex items-center justify-between mt-5">
+                <span class="font-body text-xs tracking-wider uppercase text-muted">Smoky · Tangy · Bright</span>
+                <span class="font-display text-lg" style="color: #C4973B;">$18</span>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+          <div class="px-6 pb-6"><button class="btn-outline w-full" style="padding: 11px 0; font-size: 12px;" data-tv-add="north-african-night-market">Add to Cart</button></div>
+        </div>
 
         <!-- Caribbean Sunset -->
-        <a href="blend.html?blend=caribbean-sunset" class="blend-card block rounded-sm overflow-hidden group" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);">
-          <div class="aspect-[4/3] relative overflow-hidden">
-            <img src="pomelli_image%20(3).png" alt="Caribbean Sunset blend — spice jar with food and spices" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;">
-            <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
-            <div class="absolute inset-0" style="background: rgba(123,63,94,0.15); mix-blend-mode: multiply;"></div>
-            <div class="absolute top-4 left-4">
-              <span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(123,63,94,0.8); color: #F0E4D4;">Signature</span>
+        <div class="blend-card rounded-sm overflow-hidden group reveal reveal-d1" style="background: #302823; box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <span class="card-light" aria-hidden="true"></span>
+          <a href="blend.html?blend=caribbean-sunset" class="block">
+            <div class="aspect-[4/3] relative overflow-hidden">
+              <img src="pomelli_image%20(3).png" alt="Caribbean Sunset blend — spice jar with island dishes" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" style="opacity: 0.75;" loading="lazy">
+              <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 0%, transparent 60%);"></div>
+              <div class="absolute inset-0" style="background: rgba(123,63,94,0.15); mix-blend-mode: multiply;"></div>
+              <div class="absolute top-4 left-4"><span class="inline-block px-3 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: rgba(123,63,94,0.8); color: #F0E4D4;">Signature</span></div>
             </div>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-medium">Caribbean Sunset</h3>
-            <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Allspice · Nutmeg · Thyme · Orange Peel · Scotch Bonnet</p>
-            <div class="flex items-center justify-between mt-5">
-              <span class="font-body text-xs tracking-wider uppercase text-muted">Warm · Tropical · Island Heat</span>
-              <span class="font-display text-lg" style="color: #7B3F5E;">$18</span>
+            <div class="p-6 pb-4">
+              <h3 class="font-display text-xl font-medium">Caribbean Sunset</h3>
+              <p class="font-body text-sm text-muted mt-2" style="line-height: 1.6;">Allspice · Nutmeg · Thyme · Orange Peel · Scotch Bonnet</p>
+              <div class="flex items-center justify-between mt-5">
+                <span class="font-body text-xs tracking-wider uppercase text-muted">Warm · Tropical · Island Heat</span>
+                <span class="font-display text-lg" style="color: #7B3F5E;">$18</span>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+          <div class="px-6 pb-6"><button class="btn-outline w-full" style="padding: 11px 0; font-size: 12px;" data-tv-add="caribbean-sunset">Add to Cart</button></div>
+        </div>
 
         <!-- Subscription CTA card -->
-        <div class="blend-card rounded-sm overflow-hidden flex flex-col" style="background: linear-gradient(135deg, #302823 0%, #241E19 100%); border: 1px solid rgba(196,151,59,0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+        <div class="blend-card rounded-sm overflow-hidden flex flex-col reveal reveal-d2" style="background: linear-gradient(135deg, #302823 0%, #241E19 100%); border: 1px solid rgba(196,151,59,0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
+          <span class="card-light" aria-hidden="true"></span>
           <div class="aspect-[4/3] relative overflow-hidden">
-            <img src="Screenshot%202026-03-06%20061157.png" alt="Trevean Spice subscription box with jars and recipe cards" class="w-full h-full object-cover" style="opacity: 0.8;">
+            <img src="Trace_the_Origin_of_Taste_version_1.png" alt="Spice Sage subscription — the full Trevean experience" class="w-full h-full object-cover" style="opacity: 0.8; object-position: center 56%;" loading="lazy">
             <div class="absolute inset-0" style="background: linear-gradient(to top, #302823 10%, transparent 70%);"></div>
-            <div class="absolute inset-0" style="background: rgba(196,151,59,0.08); mix-blend-mode: multiply;"></div>
           </div>
           <div class="flex flex-col justify-center items-center text-center p-8 flex-1">
-            <h3 class="font-display text-2xl font-medium">The Full Journey</h3>
-            <p class="font-body text-sm text-muted mt-3 leading-relaxed">Subscribe and receive 3–9 curated blends every month. Fresh. Authentic. Delivered.</p>
-            <span class="block font-display text-3xl mt-5" style="color: #C4973B;">$45<span class="text-base text-muted">/mo</span></span>
-            <a href="shop.html" class="btn-primary mt-5 inline-block">Subscribe Now</a>
+            <h3 class="font-display text-2xl font-medium">Spice Sage Subscription</h3>
+            <p class="font-body text-sm text-muted mt-3 leading-relaxed">All five signature blends, rotating limited releases, and recipes unlocked at the tap.</p>
+            <span class="block font-display text-3xl mt-5" style="color: #C4973B;">$39<span class="text-base text-muted">/mo</span> <span class="font-body text-sm text-muted">or</span> $99<span class="text-base text-muted">/qtr</span></span>
+            <a href="shop.html#subscribe" class="btn-primary mt-5 inline-block">Subscribe</a>
           </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Wave divider -->
-  <div class="wave-divider"></div>
-
-  <!-- ==================== HOW IT WORKS ==================== -->
-  <section class="py-28 lg:py-36 section-gradient-1">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-      <div class="text-center mb-20">
-        <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">The Experience</span>
-        <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing: -0.02em;">From Farm to Your Kitchen</h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-12 lg:gap-16">
-        <!-- Step 1 -->
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center" style="background: rgba(196,151,59,0.1); border: 1px solid rgba(196,151,59,0.2);">
-            <span class="font-display text-2xl" style="color: #C4973B;">01</span>
-          </div>
-          <h3 class="font-display text-xl font-medium mt-6">Sourced with Intention</h3>
-          <p class="font-body text-sm text-muted mt-3 max-w-xs mx-auto" style="line-height: 1.7;">Direct relationships with 25+ artisan farmers across five continents. Every spice is hand-selected at peak freshness.</p>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center" style="background: rgba(139,38,53,0.1); border: 1px solid rgba(139,38,53,0.2);">
-            <span class="font-display text-2xl" style="color: #8B2635;">02</span>
-          </div>
-          <h3 class="font-display text-xl font-medium mt-6">Blended with Knowledge</h3>
-          <p class="font-body text-sm text-muted mt-3 max-w-xs mx-auto" style="line-height: 1.7;">Verified by cultural experts and traditional practitioners. Each blend honors centuries of culinary heritage.</p>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center" style="background: rgba(107,143,113,0.1); border: 1px solid rgba(107,143,113,0.2);">
-            <span class="font-display text-2xl" style="color: #6B8F71;">03</span>
-          </div>
-          <h3 class="font-display text-xl font-medium mt-6">Tracked with Technology</h3>
-          <p class="font-body text-sm text-muted mt-3 max-w-xs mx-auto" style="line-height: 1.7;">NFC-enabled packaging tracks freshness in real time. Tap your phone, unlock recipes, stories, and origin maps.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== TESTIMONIAL / QUOTE ==================== -->
-  <section class="py-24 section-gradient-2">
-    <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center">
-      <svg width="40" height="32" viewBox="0 0 40 32" fill="none" class="mx-auto mb-8" style="opacity: 0.3;">
-        <path d="M0 32V19.2C0 8.53 6.4 1.6 16 0l2.4 4.8C11.2 6.93 8.53 11.2 8 16h8v16H0zm24 0V19.2C24 8.53 30.4 1.6 40 0l-2.4 4.8C35.2 6.93 32.53 11.2 32 16h8v16H24z" fill="#C4973B"/>
-      </svg>
-      <blockquote class="font-accent text-2xl sm:text-3xl italic leading-relaxed" style="color: #F0E4D4;">
-        The moment I opened the Silk Road blend, I understood what fresh spices were supposed to smell like. Everything in my cabinet suddenly seemed like dust.
-      </blockquote>
-      <cite class="font-body text-sm text-muted not-italic mt-6 block tracking-wide uppercase">— Beta Subscriber, Austin TX</cite>
+  <div class="wave-divider" aria-hidden="true"></div>
+
+  <!-- ==================== SUSTAINABILITY / SOURCING ==================== -->
+  <section class="relative overflow-hidden">
+    <div class="parallax-band py-32 lg:py-44" style="background-image: linear-gradient(rgba(26,21,17,.82), rgba(26,21,17,.86)), url('pomelli-image.png');">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
+        <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Sourced in the Open</span>
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mt-4 leading-tight" style="letter-spacing:-0.02em;">
+          Named on every jar.<br><span class="italic" style="color:#C4973B;">Paid above every market.</span>
+        </h2>
+        <p class="font-body text-lg text-muted mt-8 max-w-2xl mx-auto" style="line-height:1.7;">
+          Li Mei's peppercorn terraces in Sichuan. Tanaka-san's 600-year-old tea rows in Uji. Reza's rose valleys in Kashan.
+          Fatima's women-led co-op in the High Atlas. Winston's pimento groves in Saint Ann. We don't source from regions —
+          we source from people, and we put their names where the marketing usually goes.
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 mt-14">
+          <div><span class="font-display text-3xl font-medium" style="color:#C4973B;">100%</span><span class="block font-body text-xs text-muted mt-2 tracking-wide uppercase">Traceable to grower</span></div>
+          <div><span class="font-display text-3xl font-medium" style="color:#C4973B;">Direct</span><span class="block font-body text-xs text-muted mt-2 tracking-wide uppercase">Trade, no middlemen</span></div>
+          <div><span class="font-display text-3xl font-medium" style="color:#C4973B;">Small</span><span class="block font-body text-xs text-muted mt-2 tracking-wide uppercase">Batch, low waste</span></div>
+          <div><span class="font-display text-3xl font-medium" style="color:#C4973B;">5</span><span class="block font-body text-xs text-muted mt-2 tracking-wide uppercase">Named growers today</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== CTA SECTION ==================== -->
-  <section class="py-28 lg:py-36 relative overflow-hidden" style="background: #1A1511;">
-    <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(196,151,59,0.05) 0%, transparent 60%);"></div>
-    <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center relative">
-      <img src="fox-icon.png" alt="" class="w-20 h-auto mx-auto mb-8" style="opacity: 0.3;">
+  <!-- ==================== TRUST ==================== -->
+  <section class="py-28 lg:py-36 section-gradient-2">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12">
+      <div class="text-center mb-16 reveal">
+        <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">From the Beta Kitchen</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing:-0.02em;">200 cooks already know</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 items-start">
+        <figure class="md:col-span-2 p-8 sm:p-10 rounded-sm reveal" style="background:#241E19; border:1px solid rgba(168,152,136,.1);">
+          <svg width="40" height="32" viewBox="0 0 40 32" fill="none" style="opacity: 0.3;" aria-hidden="true">
+            <path d="M0 32V19.2C0 8.53 6.4 1.6 16 0l2.4 4.8C11.2 6.93 8.53 11.2 8 16h8v16H0zm24 0V19.2C24 8.53 30.4 1.6 40 0l-2.4 4.8C35.2 6.93 32.53 11.2 32 16h8v16H24z" fill="#C4973B"/>
+          </svg>
+          <blockquote class="font-accent text-2xl sm:text-3xl italic leading-relaxed mt-6" style="color:#F0E4D4;">
+            The moment I opened the Silk Road blend, I understood what fresh spices were supposed to smell like.
+            Everything in my cabinet suddenly seemed like dust.
+          </blockquote>
+          <figcaption class="font-body text-sm text-muted not-italic mt-6 tracking-wide uppercase">— Beta subscriber, Austin TX</figcaption>
+        </figure>
+        <div class="space-y-6">
+          <div class="p-7 rounded-sm reveal reveal-d1" style="background:#241E19; border:1px solid rgba(168,152,136,.1);">
+            <span class="font-display text-4xl font-medium" style="color:#C4973B;">92%</span>
+            <p class="font-body text-sm text-muted mt-2" style="line-height:1.6;">of beta members renewed — month after month.</p>
+          </div>
+          <div class="p-7 rounded-sm reveal reveal-d2" style="background:#241E19; border:1px solid rgba(168,152,136,.1);">
+            <span class="font-display text-4xl font-medium" style="color:#C4973B;">82</span>
+            <p class="font-body text-sm text-muted mt-2" style="line-height:1.6;">Net Promoter Score across the 200-member beta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="py-24 section-gradient-1">
+    <div class="max-w-3xl mx-auto px-6 lg:px-12 reveal">
+      <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Good Questions</span>
+      <h2 class="font-display text-3xl font-medium mt-3 mb-8" style="letter-spacing:-0.02em;">Asked and answered</h2>
+      <details class="faq">
+        <summary>How does the NFC tap actually work?</summary>
+        <p class="font-body text-sm text-muted pb-6" style="line-height:1.7;">Every lid carries an NFC tag — the same technology as tap-to-pay. Hold your phone near the lid and your jar's own page opens: farm, grower, harvest date, and live freshness for that exact batch. No app, no account.</p>
+      </details>
+      <details class="faq">
+        <summary>Why does freshness matter so much?</summary>
+        <p class="font-body text-sm text-muted pb-6" style="line-height:1.7;">Ground spices lose their volatile aromatic oils from the day they're processed. Most grocery jars sit in supply chains for one to three years before purchase. Trevean jars are batch-dated and sealed within weeks of harvest.</p>
+      </details>
+      <details class="faq">
+        <summary>What does the subscription cost?</summary>
+        <p class="font-body text-sm text-muted pb-6" style="line-height:1.7;">Spice Sage is $39/month or $99/quarter — the five signature blends, rotating limited releases, and recipe pairings unlocked by tapping the jar. Individual jars are $18.</p>
+      </details>
+      <details class="faq">
+        <summary>Where do the spices come from?</summary>
+        <p class="font-body text-sm text-muted pb-6" style="line-height:1.7;">Direct relationships with 25+ artisan growers across five global regions — Sichuan peppercorn, Uji green tea, Kashan saffron and rose, High Atlas herbs, Saint Ann allspice. Every grower is named on the jar.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ==================== EMAIL CAPTURE ==================== -->
+  <section class="py-28 lg:py-36 relative overflow-hidden" id="spice-ledger" style="background:#1A1511;">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(196,151,59,0.06) 0%, transparent 60%);"></div>
+    <div class="max-w-2xl mx-auto px-6 lg:px-12 text-center relative reveal">
+      <img src="fox-icon.png" alt="" class="w-16 h-auto mx-auto mb-8" style="opacity: 0.35;" loading="lazy">
       <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium" style="letter-spacing: -0.02em;">
-        Ready to transform<br>your spice cabinet?
+        Join the <span class="italic" style="color:#C4973B;">Spice Ledger</span>
       </h2>
-      <p class="font-body text-lg text-muted mt-6 max-w-xl mx-auto" style="line-height: 1.7;">
-        Join a growing community of curious cooks discovering authentic global flavors, one blend at a time.
+      <p class="font-body text-lg text-muted mt-6" style="line-height: 1.7;">
+        Fresh harvest releases, new blends, and origin stories from the growers — straight from the source.
+        First-batch access when Persian Sunrise and Caribbean Sunset ship.
       </p>
-      <div class="flex flex-wrap justify-center gap-4 mt-10">
-        <a href="shop.html" class="btn-primary inline-block">Start Your Journey</a>
-        <a href="about.html" class="btn-outline inline-block">Learn More</a>
-      </div>
+      <form data-tv-email class="flex flex-col sm:flex-row gap-3 mt-10 max-w-md mx-auto" novalidate>
+        <input type="email" class="ledger-input" placeholder="your@email.com" aria-label="Email address" required>
+        <button type="submit" class="btn-primary whitespace-nowrap">Sign Me Up</button>
+        <p class="tv-email-success font-body text-base w-full" style="display:none; color:#6B8F71;">You're in the Ledger. First harvest news lands soon.</p>
+      </form>
+      <p class="font-body text-xs text-muted mt-5">Origin stories, not spam. Unsubscribe any time.</p>
     </div>
   </section>
 
-  <!-- Wave divider -->
-  <div class="wave-divider"></div>
+  <div class="wave-divider" aria-hidden="true"></div>
 
   <!-- ==================== FOOTER ==================== -->
   <footer class="py-16" style="background: #151210;">
     <div class="max-w-7xl mx-auto px-6 lg:px-12">
       <div class="grid md:grid-cols-4 gap-12 mb-16">
-        <!-- Brand -->
         <div class="md:col-span-2">
-          <img src="logo-horizontal.png" alt="Trevean Spice" class="h-8 w-auto mb-4" style="opacity: 0.7;">
-          <p class="font-body text-sm text-muted max-w-sm" style="line-height: 1.7;">Ancient spice wisdom meets modern technology. Curated, ethical, and always fresh.</p>
+          <img src="logo-horizontal.png" alt="Trevean Spice" class="h-8 w-auto mb-4" style="opacity: 0.7;" loading="lazy">
+          <p class="font-body text-sm text-muted max-w-sm" style="line-height: 1.7;">Ancient spice wisdom meets modern technology. Tap the jar, trace the origin, taste the difference.</p>
         </div>
-        <!-- Explore -->
         <div>
           <h4 class="font-body text-xs tracking-[0.15em] uppercase text-muted mb-5">Explore</h4>
           <ul class="space-y-3">
             <li><a href="shop.html" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Shop Blends</a></li>
+            <li><a href="shop.html#subscribe" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Subscriptions</a></li>
             <li><a href="about.html" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Our Story</a></li>
-            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Subscriptions</a></li>
+            <li><a href="#traceability" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Traceability</a></li>
           </ul>
         </div>
-        <!-- Connect -->
         <div>
           <h4 class="font-body text-xs tracking-[0.15em] uppercase text-muted mb-5">Connect</h4>
           <ul class="space-y-3">
             <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Instagram</a></li>
             <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">TikTok</a></li>
-            <li><a href="#" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">Contact</a></li>
+            <li><a href="#spice-ledger" class="font-body text-sm text-cream hover:text-white transition-colors duration-300" style="opacity: 0.7;">The Spice Ledger</a></li>
           </ul>
         </div>
       </div>
-      <!-- Bottom bar -->
       <div class="pt-8" style="border-top: 1px solid rgba(168,152,136,0.08);">
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p class="font-body text-xs text-muted">&copy; 2026 Trevean Spice. All rights reserved.</p>
@@ -580,5 +851,93 @@
     </div>
   </footer>
 
+  <script src="store.js" defer></script>
+  <script>
+    /* ---------- hero spice particles ---------- */
+    (function () {
+      const canvas = document.getElementById('spice-particles');
+      if (!canvas) return;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) { canvas.remove(); return; }
+      const ctx = canvas.getContext('2d');
+      const COLORS = ['#C4973B', '#8B2635', '#9B7B6B', '#A89888', '#7B3F5E'];
+      let w, h, parts = [], raf;
+
+      function resize() {
+        const r = canvas.getBoundingClientRect();
+        w = canvas.width = r.width * devicePixelRatio;
+        h = canvas.height = r.height * devicePixelRatio;
+      }
+      function spawn(n) {
+        parts = Array.from({ length: n }, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          r: (Math.random() * 1.6 + 0.5) * devicePixelRatio,
+          vx: (Math.random() - 0.5) * 0.18 * devicePixelRatio,
+          vy: (-Math.random() * 0.22 - 0.05) * devicePixelRatio,
+          c: COLORS[Math.floor(Math.random() * COLORS.length)],
+          a: Math.random() * 0.5 + 0.12,
+          drift: Math.random() * Math.PI * 2
+        }));
+      }
+      function tick() {
+        ctx.clearRect(0, 0, w, h);
+        for (const p of parts) {
+          p.drift += 0.004;
+          p.x += p.vx + Math.sin(p.drift) * 0.12 * devicePixelRatio;
+          p.y += p.vy;
+          if (p.y < -8 || p.x < -8 || p.x > w + 8) { p.x = Math.random() * w; p.y = h + 8; }
+          ctx.globalAlpha = p.a;
+          ctx.fillStyle = p.c;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+        }
+        raf = requestAnimationFrame(tick);
+      }
+      resize(); spawn(Math.min(70, Math.floor(window.innerWidth / 18))); tick();
+      window.addEventListener('resize', () => { cancelAnimationFrame(raf); resize(); spawn(Math.min(70, Math.floor(window.innerWidth / 18))); tick(); }, { passive: true });
+      // pause when hero offscreen
+      new IntersectionObserver(en => {
+        if (en[0].isIntersecting) { cancelAnimationFrame(raf); tick(); }
+        else cancelAnimationFrame(raf);
+      }).observe(canvas);
+    })();
+
+    /* ---------- supply-chain journey scroll progress ---------- */
+    (function () {
+      const journey = document.getElementById('journey');
+      const bar = document.getElementById('journey-progress');
+      if (!journey || !bar) return;
+      const steps = journey.querySelectorAll('[data-step]');
+      function onScroll() {
+        const rect = journey.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const total = rect.height;
+        const passed = Math.min(Math.max(vh * 0.6 - rect.top, 0), total);
+        bar.style.height = passed + 'px';
+        steps.forEach(s => {
+          const sr = s.getBoundingClientRect();
+          s.classList.toggle('active', sr.top < vh * 0.62);
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* ---------- tap-to-reveal jar ---------- */
+    function toggleTapReveal(btn) {
+      const panel = document.getElementById('tap-data');
+      const open = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      if (open && window.TREVEAN) TREVEAN.track('tap_demo_open', {});
+    }
+
+    /* ---------- card pointer lighting ---------- */
+    document.querySelectorAll('.blend-card').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      }, { passive: true });
+    });
+  </script>
 </body>
 </html>
