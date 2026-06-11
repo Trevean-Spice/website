@@ -3,7 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop — Trevean Spice</title>
+  <title>Shop — Trevean Spice | Signature Blends & Spice Sage Subscription</title>
+  <meta name="description" content="Shop Trevean's five signature spice blends ($18) or subscribe to Spice Sage — $39/month or $99/quarter. Every jar NFC-traceable to its grower and harvest date.">
+  <link rel="canonical" href="https://treveanspice.com/shop.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trevean Spice">
+  <meta property="og:title" content="Shop Trevean Spice — Signature Blends & Subscription">
+  <meta property="og:description" content="Five signature blends, NFC-traceable to grower and harvest. Spice Sage subscription from $39/month.">
+  <meta property="og:url" content="https://treveanspice.com/shop.html">
+  <meta property="og:image" content="https://treveanspice.com/Persian%20Sunrise.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "Product", "position": 1, "name": "The Silk Road", "description": "Sichuan peppercorn, black cardamom, galangal, star anise, long pepper. Single-origin, NFC-traceable.", "image": "https://treveanspice.com/pomelli_image.png", "url": "https://treveanspice.com/blend.html?blend=silk-road", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": { "@type": "Offer", "price": "18.00", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } },
+      { "@type": "Product", "position": 2, "name": "Kyoto Garden", "description": "White sesame, nori, dried yuzu peel, green tea powder, dried mushroom. Single-origin, NFC-traceable.", "image": "https://treveanspice.com/pomelli-image%20(2).png", "url": "https://treveanspice.com/blend.html?blend=kyoto-garden", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": { "@type": "Offer", "price": "18.00", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } },
+      { "@type": "Product", "position": 3, "name": "Persian Sunrise", "description": "Iranian cinnamon, green cardamom, Persian lime, rose petals, saffron threads. Single-origin, NFC-traceable.", "image": "https://treveanspice.com/Persian%20Sunrise.png", "url": "https://treveanspice.com/blend.html?blend=persian-sunrise", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": { "@type": "Offer", "price": "18.00", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } },
+      { "@type": "Product", "position": 4, "name": "North African Night Market", "description": "Aleppo pepper, toasted cumin, preserved lemon, wild thyme, sumac. Single-origin, NFC-traceable.", "image": "https://treveanspice.com/pomelli-image.png", "url": "https://treveanspice.com/blend.html?blend=north-african-night-market", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": { "@type": "Offer", "price": "18.00", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } },
+      { "@type": "Product", "position": 5, "name": "Caribbean Sunset", "description": "Jamaican allspice, nutmeg, thyme, bitter orange peel, Scotch bonnet. Single-origin, NFC-traceable.", "image": "https://treveanspice.com/pomelli_image%20(3).png", "url": "https://treveanspice.com/blend.html?blend=caribbean-sunset", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": { "@type": "Offer", "price": "18.00", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } },
+      { "@type": "Product", "position": 6, "name": "Spice Sage Subscription", "description": "Curated spice boxes with NFC-enabled packaging: the five signature blends plus rotating limited offerings and recipe pairings.", "url": "https://treveanspice.com/shop.html#subscribe", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": [ { "@type": "Offer", "name": "Monthly", "price": "39.00", "priceCurrency": "USD" }, { "@type": "Offer", "name": "Quarterly", "price": "99.00", "priceCurrency": "USD" } ] }
+    ]
+  }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,10 +129,14 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">Our Story</a>
         <a href="shop.html" class="nav-link" style="color: #F0E4D4;">Shop</a>
+        <span data-tv-cart-button></span>
       </div>
-      <button class="md:hidden p-2" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-        <svg width="24" height="24" fill="none" stroke="#F0E4D4" stroke-width="1.5" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-      </button>
+      <div class="flex md:hidden items-center gap-1">
+        <span data-tv-cart-button></span>
+        <button class="p-2" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <svg width="24" height="24" fill="none" stroke="#F0E4D4" stroke-width="1.5" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
+      </div>
     </div>
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 space-y-4">
       <a href="index.html" class="block nav-link">Home</a>
@@ -142,7 +168,7 @@
       <div class="product-card rounded-sm overflow-hidden" style="background: #302823; box-shadow: 0 4px 24px rgba(0,0,0,0.2);">
         <div class="grid lg:grid-cols-5 gap-0">
           <div class="lg:col-span-2 aspect-[4/3] lg:aspect-auto relative">
-            <img src="https://placehold.co/800x600/3D332C/8B2635?text=The+Silk+Road" alt="The Silk Road" class="w-full h-full object-cover" style="mix-blend-mode: luminosity; opacity: 0.5;">
+            <img src="data:image/webp;base64,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" alt="The Silk Road — Trevean jar against an ancient trade map" class="w-full h-full object-cover" style="opacity: 0.8;" loading="lazy">
             <div class="absolute inset-0" style="background: linear-gradient(to right, transparent 60%, #302823 100%);"></div>
             <div class="absolute inset-0" style="background: rgba(139,38,53,0.12); mix-blend-mode: multiply;"></div>
             <div class="absolute top-4 left-4">
@@ -167,11 +193,11 @@
             </div>
             <div class="flex items-center gap-6 mt-6">
               <span class="font-body text-xs text-muted">NET WT 1.27 OZ (36g)</span>
-              <span class="font-body text-xs text-muted">Harvested Sept 2026</span>
+              <span class="font-body text-xs text-muted">Harvested Sept 2025</span>
               <span class="font-body text-xs text-muted">By Li Mei</span>
             </div>
             <div class="flex gap-3 mt-8">
-              <button class="btn-primary">Add to Cart</button>
+              <button class="btn-primary" data-tv-add="silk-road">Add to Cart</button>
               <a href="blend.html?blend=silk-road" class="btn-outline-sm">Trace the Origin</a>
             </div>
           </div>
@@ -182,7 +208,7 @@
       <div class="product-card rounded-sm overflow-hidden" style="background: #302823; box-shadow: 0 4px 24px rgba(0,0,0,0.2);">
         <div class="grid lg:grid-cols-5 gap-0">
           <div class="lg:col-span-2 aspect-[4/3] lg:aspect-auto relative">
-            <img src="https://placehold.co/800x600/3D332C/6B8F71?text=Kyoto+Garden" alt="Kyoto Garden" class="w-full h-full object-cover" style="mix-blend-mode: luminosity; opacity: 0.5;">
+            <img src="pomelli-image%20(2).png" alt="Kyoto Garden — Trevean jars with fresh botanicals" class="w-full h-full object-cover" style="opacity: 0.8;" loading="lazy">
             <div class="absolute inset-0" style="background: linear-gradient(to right, transparent 60%, #302823 100%);"></div>
             <div class="absolute inset-0" style="background: rgba(107,143,113,0.12); mix-blend-mode: multiply;"></div>
             <div class="absolute top-4 left-4">
@@ -211,7 +237,7 @@
               <span class="font-body text-xs text-muted">By Hiroshi Tanaka</span>
             </div>
             <div class="flex gap-3 mt-8">
-              <button class="btn-primary">Add to Cart</button>
+              <button class="btn-primary" data-tv-add="kyoto-garden">Add to Cart</button>
               <a href="blend.html?blend=kyoto-garden" class="btn-outline-sm">Trace the Origin</a>
             </div>
           </div>
@@ -222,7 +248,7 @@
       <div class="product-card rounded-sm overflow-hidden" style="background: #302823; box-shadow: 0 4px 24px rgba(0,0,0,0.2);">
         <div class="grid lg:grid-cols-5 gap-0">
           <div class="lg:col-span-2 aspect-[4/3] lg:aspect-auto relative">
-            <img src="https://placehold.co/800x600/3D332C/9B7B6B?text=Persian+Sunrise" alt="Persian Sunrise" class="w-full h-full object-cover" style="mix-blend-mode: luminosity; opacity: 0.5;">
+            <img src="Saffron_and_Damask_Rose_version_1.png" alt="Persian Sunrise — saffron and damask rose" class="w-full h-full object-cover" style="opacity: 0.8;" loading="lazy">
             <div class="absolute inset-0" style="background: linear-gradient(to right, transparent 60%, #302823 100%);"></div>
             <div class="absolute inset-0" style="background: rgba(155,123,107,0.12); mix-blend-mode: multiply;"></div>
             <div class="absolute top-4 left-4">
@@ -251,7 +277,7 @@
               <span class="font-body text-xs text-muted">By Reza Ahmadi</span>
             </div>
             <div class="flex gap-3 mt-8">
-              <button class="btn-primary">Add to Cart</button>
+              <button class="btn-primary" data-tv-add="persian-sunrise">Add to Cart</button>
               <a href="blend.html?blend=persian-sunrise" class="btn-outline-sm">Trace the Origin</a>
             </div>
           </div>
@@ -262,7 +288,7 @@
       <div class="product-card rounded-sm overflow-hidden" style="background: #302823; box-shadow: 0 4px 24px rgba(0,0,0,0.2);">
         <div class="grid lg:grid-cols-5 gap-0">
           <div class="lg:col-span-2 aspect-[4/3] lg:aspect-auto relative">
-            <img src="https://placehold.co/800x600/3D332C/C4973B?text=Night+Market" alt="North African Night Market" class="w-full h-full object-cover" style="mix-blend-mode: luminosity; opacity: 0.5;">
+            <img src="pomelli-image.png" alt="North African Night Market — spices ground by hand" class="w-full h-full object-cover" style="opacity: 0.8;" loading="lazy">
             <div class="absolute inset-0" style="background: linear-gradient(to right, transparent 60%, #302823 100%);"></div>
             <div class="absolute inset-0" style="background: rgba(196,151,59,0.12); mix-blend-mode: multiply;"></div>
             <div class="absolute top-4 left-4">
@@ -287,11 +313,11 @@
             </div>
             <div class="flex items-center gap-6 mt-6">
               <span class="font-body text-xs text-muted">NET WT 1.62 OZ (46g)</span>
-              <span class="font-body text-xs text-muted">Harvested October 2025</span>
+              <span class="font-body text-xs text-muted">Harvested Oct 2025</span>
               <span class="font-body text-xs text-muted">By Fatima Benali</span>
             </div>
             <div class="flex gap-3 mt-8">
-              <button class="btn-primary">Add to Cart</button>
+              <button class="btn-primary" data-tv-add="north-african-night-market">Add to Cart</button>
               <a href="blend.html?blend=north-african-night-market" class="btn-outline-sm">Trace the Origin</a>
             </div>
           </div>
@@ -302,7 +328,7 @@
       <div class="product-card rounded-sm overflow-hidden" style="background: #302823; box-shadow: 0 4px 24px rgba(0,0,0,0.2);">
         <div class="grid lg:grid-cols-5 gap-0">
           <div class="lg:col-span-2 aspect-[4/3] lg:aspect-auto relative">
-            <img src="https://placehold.co/800x600/3D332C/7B3F5E?text=Caribbean+Sunset" alt="Caribbean Sunset" class="w-full h-full object-cover" style="mix-blend-mode: luminosity; opacity: 0.5;">
+            <img src="pomelli_image%20(3).png" alt="Caribbean Sunset — spice jar with island dishes" class="w-full h-full object-cover" style="opacity: 0.8;" loading="lazy">
             <div class="absolute inset-0" style="background: linear-gradient(to right, transparent 60%, #302823 100%);"></div>
             <div class="absolute inset-0" style="background: rgba(123,63,94,0.12); mix-blend-mode: multiply;"></div>
             <div class="absolute top-4 left-4">
@@ -327,11 +353,11 @@
             </div>
             <div class="flex items-center gap-6 mt-6">
               <span class="font-body text-xs text-muted">NET WT 1.62 OZ (46g)</span>
-              <span class="font-body text-xs text-muted">Harvested August 2026</span>
+              <span class="font-body text-xs text-muted">Harvested Aug 2025</span>
               <span class="font-body text-xs text-muted">By Winston Campbell</span>
             </div>
             <div class="flex gap-3 mt-8">
-              <button class="btn-primary">Add to Cart</button>
+              <button class="btn-primary" data-tv-add="caribbean-sunset">Add to Cart</button>
               <a href="blend.html?blend=caribbean-sunset" class="btn-outline-sm">Trace the Origin</a>
             </div>
           </div>
@@ -342,27 +368,43 @@
   </section>
 
   <!-- SUBSCRIPTION CTA -->
-  <section class="py-24 lg:py-32 relative overflow-hidden" style="background: #1A1511;">
+  <section id="subscribe" class="py-24 lg:py-32 relative overflow-hidden" style="background: #1A1511;">
     <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(196,151,59,0.06) 0%, transparent 60%);"></div>
-    <div class="max-w-4xl mx-auto px-6 lg:px-12 relative">
-      <div class="rounded-sm p-10 lg:p-16 text-center" style="background: linear-gradient(135deg, #302823 0%, #241E19 100%); border: 1px solid rgba(196,151,59,0.12); box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
-        <img src="fox-icon.png" alt="" class="w-16 h-auto mx-auto mb-6" style="opacity: 0.4;">
-        <h2 class="font-display text-3xl sm:text-4xl font-medium" style="letter-spacing: -0.02em;">The Full Journey</h2>
+    <div class="max-w-5xl mx-auto px-6 lg:px-12 relative">
+      <div class="text-center mb-12">
+        <img src="fox-icon.png" alt="" class="w-16 h-auto mx-auto mb-6" style="opacity: 0.4;" loading="lazy">
+        <h2 class="font-display text-3xl sm:text-4xl font-medium" style="letter-spacing: -0.02em;">Spice Sage Subscription</h2>
         <p class="font-body text-base text-muted mt-4 max-w-xl mx-auto" style="line-height: 1.7;">
-          Subscribe and receive 3–9 curated blends delivered fresh to your door every month. Each shipment includes origin stories, recipes, and NFC-tracked freshness.
+          Curated spice boxes with NFC-enabled packaging — the five signature blends, rotating limited offerings,
+          and recipe pairings unlocked at the tap.
         </p>
-        <div class="flex flex-wrap justify-center gap-8 mt-10">
-          <div class="text-center">
-            <span class="font-display text-4xl font-semibold" style="color: #C4973B;">$45</span>
-            <span class="block font-body text-xs text-muted mt-2 tracking-wider uppercase">Monthly</span>
-          </div>
-          <div style="width:1px; background: rgba(168,152,136,0.12);"></div>
-          <div class="text-center">
-            <span class="font-display text-4xl font-semibold" style="color: #C4973B;">$120</span>
-            <span class="block font-body text-xs text-muted mt-2 tracking-wider uppercase">Quarterly (save 11%)</span>
-          </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <!-- Monthly -->
+        <div class="rounded-sm p-9 text-center flex flex-col" style="background: linear-gradient(135deg, #302823 0%, #241E19 100%); border: 1px solid rgba(168,152,136,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+          <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Monthly</span>
+          <span class="font-display text-5xl font-medium mt-4" style="color: #C4973B;">$39<span class="text-lg text-muted">/mo</span></span>
+          <ul class="font-body text-sm text-muted mt-6 space-y-2.5 text-left mx-auto" style="line-height:1.6;">
+            <li>→ Curated signature blends, every month</li>
+            <li>→ NFC freshness &amp; origin on every jar</li>
+            <li>→ Recipe pairings unlocked at the tap</li>
+            <li>→ Pause or cancel any time</li>
+          </ul>
+          <button class="btn-primary mt-8" data-tv-add="spice-sage-monthly">Subscribe Monthly</button>
         </div>
-        <button class="btn-primary mt-10">Start Your Subscription</button>
+        <!-- Quarterly -->
+        <div class="rounded-sm p-9 text-center flex flex-col relative" style="background: linear-gradient(135deg, #33291F 0%, #241E19 100%); border: 1px solid rgba(196,151,59,0.35); box-shadow: 0 12px 40px rgba(0,0,0,0.35);">
+          <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: #C4973B; color: #1A1511;">Best value</span>
+          <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Quarterly</span>
+          <span class="font-display text-5xl font-medium mt-4" style="color: #C4973B;">$99<span class="text-lg text-muted">/qtr</span></span>
+          <ul class="font-body text-sm text-muted mt-6 space-y-2.5 text-left mx-auto" style="line-height:1.6;">
+            <li>→ Everything in Monthly</li>
+            <li>→ Save 15% vs. month-to-month</li>
+            <li>→ First access to limited releases</li>
+            <li>→ Quarterly origin-story collection</li>
+          </ul>
+          <button class="btn-primary mt-8" data-tv-add="spice-sage-quarterly">Subscribe Quarterly</button>
+        </div>
       </div>
     </div>
   </section>
@@ -402,5 +444,6 @@
       </div>
     </div>
   </footer>
+  <script src="store.js" defer></script>
 </body>
 </html>
