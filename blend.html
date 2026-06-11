@@ -177,6 +177,17 @@
 
     .related-card { transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
     .related-card:hover { transform: translateY(-5px); }
+
+    /* ---------- Flavor profile ---------- */
+    .flavor-row { display: grid; grid-template-columns: 110px 1fr 44px; align-items: center; gap: 16px; }
+    .flavor-label { font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #A89888; }
+    .flavor-track { height: 8px; border-radius: 100px; background: rgba(168,152,136,0.12); overflow: hidden; }
+    .flavor-fill { height: 100%; width: 0; border-radius: 100px;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 55%, #1A1511), var(--accent));
+      transition: width 1.2s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.in .flavor-fill { width: var(--w); }
+    .flavor-val { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--accent); text-align: right; }
+    @media (prefers-reduced-motion: reduce) { .flavor-fill { transition: none; } }
   </style>
 </head>
 <body>
@@ -207,8 +218,12 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">Our Story</a>
         <a href="shop.html" class="nav-link">Shop</a>
+        <span data-tv-cart-button></span>
       </div>
-      <a href="shop.html" class="md:hidden font-body text-[11px] tracking-[0.12em] uppercase text-muted hover:text-cream transition-colors">Shop</a>
+      <div class="flex md:hidden items-center gap-2">
+        <span data-tv-cart-button></span>
+        <a href="shop.html" class="font-body text-[11px] tracking-[0.12em] uppercase text-muted hover:text-cream transition-colors">Shop</a>
+      </div>
     </div>
   </nav>
 
@@ -272,6 +287,7 @@
       region: 'Sichuan Highlands', country: 'China',
       coords: { lat: 30.05, lng: 103.0, latLabel: '30.05° N', lngLabel: '103.00° E' },
       descriptors: ['Numbing', 'Warm', 'Complex'],
+      flavor: { heat: 55, sweetness: 25, aromatics: 80, earthiness: 70 },
       ingredients: ['Sichuan Peppercorn', 'Black Cardamom', 'Galangal', 'Star Anise', 'Long Pepper'],
       netWeight: '1.27 oz (36g)', price: '$18', harvest: '2025-09-15',
       heroLede: 'A bold, warming blend that echoes centuries of caravans threading the mountain passes between East and West.',
@@ -294,7 +310,7 @@
       pullQuote: 'Not heat — a bright, buzzing tingle that makes everything after it taste louder.',
       jarWaveColor: '#8B2635',
       media: [
-        { src: 'Along_the_Golden_Route_version_2.png', caption: 'The golden route — caravans at dusk' },
+        { src: 'Trace_the_Origin_of_Taste_version_1.png', caption: 'The journey ends in your kitchen' },
         { src: 'Taste_3%2C000_Years_of_History_version_1.png', caption: 'Three thousand years of trade' },
         { src: 'pomelli_image.png', caption: 'From the jar to your table' }
       ],
@@ -322,6 +338,7 @@
       region: "Uji District, Kyoto", country: 'Japan',
       coords: { lat: 34.8889, lng: 135.8050, latLabel: '34.8889° N', lngLabel: '135.8050° E' },
       descriptors: ['Bright', 'Subtle', 'Umami'],
+      flavor: { heat: 10, sweetness: 35, aromatics: 65, earthiness: 85 },
       ingredients: ['White Sesame', 'Nori Flakes', 'Dried Yuzu Peel', 'Green Tea Powder', 'Dried Mushroom'],
       netWeight: '1.48 oz (42g)', price: '$18', harvest: '2026-05-10',
       heroLede: 'A delicate, umami-rich blend that brings the precision of a Kyoto tea garden to everyday cooking.',
@@ -344,8 +361,8 @@
       pullQuote: 'This is seasoning as restraint. It does not shout; it sharpens.',
       jarWaveColor: '#6B8F71',
       media: [
-        { src: 'Screenshot%202026-03-06%20061050.png', caption: 'Kyoto Garden — signature jar' },
-        { src: 'Screenshot%202026-03-06%20060949.png', caption: 'The collection, shelved' },
+        { src: 'pomelli-image%20(2).png', caption: 'The collection, gathered' },
+        { src: 'pomelli_image.png', caption: 'Tap the lid — trace the harvest' },
         { src: 'pomelli-image%20(1).png', caption: 'A pinch transforms the everyday' }
       ],
       recipes: [
@@ -372,6 +389,7 @@
       region: 'Kashan, Isfahan Province', country: 'Iran',
       coords: { lat: 33.9850, lng: 51.4100, latLabel: '33.985° N', lngLabel: '51.410° E' },
       descriptors: ['Warm', 'Floral', 'Bright'],
+      flavor: { heat: 15, sweetness: 70, aromatics: 95, earthiness: 35 },
       ingredients: ['Iranian Cinnamon', 'Green Cardamom', 'Persian Lime', 'Dried Rose Petals', 'Saffron Threads'],
       netWeight: '1.62 oz (46g)', price: '$18', harvest: '2026-04-20',
       heroLede: 'An aromatic blend that captures the warmth of a Persian sunrise — saffron, rose, and citrus over slow spice.',
@@ -422,6 +440,7 @@
       region: 'High Atlas Mountains', country: 'Morocco',
       coords: { lat: 31.0589, lng: -7.9162, latLabel: '31.0589° N', lngLabel: '7.9162° W' },
       descriptors: ['Smoky', 'Tangy', 'Bright'],
+      flavor: { heat: 60, sweetness: 20, aromatics: 75, earthiness: 80 },
       ingredients: ['Aleppo Pepper', 'Toasted Cumin', 'Preserved Lemon', 'Wild Thyme', 'Sumac'],
       netWeight: '1.62 oz (46g)', price: '$18', harvest: '2025-10-05',
       heroLede: 'A vibrant, aromatic blend that drops you into the bustling souks of Morocco at twilight.',
@@ -444,8 +463,8 @@
       pullQuote: 'All smoke and lamplight, the sour-bright snap of preserved lemon cutting through it all.',
       jarWaveColor: '#C4973B',
       media: [
-        { src: 'Screenshot%202026-03-06%20061030.png', caption: 'Night Market — signature jar' },
-        { src: 'Screenshot%202026-03-06%20061109.png', caption: 'Souk-bright on the shelf' },
+        { src: 'pomelli-image.png', caption: 'Ground by hand, balanced by taste' },
+        { src: 'pomelli-image%20(2).png', caption: 'Souk-bright on the shelf' },
         { src: 'pomelli_image%20(2).png', caption: 'Twilight flavor, any night' }
       ],
       recipes: [
@@ -472,6 +491,7 @@
       region: "Saint Ann Parish", country: 'Jamaica',
       coords: { lat: 18.2208, lng: -77.5000, latLabel: '18.2208° N', lngLabel: '77.500° W' },
       descriptors: ['Warm', 'Tropical', 'Island Heat'],
+      flavor: { heat: 75, sweetness: 55, aromatics: 70, earthiness: 50 },
       ingredients: ['Allspice (Pimento)', 'Ground Nutmeg', 'Dried Thyme', 'Bitter Orange Peel', 'Scotch Bonnet'],
       netWeight: '1.62 oz (46g)', price: '$18', harvest: '2025-08-25',
       heroLede: 'A bold, tropical blend that brings island warmth and the spirit of Caribbean cooking to every dish.',
@@ -496,7 +516,7 @@
       media: [
         { src: 'pomelli_image%20(3).png', caption: 'Island heat, plated' },
         { src: 'pomelli-image%20(3).png', caption: 'Sunset on the table' },
-        { src: 'Screenshot%202026-03-06%20061006.png', caption: 'Wear the brand — Trevean apron' }
+        { src: 'pomelli-image%20(1).png', caption: 'Wear the brand — Trevean apron' }
       ],
       recipes: [
         { name: 'Overnight Jerk Chicken', time: '24 hr', level: 'Medium', blurb: 'Deeply spiced, smoky-sweet jerk with real island heat.',
@@ -589,6 +609,27 @@
     document.documentElement.style.setProperty('--accent', b.accent);
     document.documentElement.style.setProperty('--accent-rgb', b.accentRgb);
     document.title = `${b.name} — Trevean Spice`;
+    // per-blend SEO: description + canonical + Product schema
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', `${b.name} — ${b.heroLede} NFC-traceable to ${b.grower.name} in ${b.region}, ${b.country}.`);
+    let canon = document.querySelector('link[rel="canonical"]');
+    if (!canon) { canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
+    canon.href = `https://treveanspice.com/blend.html?blend=${slug}`;
+    const ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.textContent = JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'Product',
+      name: b.name, description: b.heroLede,
+      brand: { '@type': 'Brand', name: 'Trevean Spice' },
+      countryOfOrigin: b.country, weight: b.netWeight,
+      additionalProperty: [
+        { '@type': 'PropertyValue', name: 'Harvest date', value: b.harvest },
+        { '@type': 'PropertyValue', name: 'Grower', value: b.grower.name },
+        { '@type': 'PropertyValue', name: 'Origin', value: `${b.region}, ${b.country}` }
+      ],
+      offers: { '@type': 'Offer', price: b.price.replace('$',''), priceCurrency: 'USD', availability: 'https://schema.org/PreOrder' }
+    });
+    document.head.appendChild(ld);
 
     const f = freshness(b.harvest);
     const pin = projectPin(b.coords);
@@ -602,6 +643,14 @@
     const certs = b.grower.certs.map(c => `<span class="cert-badge">${I.check}${esc(c)}</span>`).join('');
     const growerBio = b.grower.bio.map(p => `<p class="font-body text-[15px] mt-4" style="line-height:1.85;color:#C7B8A7;">${esc(p)}</p>`).join('');
     const storyParas = b.story.map((p,i) => `<p class="${i===0?'dropcap':''}">${esc(p)}</p>`).join('');
+
+    const FLAVOR_AXES = [['heat','Heat'],['sweetness','Sweetness'],['aromatics','Aromatics'],['earthiness','Earthiness']];
+    const flavorRows = FLAVOR_AXES.map(([k, label]) => `
+      <div class="flavor-row">
+        <span class="flavor-label">${label}</span>
+        <div class="flavor-track"><div class="flavor-fill" style="--w:${(b.flavor && b.flavor[k]) || 0}%"></div></div>
+        <span class="flavor-val">${(b.flavor && b.flavor[k]) || 0}</span>
+      </div>`).join('');
 
     const recipeCards = b.recipes.map((r,i) => `
       <button class="recipe-card group" data-recipe="${i}" aria-label="View recipe: ${esc(r.name)}">
@@ -661,7 +710,7 @@
               <span class="spec-chip">${I.nfc}NFC-traceable</span>
             </div>
             <div class="reveal in d3 flex flex-wrap gap-3 mt-9">
-              <a href="shop.html" class="btn-primary">Add to Cart · ${esc(b.price)}</a>
+              <button class="btn-primary" onclick="TREVEAN.addToCart('${slug}')">Add to Cart · ${esc(b.price)}</button>
               <a href="#story" class="btn-outline">Trace the Origin</a>
             </div>
           </div>
@@ -701,6 +750,7 @@
     <!-- ===== SECTION SUB-NAV ===== -->
     <div class="subnav sticky top-[6.75rem] z-40 hidden sm:block">
       <div class="max-w-6xl mx-auto px-5 lg:px-12 flex items-center gap-7 h-12 overflow-x-auto">
+        <a href="#flavor" data-spy="flavor">Flavor</a>
         <a href="#story" data-spy="story">Origin Story</a>
         <a href="#grower" data-spy="grower">The Grower</a>
         <a href="#origin" data-spy="origin">Where It Grows</a>
@@ -711,6 +761,21 @@
     </div>
 
     <div class="wave-divider"></div>
+
+    <!-- ===== FLAVOR PROFILE ===== -->
+    <section id="flavor" class="py-20 lg:py-28" style="background:radial-gradient(ellipse 50% 50% at 85% 20%, rgba(${b.accentRgb},0.07) 0%, transparent 55%), #1A1511; scroll-margin-top:8rem;">
+      <div class="max-w-4xl mx-auto px-5 lg:px-12">
+        <div class="reveal text-center mb-12">
+          <span class="accent-line"></span>
+          <p class="font-body text-xs tracking-[0.2em] uppercase text-muted mt-5">Flavor Profile</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-medium mt-3" style="letter-spacing:-0.02em;">How ${esc(b.name)} Reads on the Palate</h2>
+        </div>
+        <div class="reveal grid gap-6 p-7 sm:p-10 rounded-sm" style="background:#241E19;border:1px solid rgba(168,152,136,0.1);">
+          ${flavorRows}
+          <p class="font-body text-xs text-muted text-center mt-2" style="line-height:1.7;">Profiled by our blending team against the full Trevean collection — 100 is the strongest expression in the line.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- ===== ORIGIN STORY ===== -->
     <section id="story" class="py-20 lg:py-28" style="background:#241E19;scroll-margin-top:8rem;">
@@ -884,8 +949,8 @@
         <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium" style="letter-spacing:-0.02em;">Bring ${esc(b.name)}<br>into your kitchen</h2>
         <p class="font-body text-lg text-muted mt-6 max-w-xl mx-auto" style="line-height:1.7;">Guaranteed-fresh, ethically sourced, and traceable to the exact grove it grew in.</p>
         <div class="flex flex-wrap justify-center gap-3 mt-9">
-          <a href="shop.html" class="btn-primary">Add to Cart · ${esc(b.price)}</a>
-          <a href="shop.html" class="btn-outline">Subscribe &amp; Save</a>
+          <button class="btn-primary" onclick="TREVEAN.addToCart('${slug}')">Add to Cart · ${esc(b.price)}</button>
+          <a href="shop.html#subscribe" class="btn-outline">Subscribe &amp; Save</a>
         </div>
       </div>
     </section>
@@ -1015,5 +1080,6 @@
     track('scan_entry', { blend: slug, ref: document.referrer || 'direct', ua: navigator.userAgent.slice(0,80), source: params.get('via') || 'web' });
   })();
   </script>
+  <script src="store.js" defer></script>
 </body>
 </html>
