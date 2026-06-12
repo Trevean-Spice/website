@@ -69,7 +69,12 @@
     'spice-sage-quarterly': {
       slug: 'spice-sage-quarterly', name: 'Spice Sage — Quarterly', price: 99, type: 'subscription',
       cadence: '/quarter', accent: '#8B2635', img: 'pomelli-image.png',
-      notes: 'Best value · Full collection cadence', shopifyVariantId: ''
+      notes: 'Full collection cadence', shopifyVariantId: ''
+    },
+    'spice-sage-annual': {
+      slug: 'spice-sage-annual', name: 'Spice Sage — Annual', price: 350, type: 'subscription',
+      cadence: '/year', accent: '#C4973B', img: 'pomelli-image.png',
+      notes: 'Founding price · $118 less than monthly', shopifyVariantId: ''
     }
   };
 
@@ -160,6 +165,8 @@
   async function submitEmail(form) {
     const input = form.querySelector('input[type="email"]');
     const email = (input && input.value || '').trim();
+    const blendInput = form.querySelector('input[name="blend"]');
+    const blend = (blendInput && blendInput.value || '').trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       form.classList.add('tv-shake'); setTimeout(() => form.classList.remove('tv-shake'), 500);
       return;
@@ -168,14 +175,14 @@
       try {
         await fetch(CONFIG.emailEndpoint, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, source: location.pathname })
+          body: JSON.stringify({ email, blend, source: location.pathname })
         });
       } catch { /* fall through to local capture so the visitor still gets a success state */ }
     }
     // local capture so no signup is lost pre-launch
     try {
       const list = JSON.parse(localStorage.getItem('trevean_ledger_signups') || '[]');
-      list.push({ email, ts: new Date().toISOString(), page: location.pathname });
+      list.push({ email, blend, ts: new Date().toISOString(), page: location.pathname });
       localStorage.setItem('trevean_ledger_signups', JSON.stringify(list));
     } catch { /* noop */ }
     track('email_signup', { source: location.pathname });
