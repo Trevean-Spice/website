@@ -22,7 +22,7 @@
       { "@type": "Product", "position": 3, "name": "Persian Sunrise", "description": "Iranian cinnamon, green cardamom, Persian lime, rose petals, saffron threads. Single-origin, NFC-traceable.", "image": "https://treveanspice.com/Persian%20Sunrise.png", "url": "https://treveanspice.com/blend.html?blend=persian-sunrise", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": { "@type": "Offer", "price": "18.00", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } },
       { "@type": "Product", "position": 4, "name": "North African Night Market", "description": "Aleppo pepper, toasted cumin, preserved lemon, wild thyme, sumac. Single-origin, NFC-traceable.", "image": "https://treveanspice.com/pomelli-image.png", "url": "https://treveanspice.com/blend.html?blend=north-african-night-market", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": { "@type": "Offer", "price": "18.00", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } },
       { "@type": "Product", "position": 5, "name": "Caribbean Sunset", "description": "Jamaican allspice, nutmeg, thyme, bitter orange peel, Scotch bonnet. Single-origin, NFC-traceable.", "image": "https://treveanspice.com/pomelli_image%20(3).png", "url": "https://treveanspice.com/blend.html?blend=caribbean-sunset", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": { "@type": "Offer", "price": "18.00", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } },
-      { "@type": "Product", "position": 6, "name": "Spice Sage Subscription", "description": "Curated spice boxes with NFC-enabled packaging: the five signature blends plus rotating limited offerings and recipe pairings.", "url": "https://treveanspice.com/shop.html#subscribe", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": [ { "@type": "Offer", "name": "Monthly", "price": "39.00", "priceCurrency": "USD" }, { "@type": "Offer", "name": "Quarterly", "price": "99.00", "priceCurrency": "USD" } ] }
+      { "@type": "Product", "position": 6, "name": "Spice Sage Subscription", "description": "Curated spice boxes with NFC-enabled packaging: the five signature blends plus rotating limited offerings and recipe pairings.", "url": "https://treveanspice.com/shop.html#subscribe", "brand": { "@type": "Brand", "name": "Trevean Spice" }, "offers": [ { "@type": "Offer", "name": "Monthly", "price": "39.00", "priceCurrency": "USD" }, { "@type": "Offer", "name": "Quarterly", "price": "99.00", "priceCurrency": "USD" }, { "@type": "Offer", "name": "Annual (founding price)", "price": "350.00", "priceCurrency": "USD" } ] }
     ]
   }
   </script>
@@ -379,7 +379,7 @@
           and recipe pairings unlocked at the tap.
         </p>
       </div>
-      <div class="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <div class="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
         <!-- Monthly -->
         <div class="rounded-sm p-9 text-center flex flex-col" style="background: linear-gradient(135deg, #302823 0%, #241E19 100%); border: 1px solid rgba(168,152,136,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
           <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Monthly</span>
@@ -393,8 +393,7 @@
           <button class="btn-primary mt-8" data-tv-add="spice-sage-monthly">Subscribe Monthly</button>
         </div>
         <!-- Quarterly -->
-        <div class="rounded-sm p-9 text-center flex flex-col relative" style="background: linear-gradient(135deg, #33291F 0%, #241E19 100%); border: 1px solid rgba(196,151,59,0.35); box-shadow: 0 12px 40px rgba(0,0,0,0.35);">
-          <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: #C4973B; color: #1A1511;">Best value</span>
+        <div class="rounded-sm p-9 text-center flex flex-col" style="background: linear-gradient(135deg, #302823 0%, #241E19 100%); border: 1px solid rgba(168,152,136,0.15);">
           <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Quarterly</span>
           <span class="font-display text-5xl font-medium mt-4" style="color: #C4973B;">$99<span class="text-lg text-muted">/qtr</span></span>
           <ul class="font-body text-sm text-muted mt-6 space-y-2.5 text-left mx-auto" style="line-height:1.6;">
@@ -404,6 +403,19 @@
             <li>→ Quarterly origin-story collection</li>
           </ul>
           <button class="btn-primary mt-8" data-tv-add="spice-sage-quarterly">Subscribe Quarterly</button>
+        </div>
+        <!-- Annual -->
+        <div class="rounded-sm p-9 text-center flex flex-col relative" style="background: linear-gradient(135deg, #33291F 0%, #241E19 100%); border: 1px solid rgba(196,151,59,0.4); box-shadow: 0 12px 40px rgba(0,0,0,0.35);">
+          <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 text-xs font-body tracking-wider uppercase rounded-sm" style="background: #C4973B; color: #1A1511; white-space: nowrap;">The spreadsheet answer</span>
+          <span class="font-body text-xs tracking-[0.2em] uppercase text-muted">Annual</span>
+          <span class="font-display text-5xl font-medium mt-4" style="color: #C4973B;">$350<span class="text-lg text-muted">/yr</span></span>
+          <ul class="font-body text-sm text-muted mt-6 space-y-2.5 text-left mx-auto" style="line-height:1.6;">
+            <li>→ Everything in Quarterly</li>
+            <li>→ Founding price — $118 less than monthly</li>
+            <li>→ Lowest per-dish cost we offer</li>
+            <li>→ First claim on limited releases</li>
+          </ul>
+          <button class="btn-primary mt-8" data-tv-add="spice-sage-annual">Go Annual</button>
         </div>
       </div>
     </div>
