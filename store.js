@@ -384,3 +384,24 @@
     shopifyReady: SHOPIFY_READY
   };
 })();
+
+/* ---------- fox head-turn install (Spice Ledger) ----------
+   Swaps the static ledger fox for the animated canvas, then loads
+   fox-turn.js, which mounts on any [data-trevean-fox] canvas.
+   The animation ends pixel-exact on the brand mark. */
+(function () {
+  var img = document.querySelector('#spice-ledger img[src="fox-icon.png"]');
+  if (!img) return;
+  var c = document.createElement('canvas');
+  c.setAttribute('data-trevean-fox', '');
+  c.setAttribute('data-color', '#E4D5C2');
+  c.setAttribute('data-delay', '600');
+  c.setAttribute('data-replay-on-click', '');
+  c.setAttribute('aria-label', 'Trevean fox mark turning to look over its shoulder');
+  c.className = 'w-24 mx-auto mb-8';
+  c.style.opacity = '0.55';
+  img.replaceWith(c);
+  var s = document.createElement('script');
+  s.src = 'fox-turn.js';
+  document.head.appendChild(s);
+})();
