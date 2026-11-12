@@ -581,6 +581,61 @@
     console.log('[trevean-analytics]', payload);
   }
 
+  /* ---------- NFC scan count (same-origin /v1/scan-events) ---------- */
+  // One POST per NFC tap, after the page has loaded. Never awaited, never throws:
+  // a lost count must never cost the customer the page. No cookies, no PII; the
+  // only id is a random token in localStorage, the same one the old jar page used.
+  // Signed fetch first: the scan API sits behind CloudFront and refuses a POST body
+  // without its SHA-256 in x-amz-content-sha256, which sendBeacon cannot send.
+  function scanToken() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('tsp.beacon.token') || 'null');
+      if (saved && /^[0-9a-f]{32}$/.test(saved.token)) return saved.token;
+    } catch (e) {}
+    const bytes = crypto.getRandomValues(new Uint8Array(16));
+    const token = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+    try { localStorage.setItem('tsp.beacon.token', JSON.stringify({ token, createdAt: Date.now() })); } catch (e) {}
+    return token;
+  }
+
+  function postScan(body) {
+    const opts = { method: 'POST', body, keepalive: true, credentials: 'omit', mode: 'same-origin', headers: { 'Content-Type': 'application/json' } };
+    if (window.crypto && crypto.subtle && window.fetch) {
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(body)).then((d) => {
+        opts.headers['x-amz-content-sha256'] = Array.from(new Uint8Array(d), (b) => b.toString(16).padStart(2, '0')).join('');
+        return fetch('/v1/scan-events', opts);
+      }).catch(() => {});
+      return;
+    }
+    if (navigator.sendBeacon && navigator.sendBeacon('/v1/scan-events', new Blob([body], { type: 'application/json' }))) return;
+    if (window.fetch) fetch('/v1/scan-events', opts).catch(() => {});
+  }
+
+  function scanBeacon(slug) {
+    let sent = false;
+    const send = () => {
+      if (sent) return;
+      sent = true;
+      try {
+        const ua = navigator.userAgent || '';
+        const conn = navigator.connection || {};
+        const nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {};
+        const types = ['slow-2g', '2g', '3g', '4g', '5g'];
+        postScan(JSON.stringify({
+          blendSlug: slug, channel: 'nfc', dedupToken: scanToken(), occurredAt: new Date().toISOString(),
+          platform: /android/i.test(ua) ? 'android' : /iphone|ipad|ipod/i.test(ua) ? 'ios' : 'other',
+          connectionType: conn.type === 'wifi' ? 'wifi' : types.includes(conn.effectiveType) ? conn.effectiveType : 'unknown',
+          redirected: nav.redirectCount > 0
+        }));
+      } catch (e) { /* the page matters more than the count */ }
+    };
+    try {
+      if (document.readyState === 'complete') setTimeout(send, 0);
+      else window.addEventListener('load', () => setTimeout(send, 0), { once: true });
+      window.addEventListener('pagehide', send, { once: true });
+    } catch (e) {}
+  }
+
   /* ---------- icons ---------- */
   const I = {
     leaf: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M11 3C6 3 3 7 3 12c0 4 2 7 2 7s4-1 7-4 5-7 5-12c-2 0-4 0-6 0z"/><path d="M5 19C9 14 13 10 17 8"/></svg>',
@@ -1074,10 +1129,12 @@
       'north-african':'north-african-night-market','nightmarket':'north-african-night-market','night-market':'north-african-night-market',
       'caribbean':'caribbean-sunset' };
     if (alias[slug]) slug = alias[slug];
+    const knownBlend = Object.prototype.hasOwnProperty.call(BLENDS, slug);
     if (!BLENDS[slug]) slug = 'silk-road';
     render(slug);
     // analytics: scan + device context
     track('scan_entry', { blend: slug, ref: document.referrer || 'direct', ua: navigator.userAgent.slice(0,80), source: params.get('via') || 'web' });
+    if (knownBlend && (params.get('via') || '').toLowerCase().trim() === 'nfc') scanBeacon(slug);
   })();
   </script>
   <script src="store.js" defer></script>
