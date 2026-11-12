@@ -611,7 +611,7 @@
     if (window.fetch) fetch('/v1/scan-events', opts).catch(() => {});
   }
 
-  function scanBeacon(slug) {
+  function scanBeacon(slug, channel) {
     let sent = false;
     const send = () => {
       if (sent) return;
@@ -622,7 +622,7 @@
         const nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {};
         const types = ['slow-2g', '2g', '3g', '4g', '5g'];
         postScan(JSON.stringify({
-          blendSlug: slug, channel: 'nfc', dedupToken: scanToken(), occurredAt: new Date().toISOString(),
+          blendSlug: slug, channel, dedupToken: scanToken(), occurredAt: new Date().toISOString(),
           platform: /android/i.test(ua) ? 'android' : /iphone|ipad|ipod/i.test(ua) ? 'ios' : 'other',
           connectionType: conn.type === 'wifi' ? 'wifi' : types.includes(conn.effectiveType) ? conn.effectiveType : 'unknown',
           redirected: nav.redirectCount > 0
@@ -1134,7 +1134,8 @@
     render(slug);
     // analytics: scan + device context
     track('scan_entry', { blend: slug, ref: document.referrer || 'direct', ua: navigator.userAgent.slice(0,80), source: params.get('via') || 'web' });
-    if (knownBlend && (params.get('via') || '').toLowerCase().trim() === 'nfc') scanBeacon(slug);
+    const via = (params.get('via') || '').toLowerCase().trim();
+    if (knownBlend && (via === 'nfc' || via === 'qr')) scanBeacon(slug, via);
   })();
   </script>
   <script src="store.js" defer></script>
